@@ -19,3 +19,4 @@ class IDisplayModule {
         virtual void stop() = 0;
         virtual void display() = 0;
 };
+
