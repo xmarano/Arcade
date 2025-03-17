@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../ADisplayModule.hpp"
+#include "../Ncurses/nc_menu.hpp"
 
 class Ncurses : public ADisplayModule {
     public:
