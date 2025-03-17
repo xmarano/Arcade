@@ -8,8 +8,8 @@
 BINARY_NAME	=	arcade
 SRC_MAIN	=	main.cpp
 
-SRC_NCURSES	=	src/ncurses_setup.cpp
-SRC_SDL2	=	src/sdl2_setup.cpp
+SRC_NCURSES	=	setup_libs/ncurses_setup.cpp
+SRC_SDL2	=	setup_libs/sdl2_setup.cpp
 
 all: graphicals core
 
