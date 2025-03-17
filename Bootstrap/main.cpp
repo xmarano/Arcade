@@ -5,35 +5,24 @@
 ** main.cpp
 */
 
-#include "libarc.hpp"
-#include "libfoo.hpp"
-
-using namespace std;
+#include "DLLoader.hpp"
 
 int main()
 {
-    const char *libs[] = {"./libfoo.so", "./libarc.so"};
-    void *handle;
-    typedef IDisplayModule* (*CreateFunc)();
+    DLLoader<IDisplayModule> loader;
+    IDisplayModule *module = loader.getInstance("./libfoo.so");
 
-    for (int i = 0; i < sizeof(libs) / sizeof(libs[0]); i++) {
-        handle = dlopen(libs[i], RTLD_LAZY);
-        if (!handle) {
-            cerr << "Error: " << dlerror() << endl;
-            continue;
-        }
-        CreateFunc create = (CreateFunc)dlsym(handle, "create");
-        if (!create) {
-            cerr << "Error: " << dlerror() << endl;
-            dlclose(handle);
-            continue;
-        }
-        IDisplayModule *module = create();
+    if (module) {
+        cout << "Module name: " << module->getName() << endl;
         module->init();
         module->stop();
-        cout << "Module name: " << module->getName() << endl;
-        delete module;
-        dlclose(handle);
+    }
+    dlclose(module);
+    IDisplayModule *module2 = loader.getInstance("./libarc.so");
+    if (module2) {
+        cout << "Module name: " << module2->getName() << endl;
+        module2->init();
+        module2->stop();
     }
     return 0;
 }
