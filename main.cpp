@@ -7,10 +7,10 @@
 
 #include "DLLoader.hpp"
 
-int main()
+int main(int ac, char **av)
 {
     DLLoader<IDisplayModule> loader;
-    IDisplayModule *module = loader.getInstance("./libfoo.so");
+    IDisplayModule *module = loader.getInstance(av[1]);
 
     if (module) {
         cout << "Module name: " << module->getName() << endl;
@@ -18,12 +18,5 @@ int main()
         module->stop();
     }
     dlclose(module);
-    IDisplayModule *module2 = loader.getInstance("./libarc.so");
-    if (module2) {
-        cout << "Module name: " << module2->getName() << endl;
-        module2->init();
-        module2->stop();
-    }
-    dlclose(module2);
     return 0;
 }

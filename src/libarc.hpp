@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** libfoo.hpp
+** libarc.hpp
 */
 
 #pragma once
 
-#include "ADisplayModule.hpp"
+#include "../ADisplayModule.hpp"
 
-class Libfoo : public ADisplayModule {
+class Libarc : public ADisplayModule {
     public:
-        Libfoo();
-        ~Libfoo() = default;
+        Libarc();
+        ~Libarc() = default;
         void init() override;
         void stop() override;
 };
