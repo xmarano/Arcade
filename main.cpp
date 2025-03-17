@@ -6,17 +6,25 @@
 */
 
 #include "DLLoader.hpp"
+#include "ArcadeExeption.hpp"
 
 int main(int ac, char **av)
 {
-    DLLoader<IDisplayModule> loader;
-    IDisplayModule *module = loader.getInstance(av[1]);
+    try {
+        if (ac != 2)
+            throw ArcadeException("Usage: ./arcade ./lib/library.so");
+        DLLoader<IDisplayModule> loader;
 
-    if (module) {
-        cout << "Module name: " << module->getName() << endl;
-        module->init();
-        module->stop();
+        IDisplayModule *module = loader.getInstance(av[1]);
+        if (module) {
+            cout << "Module name: " << module->getName() << endl;
+            module->init();
+            module->stop();
+        }
+        dlclose(module);
+        return 0;
+    } catch (ArcadeException &e) {
+        cerr << "Error: " << e.what() << endl;
+        return 84;
     }
-    dlclose(module);
-    return 0;
 }

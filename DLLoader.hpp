@@ -8,6 +8,7 @@
 #pragma once
 
 #include "IDisplayModule.hpp"
+#include "ArcadeExeption.hpp"
 
 template <typename T>
 
@@ -17,15 +18,12 @@ class DLLoader {
         {
             void *handle = dlopen(path.c_str(), RTLD_LAZY);
             if (!handle) {
-                std::cerr << "Error: " << dlerror() << std::endl;
-                return nullptr;
+                throw ArcadeException(dlerror());
             }
             typedef T *(*CreateFunc)();
             CreateFunc create = (CreateFunc)dlsym(handle, "create");
             if (!create) {
-                std::cerr << "Error: " << dlerror() << std::endl;
-                dlclose(handle);
-                return nullptr;
+                throw ArcadeException(dlerror());
             }
             T *module = create();
             return module;
