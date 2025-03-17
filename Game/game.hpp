@@ -10,10 +10,8 @@
 #include "../AGameModule.hpp"
 
 class Game : public AGameModule {
-    private:
-        Menu *menu;
     public:
-        Game() : menu(new Menu()) {};
+        Game() {};
         ~Game() = default;
         void draw_menu() override = 0;
 };

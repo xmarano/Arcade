@@ -7,6 +7,12 @@
 
 #include "DLLoader.hpp"
 #include "ArcadeExeption.hpp"
+#include "Game/game.hpp"
+
+void game(IDisplayModule *module)
+{
+    module->display();
+}
 
 int main(int ac, char **av)
 {
@@ -18,7 +24,7 @@ int main(int ac, char **av)
         IDisplayModule *module = loader.getInstance(av[1]);
         if (module) {
             module->init();
-            module->display();
+            game(module);
             module->stop();
         }
         dlclose(module);
