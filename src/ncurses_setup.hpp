@@ -2,17 +2,18 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** libarc.hpp
+** Ncurses.hpp
 */
 
 #pragma once
 
 #include "../ADisplayModule.hpp"
 
-class Libarc : public ADisplayModule {
+class Ncurses : public ADisplayModule {
     public:
-        Libarc();
-        ~Libarc() = default;
+        Ncurses();
+        ~Ncurses() = default;
         void init() override;
         void stop() override;
+        void display() override;
 };

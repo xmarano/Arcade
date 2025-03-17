@@ -17,8 +17,8 @@ int main(int ac, char **av)
 
         IDisplayModule *module = loader.getInstance(av[1]);
         if (module) {
-            cout << "Module name: " << module->getName() << endl;
             module->init();
+            module->display();
             module->stop();
         }
         dlclose(module);

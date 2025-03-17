@@ -17,5 +17,5 @@ class IDisplayModule {
         virtual ~IDisplayModule() = default;
         virtual void init() = 0;
         virtual void stop() = 0;
-        virtual const string &getName() const = 0;
+        virtual void display() = 0;
 };

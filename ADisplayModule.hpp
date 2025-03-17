@@ -16,5 +16,8 @@ class ADisplayModule : public IDisplayModule
     public:
         ADisplayModule(const std::string &moduleName) : name(moduleName) {};
         ~ADisplayModule() = default;
-        const std::string &getName() const override {return name;}
+        const std::string &getName() const {return name;}
+        void init() override = 0;
+        void stop() override = 0;
+        void display() override = 0;
 };

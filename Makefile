@@ -8,8 +8,8 @@
 BINARY_NAME	=	arcade
 SRC_MAIN	=	main.cpp
 
-SRC_NCURSES	=	src/libarc.cpp
-SRC_SDL2	=	src/libfoo.cpp
+SRC_NCURSES	=	src/ncurses_setup.cpp
+SRC_SDL2	=	src/sdl2_setup.cpp
 
 all: graphicals core
 
@@ -19,8 +19,8 @@ core:
 # games:
 
 graphicals:
-	g++ -shared -o arcade_ncurses.so -fPIC $(SRC_NCURSES)
-	g++ -shared -o arcade_sdl2.so -fPIC $(SRC_SDL2)
+	g++ -shared -o arcade_ncurses.so -fPIC $(SRC_NCURSES) -lncurses
+	g++ -shared -o arcade_sdl2.so -fPIC $(SRC_SDL2) -lSDL2 -lSDL2_ttf
 	mv *.so lib/
 
 clean:

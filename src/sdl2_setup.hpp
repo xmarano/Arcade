@@ -2,17 +2,18 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** libfoo.hpp
+** Sdl2.hpp
 */
 
 #pragma once
 
 #include "../ADisplayModule.hpp"
 
-class Libfoo : public ADisplayModule {
+class Sdl2 : public ADisplayModule {
     public:
-        Libfoo();
-        ~Libfoo() = default;
+        Sdl2();
+        ~Sdl2() = default;
         void init() override;
         void stop() override;
+        void display() override;
 };
