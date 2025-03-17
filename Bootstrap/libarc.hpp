@@ -8,12 +8,12 @@
 #pragma once
 
 #include <iostream>
-#include "DisplayModule.hpp"
+#include "ADisplayModule.hpp"
 
-class Libarc : public IDisplayModule {
+class Libarc : public ADisplayModule {
     public:
+        Libarc();
         ~Libarc() = default;
         void init() override;
         void stop() override;
-        const std::string &getName() const override;
 };

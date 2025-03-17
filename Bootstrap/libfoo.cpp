@@ -11,6 +11,11 @@ extern "C" IDisplayModule* create() {
     return new Libfoo();
 }
 
+Libfoo::Libfoo() : ADisplayModule("libfoo")
+{
+    return;
+}
+
 void Libfoo::init()
 {
     cout << "[libfoo] Entry point for libfoo !" << endl;
@@ -19,10 +24,4 @@ void Libfoo::init()
 void Libfoo::stop()
 {
     cout << "[libfoo] libfoo stopping ..." << endl;
-}
-
-const string &Libfoo::getName() const
-{
-    static const string name = "libfoo";
-    return name;
 }

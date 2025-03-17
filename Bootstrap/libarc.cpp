@@ -11,6 +11,11 @@ extern "C" IDisplayModule* create() {
     return new Libarc();
 }
 
+Libarc::Libarc() : ADisplayModule("libarc")
+{
+    return;
+}
+
 void Libarc::init()
 {
     cout << "[libarc] Entry point for libarc !" << endl;
@@ -19,10 +24,4 @@ void Libarc::init()
 void Libarc::stop()
 {
     cout << "[libarc] libarc stopping ..." << endl;
-}
-
-const string &Libarc::getName() const
-{
-    static const string name = "libarc";
-    return name;
 }

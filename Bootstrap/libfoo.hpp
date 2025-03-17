@@ -7,14 +7,12 @@
 
 #pragma once
 
-#include "DisplayModule.hpp"
+#include "ADisplayModule.hpp"
 
-class Libfoo : public IDisplayModule {
-    private:
-        void *entryPoint;
+class Libfoo : public ADisplayModule {
     public:
+        Libfoo();
         ~Libfoo() = default;
         void init() override;
         void stop() override;
-        const std::string &getName() const override;
 };
