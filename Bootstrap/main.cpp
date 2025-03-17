@@ -24,5 +24,6 @@ int main()
         module2->init();
         module2->stop();
     }
+    dlclose(module2);
     return 0;
 }
