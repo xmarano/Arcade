@@ -14,8 +14,8 @@ SRC	=	libfoo.cpp	\
 		libarc.cpp
 
 all:
-	g++ -shared -o libarc.so -fPIC libarc.cpp -L. -larc
-	g++ -shared -o libfoo.so -fPIC libfoo.cpp -L. -lfoo
+	g++ -shared -o libarc.so -fPIC libarc.cpp
+	g++ -shared -o libfoo.so -fPIC libfoo.cpp
 	g++ main.cpp -o $(NAME_MAIN) -ldl
 
 clean:

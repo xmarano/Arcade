@@ -5,21 +5,24 @@
 ** libfoo.cpp
 */
 
-#include <iostream>
+#include "libfoo.hpp"
 
-extern "C"
+extern "C" IDisplayModule* create() {
+    return new Libfoo();
+}
+
+void Libfoo::init()
 {
-    __attribute__((constructor))
-    void init() {
-        std::cout << "[libfoo] Loading foo library ..." << std::endl;
-    }
+    cout << "[libfoo] Entry point for libfoo !" << endl;
+}
 
-    __attribute__((destructor))
-    void cleanup() {
-        std::cout << "[libfoo] foo closing ..." << std::endl;
-    }
+void Libfoo::stop()
+{
+    cout << "[libfoo] libfoo stopping ..." << endl;
+}
 
-    void myEntryPoint() {
-        std::cout << "[libfoo] Entry point for foo !" << std::endl;
-    }
+const string &Libfoo::getName() const
+{
+    static const string name = "libfoo";
+    return name;
 }

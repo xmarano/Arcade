@@ -5,8 +5,8 @@
 ** main.cpp
 */
 
-#include <iostream>
-#include <dlfcn.h>
+#include "libarc.hpp"
+#include "libfoo.hpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main()
 {
     const char *libs[] = {"./libfoo.so", "./libarc.so"};
     void *handle;
-    void (*myEntryPoint)();
+    typedef IDisplayModule* (*CreateFunc)();
 
     for (int i = 0; i < sizeof(libs) / sizeof(libs[0]); i++) {
         handle = dlopen(libs[i], RTLD_LAZY);
@@ -22,8 +22,17 @@ int main()
             cerr << "Error: " << dlerror() << endl;
             continue;
         }
-        myEntryPoint = (void (*)())dlsym(handle, "myEntryPoint");
-        myEntryPoint();
+        CreateFunc create = (CreateFunc)dlsym(handle, "create");
+        if (!create) {
+            cerr << "Error: " << dlerror() << endl;
+            dlclose(handle);
+            continue;
+        }
+        IDisplayModule *module = create();
+        module->init();
+        module->stop();
+        cout << "Module name: " << module->getName() << endl;
+        delete module;
         dlclose(handle);
     }
     return 0;

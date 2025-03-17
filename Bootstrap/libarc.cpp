@@ -5,21 +5,24 @@
 ** libarc.cpp
 */
 
-#include <iostream>
+#include "libarc.hpp"
 
-extern "C"
+extern "C" IDisplayModule* create() {
+    return new Libarc();
+}
+
+void Libarc::init()
 {
-    __attribute__((constructor))
-    void init() {
-        std::cout << "[libarc] Loading arc library ..." << std::endl;
-    }
+    cout << "[libarc] Entry point for libarc !" << endl;
+}
 
-    __attribute__((destructor))
-    void cleanup() {
-        std::cout << "[libarc] foo closing ..." << std::endl;
-    }
+void Libarc::stop()
+{
+    cout << "[libarc] libarc stopping ..." << endl;
+}
 
-    void myEntryPoint() {
-        std::cout << "[libarc] Entry point for foo !" << std::endl;
-    }
+const string &Libarc::getName() const
+{
+    static const string name = "libarc";
+    return name;
 }
