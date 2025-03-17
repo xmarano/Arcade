@@ -8,9 +8,10 @@
 #pragma once
 
 #include <iostream>
+#include "IRenderer.hpp"
 
 class IGameModule {
     public:
         virtual ~IGameModule() = default;
-        virtual void draw_menu() = 0;
+        virtual void draw_menu(IRenderer *renderer) = 0;
 };

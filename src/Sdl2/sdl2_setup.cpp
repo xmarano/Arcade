@@ -1,0 +1,100 @@
+/*
+** EPITECH PROJECT, 2024
+** Arcade
+** File description:
+** sdl2_setup.cpp
+*/
+
+/*
+** EPITECH PROJECT, 2024
+** Arcade
+** File description:
+** sdl2_setup.cpp
+*/
+
+#include "sdl2_setup.hpp"
+#include <iostream>
+
+SDL2::SDL2() : ADisplayModule("SDL2"), window(nullptr), renderer(nullptr), font(nullptr) {}
+
+void SDL2::init()
+{
+    SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
+    window = SDL_CreateWindow("Arcade - SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    font = TTF_OpenFont("Assets/text.ttf", 24);
+}
+
+void SDL2::stop()
+{
+    TTF_CloseFont(font);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    SDL_Quit();
+}
+
+void SDL2::display()
+{
+    clearScreen();
+    if (gameModule) {
+        gameModule->draw_menu(this);
+    }
+    refreshScreen();
+    SDL_Event event;
+    bool running = true;
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q)) {
+                running = false;
+            }
+        }
+        SDL_Delay(16);
+    }
+}
+
+void SDL2::drawText(int x, int y, const std::string &text)
+{
+    SDL_Color color = {255, 255, 255, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_Rect rect = {x, y, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, nullptr, &rect);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+}
+
+void SDL2::clearScreen()
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+}
+
+void SDL2::refreshScreen()
+{
+    SDL_RenderPresent(renderer);
+}
+
+extern "C" {
+    IDisplayModule *create()
+    {
+        return new SDL2();
+    }
+}
+
+int SDL2::getScreenWidth() const
+{
+    int width;
+
+    SDL_GetWindowSize(window, &width, nullptr);
+    return width;
+}
+
+int SDL2::getScreenHeight() const
+{
+    int height;
+
+    SDL_GetWindowSize(window, nullptr, &height);
+    return height;
+}

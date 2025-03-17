@@ -8,6 +8,7 @@
 #pragma once
 
 #include "IDisplayModule.hpp"
+#include "dlfcn.h"
 #include "ArcadeExeption.hpp"
 
 template <typename T>

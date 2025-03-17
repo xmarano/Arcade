@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** Exeption.hpp
+** ArcadeExepltion.hpp
 */
 
 #pragma once
