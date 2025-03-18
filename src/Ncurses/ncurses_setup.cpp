@@ -10,7 +10,7 @@
 
 Ncurses::Ncurses() : ADisplayModule("Ncurses")
 {
-    menuRenderer = new NcursesMenu();
+    menuRenderer = new NcursesMenu(this);
 }
 
 Ncurses::~Ncurses()

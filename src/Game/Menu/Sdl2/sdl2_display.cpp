@@ -6,6 +6,9 @@
 */
 
 #include "sdl2_display.hpp"
+#include "../../../Sdl2/sdl2_setup.hpp"
+
+Sdl2Menu::Sdl2Menu(SDL2 *sdl2) : sdl2(sdl2) {}
 
 void Sdl2Menu::Draw_Module1()
 {
@@ -19,4 +22,5 @@ void Sdl2Menu::Draw_Module2()
 
 void Sdl2Menu::Draw_Module3()
 {
+
 }

@@ -11,8 +11,10 @@
 
 class Sdl2Menu : public IMenuRenderer
 {
+    private:
+        SDL2 *sdl2;
     public:
-        Sdl2Menu() = default;
+        Sdl2Menu(SDL2 *sdl2);
         ~Sdl2Menu() = default;
         void Draw_Module1() override;
         void Draw_Module2() override;

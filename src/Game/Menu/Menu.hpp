@@ -15,6 +15,7 @@ class Menu : public IGameModule
         Menu() = default;
         ~Menu() = default;
         void draw_game(IRenderer *renderer) override;
+        void modules(IRenderer *renderer);
 };
 
 class IMenuRenderer {

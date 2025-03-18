@@ -9,7 +9,7 @@
 #include <fstream>
 #include "../../Sdl2/sdl2_setup.hpp"
 
-void module1(IRenderer *renderer)
+void Menu::modules(IRenderer *renderer)
 {
     int screenWidth = renderer->getScreenWidth();
     int screenHeight = renderer->getScreenHeight();
@@ -24,6 +24,5 @@ void Menu::draw_game(IRenderer *renderer)
     int screenHeight = renderer->getScreenHeight();
 
     renderer->DrawText1(((screenWidth / 2) / 1.2) + 10, 0, "Bienvenue sur Arcade !"); // Title
-
-    module1(renderer);
+    modules(renderer);
 }

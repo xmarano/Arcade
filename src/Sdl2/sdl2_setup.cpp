@@ -17,7 +17,7 @@
 
 SDL2::SDL2() : ADisplayModule("SDL2"), window(nullptr), renderer(nullptr), font(nullptr)
 {
-    menuRenderer = new Sdl2Menu();
+    menuRenderer = new Sdl2Menu(this);
 }
 
 void SDL2::init()
