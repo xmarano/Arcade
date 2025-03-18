@@ -38,6 +38,6 @@ class Pacman_Game: public IGameModule
         int level;
         int highscore;
         std::pair<int, int> pos_player;
-        std::string** map;
+        std::string* map;
 
 };
