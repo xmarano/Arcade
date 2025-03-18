@@ -15,8 +15,7 @@ template <typename T>
 
 class DLLoader {
     public:
-        T *getInstance(const std::string &path)
-        {
+        T *getInstance(const std::string &path) {
             void *handle = dlopen(path.c_str(), RTLD_LAZY);
             if (!handle) {
                 throw ArcadeException(dlerror());

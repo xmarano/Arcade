@@ -9,7 +9,8 @@
 #include "ArcadeExeption.hpp"
 #include "Menu.hpp"
 
-int main(int ac, char **av) {
+int main(int ac, char **av)
+{
     try {
         if (ac != 2)
             throw ArcadeException("Usage: ./arcade ./lib/libncurses.so");

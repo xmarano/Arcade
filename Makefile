@@ -6,19 +6,21 @@
 ##
 
 BINARY_NAME	=	arcade
-SRC_MAIN	=	src/main.cpp
-SRC_MENU	=	src/Menu.cpp
+SRC_FILES	=	src/*.cpp
 
-SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp
-SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp
+SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
+				src/Ncurses/ncurses_display.cpp
 
-CXXFLAGS	=	-std=c++17 -Wall -Wextra -Werror
+SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
+				src/Sdl2/sdl2_display.cpp
+
+FLAGS	=	-std=c++17 -Wall -Wextra -Werror
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
 
 all: graphicals core
 
 core:
-	g++ $(CXXFLAGS) $(SRC_MAIN) $(SRC_MENU) -o $(BINARY_NAME) $(LDFLAGS)
+	g++ $(FLAGS) $(SRC_FILES) -o $(BINARY_NAME) $(LDFLAGS)
 
 graphicals:
 	g++ -shared -fPIC $(SRC_NCURSES) -o lib/arcade_ncurses.so -lncurses
