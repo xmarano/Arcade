@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "IGameModule.hpp"
-#include "IRenderer.hpp"
+#include "../../IGameModule.hpp"
+#include "../../IRenderer.hpp"
 
 class Menu : public IGameModule {
     public:

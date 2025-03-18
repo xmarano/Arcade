@@ -18,6 +18,9 @@ class SDL2 : public ADisplayModule, public IRenderer {
         SDL_Renderer *renderer;
         TTF_Font *font;
         TTF_Font *litle_font;
+        TTF_Font *arcade_font;
+        TTF_Font *goofy_font;
+        TTF_Font *arial_font;
         int pos_x;
         int pos_y;
     public:
@@ -27,9 +30,11 @@ class SDL2 : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawTitleMenu(const std::string &text) override;
-        void draw_sprite(const std::string &spritePath) override;
-        void draw_box(int width, int height) override;
+        void DrawTitleMenu() override;
+
+        void Draw_Module1() override;
+        void Draw_Module2() override;
+        void Draw_Module3() override;
 
         void clearScreen() override;
         void refreshScreen() override;

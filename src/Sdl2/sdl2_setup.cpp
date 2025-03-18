@@ -23,8 +23,11 @@ void SDL2::init()
     TTF_Init();
     window = SDL_CreateWindow("Arcade - SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    font = TTF_OpenFont("Assets/text.ttf", 24);
-    litle_font = TTF_OpenFont("Assets/little.ttf", 12);
+    font = TTF_OpenFont("Assets/Font/text.ttf", 20);
+    litle_font = TTF_OpenFont("Assets/Font/little.ttf", 14);
+    arcade_font = TTF_OpenFont("Assets/Font/arcade.ttf", 20);
+    goofy_font = TTF_OpenFont("Assets/Font/goofy.ttf", 20);
+    arial_font = TTF_OpenFont("Assets/Font/arial.ttf", 20);
 
     getScreenWidth();
     getScreenHeight();

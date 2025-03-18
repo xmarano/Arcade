@@ -7,7 +7,7 @@
 
 #include "DLLoader.hpp"
 #include "ArcadeExeption.hpp"
-#include "Menu.hpp"
+#include "Game/Menu/Menu.hpp"
 
 int main(int ac, char **av)
 {

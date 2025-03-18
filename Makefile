@@ -6,7 +6,8 @@
 ##
 
 BINARY_NAME	=	arcade
-SRC_FILES	=	src/*.cpp
+SRC_FILES	=	src/main.cpp	\
+				src/Game/Menu/Menu.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 				src/Ncurses/ncurses_display.cpp

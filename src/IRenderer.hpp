@@ -16,9 +16,10 @@ class IRenderer {
 
         //! Methode virtuelle du menu principal
 
-        virtual void DrawTitleMenu(const std::string &text) = 0;
-        virtual void draw_sprite(const std::string &spritePath) = 0;
-        virtual void draw_box(int width, int height) = 0;
+        virtual void DrawTitleMenu() = 0; // Affichage du titre du menu
+            virtual void Draw_Module1() = 0; // Module selection du jeu
+            virtual void Draw_Module2() = 0; // Module du profil du joueur
+            virtual void Draw_Module3() = 0; // Module de selection de la lib graphique
 
         virtual void clearScreen() = 0;
         virtual void refreshScreen() = 0;

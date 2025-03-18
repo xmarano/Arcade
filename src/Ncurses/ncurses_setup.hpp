@@ -22,9 +22,12 @@ class Ncurses : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawTitleMenu(const std::string &text) override;
-        void draw_sprite(const std::string &spritePath) override;
-        void draw_box(int width, int height) override;
+        void DrawTitleMenu() override;
+
+        void Draw_Module1() override;
+        void Draw_Module2() override;
+        void Draw_Module3() override;
+
         void clearScreen() override;
         void refreshScreen() override;
 
