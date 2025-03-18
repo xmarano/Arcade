@@ -14,7 +14,7 @@ SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 				src/Sdl2/sdl2_display.cpp
 
-FLAGS	=	-std=c++17 -Wall -Wextra -Werror
+FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
 
 all: graphicals core

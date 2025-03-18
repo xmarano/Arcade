@@ -14,13 +14,22 @@ Ncurses::~Ncurses()
     stop();
 }
 
+void Ncurses::setTerminalTitle(string title)
+{
+    std::cout << "\033]0;" << title << "\007";
+}
+
 void Ncurses::init()
 {
+    setTerminalTitle("Arcade");
     initscr();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
+
+    getScreenHeight();
+    getScreenWidth();
 }
 
 void Ncurses::stop()
@@ -45,18 +54,18 @@ extern "C" {
     }
 }
 
-int Ncurses::getScreenWidth() const
+void Ncurses::getScreenWidth()
 {
     int maxX, maxY;
 
     getmaxyx(stdscr, maxY, maxX);
-    return maxX;
+    pos_x = maxX;
 }
 
-int Ncurses::getScreenHeight() const
+void Ncurses::getScreenHeight()
 {
     int maxX, maxY;
 
     getmaxyx(stdscr, maxY, maxX);
-    return maxY;
+    pos_y = maxY;
 }

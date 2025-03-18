@@ -10,13 +10,14 @@
 
 void Menu::draw_menu(IRenderer *renderer)
 {
-    int screenWidth = renderer->getScreenWidth();
-    int screenHeight = renderer->getScreenHeight();
+    renderer->DrawTitleMenu("Bienvenue sur Arcade !"); // Title
 
-    int startY = screenHeight / 4;
-    int lineHeight = screenHeight / 10;
+    // renderer->drawText(screenWidth / 2 - 10, startY, "Jeu disponible"); // Module 1
+    // renderer->draw_box(screenWidth / 2 - 10, startY + lineHeight, 20, 1); // Box Module 1
 
-    renderer->drawText(screenWidth / 2 - 10, startY, "1. Jouer au jeu X");
-    renderer->drawText(screenWidth / 2 - 10, startY + lineHeight, "2. Changer de bibliothèque graphique");
-    renderer->drawText(screenWidth / 2 - 10, startY + 2 * lineHeight, "3. Quitter");
+    // renderer->drawText(screenWidth / 2 - 10, startY + lineHeight, "Profil du joueur"); // Module 2
+    // renderer->draw_box(screenWidth / 2 - 10, startY + 2 * lineHeight, 20, 1); // Box Module 2
+
+    // renderer->drawText(screenWidth / 2 - 10, startY + 2 * lineHeight, "Affichage"); // Module 3
+    // renderer->draw_box(screenWidth / 2 - 10, startY + 3 * lineHeight, 20, 1); // Box Module 3
 }

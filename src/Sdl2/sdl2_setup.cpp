@@ -24,11 +24,16 @@ void SDL2::init()
     window = SDL_CreateWindow("Arcade - SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     font = TTF_OpenFont("Assets/text.ttf", 24);
+    litle_font = TTF_OpenFont("Assets/little.ttf", 12);
+
+    getScreenWidth();
+    getScreenHeight();
 }
 
 void SDL2::stop()
 {
     TTF_CloseFont(font);
+    TTF_CloseFont(litle_font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -53,18 +58,18 @@ extern "C" {
     }
 }
 
-int SDL2::getScreenWidth() const
+void SDL2::getScreenWidth()
 {
     int width;
 
     SDL_GetWindowSize(window, &width, nullptr);
-    return width;
+    pos_x = width;
 }
 
-int SDL2::getScreenHeight() const
+void SDL2::getScreenHeight()
 {
     int height;
 
     SDL_GetWindowSize(window, nullptr, &height);
-    return height;
+    pos_y = height;
 }

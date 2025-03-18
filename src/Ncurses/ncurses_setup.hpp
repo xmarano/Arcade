@@ -12,6 +12,9 @@
 #include <ncurses.h>
 
 class Ncurses : public ADisplayModule, public IRenderer {
+    private:
+        int pos_x;
+        int pos_y;
     public:
         Ncurses();
         ~Ncurses();
@@ -19,11 +22,15 @@ class Ncurses : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void drawText(int x, int y, const std::string &text) override;
-        void draw_sprite(int x, int y, const std::string &spritePath) override;
+        void DrawTitleMenu(const std::string &text) override;
+        void draw_sprite(const std::string &spritePath) override;
+        void draw_box(int width, int height) override;
         void clearScreen() override;
         void refreshScreen() override;
 
-        int getScreenWidth() const override;
-        int getScreenHeight() const override;
+        // Idendependant
+        void setTerminalTitle(string name);
+
+        void getScreenWidth() override;
+        void getScreenHeight() override;
 };

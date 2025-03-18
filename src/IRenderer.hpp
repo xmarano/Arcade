@@ -12,11 +12,16 @@ class IRenderer {
     public:
         virtual ~IRenderer() = default;
 
-        virtual void drawText(int x, int y, const std::string &text) = 0;
-        virtual void draw_sprite(int x, int y, const std::string &spritePath) = 0;
+        // Fonctions d'affichage pour Ncurses, SDL2 et [?]
+
+        //! Methode virtuelle du menu principal
+
+        virtual void DrawTitleMenu(const std::string &text) = 0;
+        virtual void draw_sprite(const std::string &spritePath) = 0;
+        virtual void draw_box(int width, int height) = 0;
+
         virtual void clearScreen() = 0;
         virtual void refreshScreen() = 0;
-
-        virtual int getScreenWidth() const = 0;
-        virtual int getScreenHeight() const = 0;
+        virtual void getScreenWidth() = 0;
+        virtual void getScreenHeight() = 0;
 };
