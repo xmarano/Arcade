@@ -23,26 +23,24 @@ void Ncurses::display()
     }
 }
 
-void Ncurses::DrawTitleMenu()
+void Ncurses::DrawText(int pos_x, int pos_y, string mess)
 {
-    box(stdscr, 0, 0);
-    mvprintw(1, (pos_x / 2) - 10, "Bienvenue sur Arcade !");
-    mvprintw(1, pos_x - 30, "Appuyer sur 'q' pour quitter");
+    mvprintw(pos_y, pos_x, "%s", mess.c_str());
 }
 
-void Ncurses::Draw_Module1()
-{
-    mvprintw((pos_y / 7), (pos_x / 4) - 10, "Jeux disponibles");
+// void Ncurses::Draw_Module1()
+// {
+//     mvprintw((pos_y / 7), (pos_x / 4) - 10, "Jeux disponibles");
 
-    // Box
-}
+//     // Box
+// }
 
-void Ncurses::Draw_Module2()
-{
-    // mvprintw(2, (pos_x / 2) - 10, "Profil du joueur");
-}
+// void Ncurses::Draw_Module2()
+// {
+//     // mvprintw(2, (pos_x / 2) - 10, "Profil du joueur");
+// }
 
-void Ncurses::Draw_Module3()
-{
-    // mvprintw(3, (pos_x / 2) - 10, "Affichage");
-}
+// void Ncurses::Draw_Module3()
+// {
+//     // mvprintw(3, (pos_x / 2) - 10, "Affichage");
+// }

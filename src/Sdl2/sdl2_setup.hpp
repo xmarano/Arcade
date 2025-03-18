@@ -21,8 +21,6 @@ class SDL2 : public ADisplayModule, public IRenderer {
         TTF_Font *arcade_font;
         TTF_Font *goofy_font;
         TTF_Font *arial_font;
-        int pos_x;
-        int pos_y;
     public:
         SDL2();
         ~SDL2() = default;
@@ -30,14 +28,14 @@ class SDL2 : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawTitleMenu() override;
+        void DrawText(int pos_x, int pos_y, string mess) override;
 
-        void Draw_Module1() override;
-        void Draw_Module2() override;
-        void Draw_Module3() override;
+        // void Draw_Module1() override;
+        // void Draw_Module2() override;
+        // void Draw_Module3() override;
 
         void clearScreen() override;
         void refreshScreen() override;
-        void getScreenWidth() override;
-        void getScreenHeight() override;
+        int getScreenWidth() override;
+        int getScreenHeight() override;
 };

@@ -10,11 +10,9 @@
 
 void Menu::draw_menu(IRenderer *renderer)
 {
-    // int pos_x = renderer->getScreenHeight()
+    int screenWidth = renderer->getScreenWidth();
+    int screenHeight = renderer->getScreenHeight();
 
-    renderer->DrawTitleMenu(); // Title
+    renderer->DrawText(((screenWidth / 2) / 1.2) + 10, 0, "Bienvenue sur Arcade !"); // Title
 
-    renderer->Draw_Module1(); // Module 1
-    renderer->Draw_Module2(); // Module 2
-    renderer->Draw_Module3(); // Module 3
 }

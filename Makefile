@@ -18,15 +18,15 @@ SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
 
-all: graphicals core
+all:	graphicals core
 
 core:
 	g++ $(FLAGS) $(SRC_FILES) -o $(BINARY_NAME) $(LDFLAGS)
 
 graphicals:
+	export SDL_VIDEODRIVER=x11
 	g++ -shared -fPIC $(SRC_NCURSES) -o lib/arcade_ncurses.so -lncurses
 	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf
-	export SDL_VIDEODRIVER=x11
 
 clean:
 	rm -f lib/*.so

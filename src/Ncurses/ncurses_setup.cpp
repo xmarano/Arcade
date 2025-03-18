@@ -27,9 +27,6 @@ void Ncurses::init()
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
-
-    getScreenHeight();
-    getScreenWidth();
 }
 
 void Ncurses::stop()
@@ -54,18 +51,18 @@ extern "C" {
     }
 }
 
-void Ncurses::getScreenWidth()
+int Ncurses::getScreenWidth()
 {
     int maxX, maxY;
 
     getmaxyx(stdscr, maxY, maxX);
-    pos_x = maxX;
+    return maxX;
 }
 
-void Ncurses::getScreenHeight()
+int Ncurses::getScreenHeight()
 {
     int maxX, maxY;
 
     getmaxyx(stdscr, maxY, maxX);
-    pos_y = maxY;
+    return maxY;
 }

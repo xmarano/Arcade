@@ -12,9 +12,6 @@
 #include <ncurses.h>
 
 class Ncurses : public ADisplayModule, public IRenderer {
-    private:
-        int pos_x;
-        int pos_y;
     public:
         Ncurses();
         ~Ncurses();
@@ -22,11 +19,11 @@ class Ncurses : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawTitleMenu() override;
+        void DrawText(int pos_x, int pos_y, string mess) override;
 
-        void Draw_Module1() override;
-        void Draw_Module2() override;
-        void Draw_Module3() override;
+        // void Draw_Module1() override;
+        // void Draw_Module2() override;
+        // void Draw_Module3() override;
 
         void clearScreen() override;
         void refreshScreen() override;
@@ -34,6 +31,6 @@ class Ncurses : public ADisplayModule, public IRenderer {
         // Idendependant
         void setTerminalTitle(string name);
 
-        void getScreenWidth() override;
-        void getScreenHeight() override;
+        int getScreenWidth() override;
+        int getScreenHeight() override;
 };
