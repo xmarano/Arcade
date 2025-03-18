@@ -9,7 +9,6 @@
 
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
-#include <ncurses.h>
 
 class Ncurses : public ADisplayModule, public IRenderer {
     public:
@@ -19,7 +18,8 @@ class Ncurses : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawText(int pos_x, int pos_y, string mess) override;
+        void DrawText1(int pos_x, int pos_y, string mess) override;
+        void DrawText2(int pos_x, int pos_y, string mess) override;
 
         // void Draw_Module1() override;
         // void Draw_Module2() override;

@@ -9,8 +9,6 @@
 
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 
 class SDL2 : public ADisplayModule, public IRenderer {
     private:
@@ -28,7 +26,8 @@ class SDL2 : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
-        void DrawText(int pos_x, int pos_y, string mess) override;
+        void DrawText1(int pos_x, int pos_y, string mess) override;
+        void DrawText2(int pos_x, int pos_y, string mess) override;
 
         // void Draw_Module1() override;
         // void Draw_Module2() override;
