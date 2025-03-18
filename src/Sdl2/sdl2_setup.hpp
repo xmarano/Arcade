@@ -9,8 +9,10 @@
 
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
+#include "../Game/Menu/Menu.hpp"
 
-class SDL2 : public ADisplayModule, public IRenderer {
+class SDL2 : public ADisplayModule, public IRenderer
+{
     private:
         SDL_Window *window;
         SDL_Renderer *renderer;
@@ -19,6 +21,7 @@ class SDL2 : public ADisplayModule, public IRenderer {
         TTF_Font *arcade_font;
         TTF_Font *goofy_font;
         TTF_Font *arial_font;
+        IMenuRenderer* menuRenderer = nullptr;
     public:
         SDL2();
         ~SDL2() = default;
@@ -26,12 +29,9 @@ class SDL2 : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
+        IMenuRenderer* getMenuRenderer() override { return menuRenderer; };
         void DrawText1(int pos_x, int pos_y, string mess) override;
         void DrawText2(int pos_x, int pos_y, string mess) override;
-
-        // void Draw_Module1() override;
-        // void Draw_Module2() override;
-        // void Draw_Module3() override;
 
         void clearScreen() override;
         void refreshScreen() override;

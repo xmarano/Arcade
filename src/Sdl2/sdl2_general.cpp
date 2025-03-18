@@ -11,7 +11,7 @@ void SDL2::display()
 {
     clearScreen();
     if (gameModule) {
-        gameModule->draw_menu(this);
+        gameModule->draw_game(this);
     }
     refreshScreen();
     SDL_Event event;
@@ -51,3 +51,4 @@ void SDL2::DrawText2(int pos_x, int pos_y, string mess)
     SDL_FreeSurface(surface_text);
 
 }
+

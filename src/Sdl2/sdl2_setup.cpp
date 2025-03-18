@@ -13,9 +13,12 @@
 */
 
 #include "sdl2_setup.hpp"
-#include <iostream>
+#include "../Game/Menu/Sdl2/sdl2_display.hpp"
 
-SDL2::SDL2() : ADisplayModule("SDL2"), window(nullptr), renderer(nullptr), font(nullptr) {}
+SDL2::SDL2() : ADisplayModule("SDL2"), window(nullptr), renderer(nullptr), font(nullptr)
+{
+    menuRenderer = new Sdl2Menu();
+}
 
 void SDL2::init()
 {

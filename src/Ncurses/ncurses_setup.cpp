@@ -6,11 +6,17 @@
 */
 
 #include "ncurses_setup.hpp"
+#include "../Game/Menu/Ncurses/nc_display.hpp"
 
-Ncurses::Ncurses() : ADisplayModule("Ncurses") {}
+Ncurses::Ncurses() : ADisplayModule("Ncurses")
+{
+    menuRenderer = new NcursesMenu();
+}
 
 Ncurses::~Ncurses()
 {
+    if (menuRenderer != nullptr)
+        delete menuRenderer;
     stop();
 }
 

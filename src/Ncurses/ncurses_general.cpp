@@ -12,7 +12,7 @@ void Ncurses::display()
     cout << "Displaying Ncurses" << endl;
     clear();
     if (gameModule) {
-        gameModule->draw_menu(this);
+        gameModule->draw_game(this);
     }
     refresh();
     while (true) {
@@ -33,19 +33,3 @@ void Ncurses::DrawText2(int pos_x, int pos_y, string mess)
     DrawText1(pos_x, pos_y, mess);
 }
 
-// void Ncurses::Draw_Module1()
-// {
-//     mvprintw((pos_y / 7), (pos_x / 4) - 10, "Jeux disponibles");
-
-//     // Box
-// }
-
-// void Ncurses::Draw_Module2()
-// {
-//     // mvprintw(2, (pos_x / 2) - 10, "Profil du joueur");
-// }
-
-// void Ncurses::Draw_Module3()
-// {
-//     // mvprintw(3, (pos_x / 2) - 10, "Affichage");
-// }

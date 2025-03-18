@@ -14,5 +14,5 @@
 class IGameModule {
     public:
         virtual ~IGameModule() = default;
-        virtual void draw_menu(IRenderer *renderer) = 0;
+        virtual void draw_game(IRenderer *renderer) = 0;
 };

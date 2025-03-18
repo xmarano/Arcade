@@ -9,8 +9,12 @@
 
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
+#include "../Game/Menu/Menu.hpp"
 
-class Ncurses : public ADisplayModule, public IRenderer {
+class Ncurses : public ADisplayModule, public IRenderer
+{
+    private:
+        IMenuRenderer* menuRenderer = nullptr;
     public:
         Ncurses();
         ~Ncurses();
@@ -18,12 +22,9 @@ class Ncurses : public ADisplayModule, public IRenderer {
         void stop() override;
         void display() override;
 
+        virtual IMenuRenderer* getMenuRenderer() override { return menuRenderer; }
         void DrawText1(int pos_x, int pos_y, string mess) override;
         void DrawText2(int pos_x, int pos_y, string mess) override;
-
-        // void Draw_Module1() override;
-        // void Draw_Module2() override;
-        // void Draw_Module3() override;
 
         void clearScreen() override;
         void refreshScreen() override;

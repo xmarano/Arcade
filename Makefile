@@ -10,10 +10,12 @@ SRC_FILES	=	src/main.cpp	\
 				src/Game/Menu/Menu.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
-				src/Ncurses/ncurses_display.cpp
+				src/Ncurses/ncurses_general.cpp	\
+				src/Game/Menu/Ncurses/nc_display.cpp
 
 SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
-				src/Sdl2/sdl2_display.cpp
+				src/Sdl2/sdl2_general.cpp	\
+				src/Game/Menu/Sdl2/sdl2_display.cpp	\
 
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
