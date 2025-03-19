@@ -29,6 +29,8 @@ class Pacman : public IGameModule
         Pacman() = default;
         ~Pacman() = default;
         void draw_game(IRenderer *renderer) override;
+
+        //! pas touché
 };
 
 class IPacmanRenderer {

@@ -14,7 +14,7 @@ NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc)
     this->level = 1;
     this->highscore = 0;
     this->pos_player = std::make_pair(19, 13);
-    load_map_from_file("src/Game/PACMAN/map.txt");
+    load_map_from_file("src/Game/Pacman/pacman_map.txt");
 }
 
 void NcursesPacman::move_player()

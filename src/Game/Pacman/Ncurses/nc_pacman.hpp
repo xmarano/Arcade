@@ -24,4 +24,5 @@ class NcursesPacman: public IPacmanRenderer
         ~NcursesPacman() = default;
         void move_player() override;
         int load_map_from_file(std::string filename) override;
+        // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };
