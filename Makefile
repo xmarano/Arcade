@@ -44,7 +44,7 @@ graphicals: ncurses sdl2
 ncurses:
 	@echo "$(GREEN)ncurses$(RESET)"
 ifeq ($(UNAME),Linux)
-	g++ -shared -fPIC $(SRC_NCURSES) -o lib/arcade_ncurses.so -lncurses $(FLAGS)
+	g++ -shared -fPIC $(SRC_NCURSES) -o lib/arcade_ncurses.so -lncurses $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
 	g++ -shared -fPIC $(SRC_NCURSES) -o lib/arcade_ncurses.so -lncurses -lSDL2 $(DARWIN_SDL2_FLAGS) $(FLAGS)
 endif
