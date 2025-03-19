@@ -1,6 +1,14 @@
-#include "pacman.hpp"
+/*
+** EPITECH PROJECT, 2024
+** Arcade
+** File description:
+** nc_pacman.cpp
+*/
 
-Pacman_Game::Pacman_Game()
+#include "nc_pacman.hpp"
+#include "../../../Ncurses/ncurses_setup.hpp"
+
+NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc)
 {
     this->score = 0;
     this->lives = 3;
@@ -10,25 +18,7 @@ Pacman_Game::Pacman_Game()
     load_map_from_file("src/Game/PACMAN/map.txt");
 }
 
-int Pacman_Game::load_map_from_file(std::string filename)
-{
-    std::string line;
-    std::ifstream file(filename);
-    int i = 0;
-
-    if (!file.is_open()) {
-        throw std::exception();
-        return 84;
-    }
-    while (std::getline(file, line)) {
-        this->map[i].append(line);
-        i++;
-    }
-    file.close();
-    return 0;
-}
-
-void Pacman_Game::move_player()
+void NcursesPacman::move_player()
 {
     int ch = getch();
     int x = this->pos_player.first;
@@ -68,4 +58,24 @@ void Pacman_Game::move_player()
             }
             break;
     }
+}
+
+int NcursesPacman::load_map_from_file(std::string filename)
+{
+    std::ofstream file("caca.txt");
+
+    file << "load_map_from_file" << std::endl;
+    // std::string line;
+    // std::ifstream file(filename);
+    // int i = 0;
+
+    // if (!file.is_open()) {
+    //     throw ArcadeException("Error: Could not open file");
+    // }
+    // while (std::getline(file, line)) {
+    //     this->map[i].append(line);
+    //     i++;
+    // }
+    // file.close();
+    // return 0;
 }
