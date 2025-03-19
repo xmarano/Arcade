@@ -23,6 +23,9 @@
     #define POWERUP '@'
     #define TELEPORT 'T'
     #define MAP_HEIGHT 25
+    #define DEFAULT_PLAYER_POSITION std::make_pair(19, 13)
+    #define TELEPORT_1 std::make_pair(1, 11)
+    #define TELEPORT_2 std::make_pair(22, 13)
 
 class Pacman : public IGameModule
 {
