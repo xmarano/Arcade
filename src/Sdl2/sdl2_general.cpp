@@ -7,25 +7,24 @@
 
 #include "sdl2_setup.hpp"
 
+Event SDL2::pollEvent() {
+    SDL_Event event;
+    if (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT)
+            return Event::Quit;
+        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_n)
+            return Event::SwitchToNCurses;
+    }
+    return Event::None;
+}
+
 void SDL2::display()
 {
-    SDL_Event event;
-    bool running = true;
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-            }
-            // if (event.key.keysym.sym == SDLK_n) {
-            //     // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
-            // }
-        }
-        clearScreen();
-        if (gameModule)
-            gameModule->draw_game(this);
-        refreshScreen();
-        SDL_Delay(16);
-    }
+    clearScreen();
+    if (gameModule)
+        gameModule->draw_game(this);
+    refreshScreen();
+    SDL_Delay(16);
 }
 
 void SDL2::DrawText1(int pos_x, int pos_y, string mess)

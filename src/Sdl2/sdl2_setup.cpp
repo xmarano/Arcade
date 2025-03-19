@@ -37,6 +37,8 @@ void SDL2::stop()
     TTF_CloseFont(arial_font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    window = nullptr;
+    renderer = nullptr;
     TTF_Quit();
     SDL_Quit();
 }

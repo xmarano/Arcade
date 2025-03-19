@@ -11,9 +11,9 @@ RESET   = $(shell tput sgr0)
 NAME	=	arcade
 
 SRC_FILES	=	src/main.cpp	\
-				src/ADisplayModule.cpp	\
 				src/Game/Menu/Menu.cpp	\
 				src/Game/Pacman/Pacman.cpp	\
+				src/DLLoader.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 				src/Ncurses/ncurses_general.cpp	\

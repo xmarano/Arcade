@@ -9,6 +9,7 @@
 
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
+#include "Setup.hpp"
 
 class ADisplayModule : public IDisplayModule
 {
@@ -17,7 +18,6 @@ class ADisplayModule : public IDisplayModule
     public:
         ADisplayModule(const std::string &moduleName) : name(moduleName), gameModule(nullptr) {}
         ~ADisplayModule() = default;
-        const std::string &getName() const { return name; }
         void setGameModule(IGameModule *game) override { gameModule = game; }
         virtual void init() = 0;
         virtual void stop() = 0;

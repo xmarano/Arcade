@@ -13,14 +13,15 @@ using namespace std;
 #include <ncurses.h>
 #include <iostream>
 #include <fstream>
-
 #include "IGameModule.hpp"
+#include "Setup.hpp"
 
 class IDisplayModule {
-public:
-    virtual ~IDisplayModule() = default;
-    virtual void init() = 0;
-    virtual void stop() = 0;
-    virtual void display() = 0;
-    virtual void setGameModule(IGameModule *game) = 0;
+    public:
+        virtual ~IDisplayModule() = default;
+        virtual void init() = 0;
+        virtual void stop() = 0;
+        virtual void display() = 0;
+        virtual void setGameModule(IGameModule *game) = 0;
+        virtual Event pollEvent() = 0;
 };

@@ -7,22 +7,23 @@
 
 #include "ncurses_setup.hpp"
 
+Event Ncurses::pollEvent()
+{
+    int ch = getch();
+
+    if (ch == 'q')
+        return Event::Quit;
+    if (ch == 's')
+        return Event::SwitchToSDL2;
+    return Event::None;
+}
+
 void Ncurses::display()
 {
-    cout << "Displaying Ncurses" << endl;
-    while (true) {
-        clearScreen();
-        if (gameModule)
-            gameModule->draw_game(this);
-        refreshScreen();
-        int ch = getch();
-        if (ch == 'q') {
-            break;
-        }
-        // if (ch == 'n') {
-        //     // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
-        // }
-    }
+    clearScreen();
+    if (gameModule)
+        gameModule->draw_game(this);
+    refreshScreen();
 }
 
 void Ncurses::DrawText1(int pos_x, int pos_y, string mess)

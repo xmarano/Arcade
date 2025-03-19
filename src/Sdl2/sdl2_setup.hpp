@@ -41,4 +41,6 @@ class SDL2 : public ADisplayModule, public IRenderer
         void refreshScreen() override;
         int getScreenWidth() override;
         int getScreenHeight() override;
+
+        Event pollEvent() override;
 };
