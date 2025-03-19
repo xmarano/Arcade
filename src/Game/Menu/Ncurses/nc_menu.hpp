@@ -2,20 +2,22 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** sdl2_display.hpp
+** nc_display.hpp
 */
 
 #pragma once
 
-#include "../../../Sdl2/sdl2_setup.hpp"
+#include "../Menu.hpp"
 
-class Sdl2Menu : public IMenuRenderer
+class NcursesMenu : public IMenuRenderer
 {
     private:
-        SDL2 *sdl2;
+        int pos_x;
+        int pos_y;
+        Ncurses *nc;
     public:
-        Sdl2Menu(SDL2 *sdl2);
-        ~Sdl2Menu() = default;
+        NcursesMenu(Ncurses* nc);
+        ~NcursesMenu() = default;
         void Draw_Module1() override;
         void Draw_Module2() override;
         void Draw_Module3() override;

@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include "../../../IRenderer.hpp"
 #include "../Pacman.hpp"
-#include <ncurses.h>
 
 class NcursesPacman: public IPacmanRenderer
 {

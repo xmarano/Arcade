@@ -16,12 +16,13 @@ SRC_FILES	=	src/main.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 				src/Ncurses/ncurses_general.cpp	\
-				src/Game/Menu/Ncurses/nc_display.cpp	\
+				src/Game/Menu/Ncurses/nc_menu.cpp	\
 				src/Game/Pacman/Ncurses/nc_pacman.cpp	\
 
 SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 				src/Sdl2/sdl2_general.cpp	\
-				src/Game/Menu/Sdl2/sdl2_display.cpp	\
+				src/Game/Menu/Sdl2/sdl2_menu.cpp	\
+				src/Game/Pacman/Sdl2/sdl2_pacman.cpp	\
 
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
@@ -58,10 +59,8 @@ endif
 sdl2:
 	@echo "$(GREEN)sdl2$(RESET)"
 ifeq ($(UNAME),Linux)
-	export SDL_VIDEODRIVER=x11
 	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
-	export SDL_VIDEODRIVER=x11
 	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf $(DARWIN_SDL2_FLAGS) $(FLAGS)
 endif
 

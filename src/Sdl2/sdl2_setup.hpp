@@ -10,7 +10,7 @@
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
 #include "../Game/Menu/Menu.hpp"
-
+#include "../Game/Pacman/Pacman.hpp"
 
 class SDL2 : public ADisplayModule, public IRenderer
 {

@@ -5,8 +5,7 @@
 ** sdl2_display.cpp
 */
 
-#include "sdl2_display.hpp"
-#include "../../../Sdl2/sdl2_setup.hpp"
+#include "sdl2_menu.hpp"
 
 Sdl2Menu::Sdl2Menu(SDL2 *sdl2) : sdl2(sdl2) {}
 

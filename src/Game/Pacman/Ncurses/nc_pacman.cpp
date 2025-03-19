@@ -61,7 +61,5 @@ void NcursesPacman::move_player()
 
 int NcursesPacman::load_map_from_file(std::string filename)
 {
-    std::ofstream file("caca.txt");
-    file << "load_map_from_file" << std::endl;
     return 0;
 }

@@ -5,8 +5,7 @@
 ** nc_display.cpp
 */
 
-#include "nc_display.hpp"
-#include <fstream>
+#include "nc_menu.hpp"
 
 NcursesMenu::NcursesMenu(Ncurses* nc) : nc(nc) {}
 

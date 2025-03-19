@@ -11,6 +11,8 @@
 #include "../../ArcadeExeption.hpp"
 #include <fstream>
 #include "../../Sdl2/sdl2_setup.hpp"
+#include "../Pacman/Pacman.hpp"
+#include "../../Ncurses/ncurses_setup.hpp"
 
 class Pacman;
 

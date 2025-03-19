@@ -6,7 +6,7 @@
 */
 
 #include "ncurses_setup.hpp"
-#include "../Game/Menu/Ncurses/nc_display.hpp"
+#include "../Game/Menu/Ncurses/nc_menu.hpp"
 #include "../Game/Pacman/Ncurses/nc_pacman.hpp"
 
 Ncurses::Ncurses() : ADisplayModule("Ncurses")

@@ -6,7 +6,6 @@
 */
 
 #include "Menu.hpp"
-#include "../Pacman/Pacman.hpp"
 
 Menu::Menu()
 {

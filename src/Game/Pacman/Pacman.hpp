@@ -7,17 +7,21 @@
 
 #pragma once
 
+#include <ncurses.h>
+#include <fstream>
 #include "../../IGameModule.hpp"
 #include "../../ArcadeExeption.hpp"
+#include "../../IRenderer.hpp"
 #include "../../Ncurses/ncurses_setup.hpp"
+#include "../../Sdl2/sdl2_setup.hpp"
 
-#define PLAYER 'C'
-#define WALL '#'
-#define GHOST 'G'
-#define COIN '*'
-#define EMPTY ' '
-#define POWERUP '@'
-#define TELEPORT 'T'
+    #define PLAYER 'C'
+    #define WALL '#'
+    #define GHOST 'G'
+    #define COIN '*'
+    #define EMPTY ' '
+    #define POWERUP '@'
+    #define TELEPORT 'T'
 
 class Pacman : public IGameModule
 {
@@ -30,12 +34,8 @@ class Pacman : public IGameModule
 class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
-
-        // virtual void Draw_Player() = 0;
-        // virtual void Draw_Ghost() = 0;
-        // virtual void Draw_Coin() = 0;
-        // virtual void Draw_Powerup() = 0;
-
         virtual int load_map_from_file(std::string filename) = 0;
         virtual void move_player() = 0;
+
+        // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };
