@@ -59,14 +59,14 @@ int Menu::DisplayModules1(IRenderer *renderer)
         else
             DisplayText(renderer, moduleGames[i], 1, i + 4);
     }
-    return i % selectedOption;
+    return selectedOption;
 }
 
 int Menu::DisplayModules2(IRenderer *renderer)
 {
     DisplayText(renderer, "USER", 2, 4);
     DisplayText(renderer, "Score Pacman : 100", 2, 5);
-    return selectedOption
+    return selectedOption;
 }
 
 int Menu::DisplayModules3(IRenderer *renderer)
