@@ -20,15 +20,16 @@ class Menu : public IGameModule
 {
     private:
         Pacman *pacman;
+        int selectedOption;
     public:
         Menu();
         ~Menu();
         void draw_game(IRenderer *renderer) override;
         void modules(IRenderer *renderer);
         void DisplayText(IRenderer *renderer, string text, int module, int height);
-        //void Modules1(IRenderer *renderer, int screenWidth, int screenHeight);
-        //void Modules2(IRenderer *renderer, int screenWidth, int screenHeight);
-        //void Modules3(IRenderer *renderer, int screenWidth, int screenHeight);
+        int DisplayModules1(IRenderer *renderer);
+        int DisplayModules2(IRenderer *renderer);
+        int DisplayModules3(IRenderer *renderer);
 };
 
 class IMenuRenderer {

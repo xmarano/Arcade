@@ -7,7 +7,7 @@
 
 #include "Menu.hpp"
 
-Menu::Menu()
+Menu::Menu() : selectedOption(0)
 {
     pacman = new Pacman();
 }
@@ -26,12 +26,6 @@ void Menu::modules(IRenderer *renderer)
     menuRenderer->Draw_Module1();
 
 }
-
-// void Menu::Modules1(IRenderer *renderer, string title, int x, int y)
-// {
-//     renderer->DrawText1(x, y, title);
-
-// }
 
 void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
 {
@@ -53,7 +47,45 @@ void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
     }
 }
 
-// ANTHONY
+int Menu::DisplayModules1(IRenderer *renderer)
+{
+    std::vector<std::string> moduleGames;
+    moduleGames.push_back("Pacman");
+    moduleGames.push_back("Snake");
+
+    for (int i = 0; i < moduleGames.size(); i++) {
+        if (i % selectedOption == 0)
+            DisplayText(renderer, moduleGames[i] + " <", 1, i + 4);
+        else
+            DisplayText(renderer, moduleGames[i], 1, i + 4);
+    }
+    return i % selectedOption;
+}
+
+int Menu::DisplayModules2(IRenderer *renderer)
+{
+    DisplayText(renderer, "USER", 2, 4);
+    DisplayText(renderer, "Score Pacman : 100", 2, 5);
+    return selectedOption
+}
+
+int Menu::DisplayModules3(IRenderer *renderer)
+{
+    std::vector<std::string> moduleFiles;
+
+    for (const auto &entry : std::filesystem::directory_iterator("./lib")) {
+        if (entry.path().extension() == ".so") {
+            string temp_file = entry.path().string();
+            int start = temp_file.find("arcade_") + 7;
+            int end = temp_file.find(".so");
+            temp_file = temp_file.substr(start, end - start);
+            moduleFiles.push_back(temp_file);
+        }
+    }
+    for (int i = 0; i < moduleFiles.size(); i++) {
+        DisplayText(renderer, moduleFiles[i], 3, i + 4);
+    }
+}
 
 void Menu::draw_game(IRenderer *renderer)
 {
@@ -67,9 +99,15 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_2, 2, 2);
     DisplayText(renderer, title_3, 3, 2);
 
-    // Modules1(renderer, title_1, title_1_x, y);
-    // Modules2(renderer, title_2, title_2_x, y);
-    // Modules3(renderer, title_3, title_3_x, y);
-    pacman->draw_game(renderer);
+    std::vector<int> optionSelected;
+    int module1Selected = DisplayModules1(renderer);
+    int module2Selected = DisplayModules2(renderer);
+    int module3Selected = DisplayModules3(renderer);
+    optionSelected.push_back(module1Selected);
+    optionSelected.push_back(module2Selected);
+    optionSelected.push_back(module3Selected);
+    // à optimiser
+
+    // pacman->draw_game(renderer);
     modules(renderer);
 }
