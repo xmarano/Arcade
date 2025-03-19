@@ -28,6 +28,10 @@ DARWIN_SFML_FLAGS = -I/opt/homebrew/Cellar/csfml/2.6.1_1/include/ -L/opt/homebre
 
 UNAME	:=	$(shell uname -s)
 
+ifeq ($(UNAME),Darwin)
+    FLAGS += -w
+endif
+
 all: graphicals core
 	@echo "$(YELLOW)$(UNAME)$(RESET)"
 
