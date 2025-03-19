@@ -26,21 +26,49 @@ void Menu::modules(IRenderer *renderer)
     menuRenderer->Draw_Module1();
 }
 
-void Menu::draw_game(IRenderer *renderer)
+// void Menu::Modules1(IRenderer *renderer, string title, int x, int y)
+// {
+//     renderer->DrawText1(x, y, title);
+
+// }
+
+void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
 {
     int screenWidth = renderer->getScreenWidth();
     int screenHeight = renderer->getScreenHeight();
+    int y = (screenHeight / 10 * height);
+    string error = "!-- ERROR DISPLAY --!";
 
-    string title = "Bienvenue sur Arcade !";
+    if (module == 0) {
+        renderer->DrawText1((screenWidth / 2) - (text.length() / 2), y, text);
+    } else if (module == 1) {
+        renderer->DrawText1(((screenWidth / 3) / 2) - (text.length() / 2), y, text);
+    } else if (module == 2) {
+        renderer->DrawText1(((screenWidth / 1) / 2) - (text.length() / 2), y, text);
+    } else if (module == 3) {
+        renderer->DrawText1(((screenWidth / 3) * 2.5) - (text.length() / 2), y, text);
+    } else {
+        renderer->DrawText1((screenWidth / 2) - (error.length() / 2), y, error);
+    }
+}
+
+// ANTHONY
+
+void Menu::draw_game(IRenderer *renderer)
+{
+    string title_0 = "Bienvenue sur Arcade !";
     string title_1 = "Jeux disponibles:";
     string title_2 = "Joueur:";
     string title_3 = "Affichage:";
 
-    renderer->DrawText1(((screenWidth / 2) - (title.length() / 2)), (screenHeight / 10 * 0), title);
-    renderer->DrawText1((((screenWidth / 3) / 2) - (title_1.length() / 2)), (screenHeight / 10 * 1), title_1);
-    renderer->DrawText1((((screenWidth / 1) / 2) - (title_2.length() / 2)), (screenHeight / 10 * 1), title_2);
-    renderer->DrawText1((((screenWidth / 3) * 2.5) - (title_3.length() / 2)), (screenHeight / 10 * 1), title_3);
+    DisplayText(renderer, title_0, 0, 0);
+    DisplayText(renderer, title_1, 1, 2);
+    DisplayText(renderer, title_2, 2, 2);
+    DisplayText(renderer, title_3, 3, 2);
 
+    // Modules1(renderer, title_1, title_1_x, y);
+    // Modules2(renderer, title_2, title_2_x, y);
+    // Modules3(renderer, title_3, title_3_x, y);
     pacman->draw_game(renderer);
     modules(renderer);
 }

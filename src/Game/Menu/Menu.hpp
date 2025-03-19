@@ -25,6 +25,10 @@ class Menu : public IGameModule
         ~Menu();
         void draw_game(IRenderer *renderer) override;
         void modules(IRenderer *renderer);
+        void DisplayText(IRenderer *renderer, string text, int module, int height);
+        //void Modules1(IRenderer *renderer, int screenWidth, int screenHeight);
+        //void Modules2(IRenderer *renderer, int screenWidth, int screenHeight);
+        //void Modules3(IRenderer *renderer, int screenWidth, int screenHeight);
 };
 
 class IMenuRenderer {
