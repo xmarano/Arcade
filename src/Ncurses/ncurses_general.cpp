@@ -11,15 +11,14 @@ void Ncurses::display()
 {
     cout << "Displaying Ncurses" << endl;
     while (true) {
-        clearScreen();
-        if (gameModule) {
-            gameModule->draw_game(this);
-        }
-        refreshScreen();
         int ch = getch();
         if (ch == 'q') {
             break;
         }
+        clearScreen();
+        if (gameModule)
+            gameModule->draw_game(this);
+        refreshScreen();
     }
 }
 
