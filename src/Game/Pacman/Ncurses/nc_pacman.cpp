@@ -6,6 +6,7 @@
 */
 
 #include "nc_pacman.hpp"
+#include "../../../ArcadeExeption.hpp"
 
 NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc)
 {
@@ -15,6 +16,10 @@ NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc)
     this->highscore = 0;
     this->pos_player = std::make_pair(19, 13);
     load_map_from_file("src/Game/Pacman/pacman_map.txt");
+    // for (int i = 0; i < MAP_HEIGHT; i++)
+    // {
+    //     std::cout << this->map[i] << std::endl;
+    // }
 }
 
 void NcursesPacman::move_player()
@@ -61,5 +66,24 @@ void NcursesPacman::move_player()
 
 int NcursesPacman::load_map_from_file(std::string filename)
 {
+    std::string line;
+    std::ifstream file(filename);
+    int i = 0;
+
+    if (!file.is_open()) {
+        throw ArcadeException("Invalid file map.");
+        return -1;
+    }
+    this->map = new std::string[MAP_HEIGHT];
+
+    while (std::getline(file, line)) {
+        if (i < MAP_HEIGHT) {
+            this->map[i].assign(line);
+            i++;
+        } else {
+            break;
+        }
+    }
+    file.close();
     return 0;
 }

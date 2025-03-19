@@ -22,6 +22,7 @@
     #define EMPTY ' '
     #define POWERUP '@'
     #define TELEPORT 'T'
+    #define MAP_HEIGHT 25
 
 class Pacman : public IGameModule
 {
