@@ -9,6 +9,19 @@
 #include "ArcadeExeption.hpp"
 #include "Game/Menu/Menu.hpp"
 
+void DLLoader<IDisplayModule>::changeLibrary(IDisplayModule*& currentDisplay, std::string newLibraryPath)
+{
+    DLLoader<IDisplayModule> loader;
+    IDisplayModule* newDisplay = loader.getInstance(newLibraryPath);
+
+    if (currentDisplay) {
+        currentDisplay->stop();
+        delete currentDisplay;
+    }
+    currentDisplay = newDisplay;
+    currentDisplay->init();
+}
+
 int main(int ac, char **av)
 {
     try {
@@ -16,16 +29,20 @@ int main(int ac, char **av)
             throw ArcadeException("Usage: ./arcade ./lib/libncurses.so");
 
         DLLoader<IDisplayModule> loader;
-        IDisplayModule *display = loader.getInstance(av[1]);
+        IDisplayModule *current_display = loader.getInstance(av[1]);
+        ADisplayModule::setCurrentDisplayModule(current_display);
+        bool running = true;
 
         Menu menu;
-        display->setGameModule(&menu);
+        current_display->setGameModule(&menu);
 
-        display->init();
-        display->display();
-        display->stop();
+        current_display->init();
+        while (running) {
+            current_display->display();
+        }
+        current_display->stop();
 
-        delete display;
+        delete current_display;
         return 0;
     } catch (ArcadeException &e) {
         std::cerr << "Error: " << e.what() << std::endl;
