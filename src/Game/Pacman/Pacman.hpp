@@ -30,18 +30,28 @@
 class Pacman : public IGameModule
 {
     public:
-        Pacman() = default;
+        Pacman();
         ~Pacman() = default;
-        void draw_game(IRenderer *renderer) override;
+        void draw_game(IRenderer *renderer) override; // Royal delux
 
-        //! pas touché
+        void move_player();
+        int load_map_from_file(std::string filename);
+        void check_bonuses(char new_pos);
+
+    private:
+        int score;
+        int lives;
+        int level;
+        int highscore;
+        bool is_sous_frozen;
+        std::pair<int, int> pos_player;
+        std::string* map;
 };
 
 class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
-        virtual int load_map_from_file(std::string filename) = 0;
-        virtual void move_player() = 0;
 
+        virtual void print_map(std::string *map) = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

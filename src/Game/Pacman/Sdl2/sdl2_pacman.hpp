@@ -14,9 +14,8 @@ class Sdl2Pacman : public IPacmanRenderer
     private:
         SDL2 *sdl2;
     public:
-        Sdl2Pacman(SDL2 *sdl2);;
+        Sdl2Pacman(SDL2 *sdl2);
         ~Sdl2Pacman() = default;
 
-        int load_map_from_file(std::string filename) override;
-        void move_player() override;
+        void print_map(std::string *map) override;
 };

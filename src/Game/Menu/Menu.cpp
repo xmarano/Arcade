@@ -24,6 +24,7 @@ void Menu::modules(IRenderer *renderer)
 
     IMenuRenderer* menuRenderer = renderer->getMenuRenderer();
     menuRenderer->Draw_Module1();
+
 }
 
 // void Menu::Modules1(IRenderer *renderer, string title, int x, int y)

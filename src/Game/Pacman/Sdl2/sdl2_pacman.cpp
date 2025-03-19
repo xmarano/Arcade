@@ -7,15 +7,11 @@
 
 #include "sdl2_pacman.hpp"
 
-Sdl2Pacman::Sdl2Pacman(SDL2 *sdl2) : sdl2(sdl2)
-{}
+Sdl2Pacman::Sdl2Pacman(SDL2 *sdl2) : sdl2(sdl2) {}
 
-int Sdl2Pacman::load_map_from_file(std::string filename)
+void Sdl2Pacman::print_map(std::string *map)
 {
-    return 0;
-}
-
-void Sdl2Pacman::move_player()
-{
-
+    // for (int i = 0; i < MAP_HEIGHT; i++) {
+    //     sdl2->DrawText1(0, i, map[i]->c_str());
+    // }
 }
