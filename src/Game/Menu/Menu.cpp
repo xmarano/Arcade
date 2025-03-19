@@ -6,9 +6,17 @@
 */
 
 #include "Menu.hpp"
-#include <fstream>
-#include "../../Sdl2/sdl2_setup.hpp"
 #include "../Pacman/Pacman.hpp"
+
+Menu::Menu()
+{
+    pacman = new Pacman();
+}
+
+Menu::~Menu()
+{
+    delete pacman;
+}
 
 void Menu::modules(IRenderer *renderer)
 {
@@ -21,12 +29,10 @@ void Menu::modules(IRenderer *renderer)
 
 void Menu::draw_game(IRenderer *renderer)
 {
-    // Pacman pacman;
-
     int screenWidth = renderer->getScreenWidth();
     int screenHeight = renderer->getScreenHeight();
 
     renderer->DrawText1(((screenWidth / 2) / 1.2) + 10, 0, "Bienvenue sur Arcade !"); // Title
-    // pacman.draw_game(renderer);
-    // modules(renderer);
+    pacman->draw_game(renderer);
+    modules(renderer);
 }

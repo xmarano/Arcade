@@ -15,6 +15,7 @@ class Ncurses : public ADisplayModule, public IRenderer
 {
     private:
         IMenuRenderer* menuRenderer = nullptr;
+        IPacmanRenderer* pacmanRenderer = nullptr;
     public:
         Ncurses();
         ~Ncurses();
@@ -23,7 +24,7 @@ class Ncurses : public ADisplayModule, public IRenderer
         void display() override;
 
         virtual IMenuRenderer* getMenuRenderer() override { return menuRenderer; }
-        virtual IPacmanRenderer* getPacmanRenderer() override { return nullptr; }
+        virtual IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; }
         void DrawText1(int pos_x, int pos_y, string mess) override;
         void DrawText2(int pos_x, int pos_y, string mess) override;
 

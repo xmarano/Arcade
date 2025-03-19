@@ -6,7 +6,6 @@
 */
 
 #include "nc_pacman.hpp"
-#include "../../../Ncurses/ncurses_setup.hpp"
 
 NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc)
 {
@@ -63,19 +62,6 @@ void NcursesPacman::move_player()
 int NcursesPacman::load_map_from_file(std::string filename)
 {
     std::ofstream file("caca.txt");
-
     file << "load_map_from_file" << std::endl;
-    // std::string line;
-    // std::ifstream file(filename);
-    // int i = 0;
-
-    // if (!file.is_open()) {
-    //     throw ArcadeException("Error: Could not open file");
-    // }
-    // while (std::getline(file, line)) {
-    //     this->map[i].append(line);
-    //     i++;
-    // }
-    // file.close();
-    // return 0;
+    return 0;
 }

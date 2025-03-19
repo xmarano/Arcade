@@ -7,16 +7,20 @@
 
 #include "ncurses_setup.hpp"
 #include "../Game/Menu/Ncurses/nc_display.hpp"
+#include "../Game/Pacman/Ncurses/nc_pacman.hpp"
 
 Ncurses::Ncurses() : ADisplayModule("Ncurses")
 {
     menuRenderer = new NcursesMenu(this);
+    pacmanRenderer = new NcursesPacman(this);
 }
 
 Ncurses::~Ncurses()
 {
     if (menuRenderer != nullptr)
         delete menuRenderer;
+    if (pacmanRenderer != nullptr)
+        delete pacmanRenderer;
     stop();
 }
 

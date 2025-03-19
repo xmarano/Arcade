@@ -9,6 +9,7 @@
 
 #include "../../IGameModule.hpp"
 #include "../../ArcadeExeption.hpp"
+#include "../../Ncurses/ncurses_setup.hpp"
 
 #define PLAYER 'C'
 #define WALL '#'
@@ -20,8 +21,6 @@
 
 class Pacman : public IGameModule
 {
-    private:
-        IRenderer *renderer;
     public:
         Pacman() = default;
         ~Pacman() = default;
@@ -32,10 +31,10 @@ class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
 
-        virtual void Draw_Player() = 0;
-        virtual void Draw_Ghost() = 0;
-        virtual void Draw_Coin() = 0;
-        virtual void Draw_Powerup() = 0;
+        // virtual void Draw_Player() = 0;
+        // virtual void Draw_Ghost() = 0;
+        // virtual void Draw_Coin() = 0;
+        // virtual void Draw_Powerup() = 0;
 
         virtual int load_map_from_file(std::string filename) = 0;
         virtual void move_player() = 0;

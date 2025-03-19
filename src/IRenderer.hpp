@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <iostream>
+
 class IMenuRenderer;
 class IPacmanRenderer;
 

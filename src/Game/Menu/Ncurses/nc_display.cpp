@@ -6,7 +6,6 @@
 */
 
 #include "nc_display.hpp"
-#include "../../../Ncurses/ncurses_setup.hpp"
 #include <fstream>
 
 NcursesMenu::NcursesMenu(Ncurses* nc) : nc(nc) {}

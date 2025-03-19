@@ -12,10 +12,12 @@ NAME	=	arcade
 
 SRC_FILES	=	src/main.cpp	\
 				src/Game/Menu/Menu.cpp	\
+				src/Game/Pacman/Pacman.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 				src/Ncurses/ncurses_general.cpp	\
-				src/Game/Menu/Ncurses/nc_display.cpp
+				src/Game/Menu/Ncurses/nc_display.cpp	\
+				src/Game/Pacman/Ncurses/nc_pacman.cpp	\
 
 SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 				src/Sdl2/sdl2_general.cpp	\

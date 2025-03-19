@@ -8,12 +8,19 @@
 #pragma once
 
 #include "../../IGameModule.hpp"
+#include "../../ArcadeExeption.hpp"
+#include <fstream>
+#include "../../Sdl2/sdl2_setup.hpp"
+
+class Pacman;
 
 class Menu : public IGameModule
 {
+    private:
+        Pacman *pacman;
     public:
-        Menu() = default;
-        ~Menu() = default;
+        Menu();
+        ~Menu();
         void draw_game(IRenderer *renderer) override;
         void modules(IRenderer *renderer);
 };
