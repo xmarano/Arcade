@@ -34,7 +34,7 @@ all: graphicals core
 core:
 	@echo "$(GREEN)core$(RESET)"
 ifeq ($(UNAME),Linux)
-	g++ $(SRC_FILES) -o $(NAME) $(LDFLAGS) $(FLAGS)
+	g++ $(SRC_FILES) -o $(NAME) $(LDFLAGS) $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
 	g++ $(SRC_FILES) -o $(NAME) -ldl -lncurses -lSDL2 -lSDL2_ttf $(DARWIN_SDL2_FLAGS) $(FLAGS)
 endif
@@ -53,7 +53,7 @@ sdl2:
 	@echo "$(GREEN)sdl2$(RESET)"
 ifeq ($(UNAME),Linux)
 	export SDL_VIDEODRIVER=x11
-	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf $(FLAGS)
+	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
 	export SDL_VIDEODRIVER=x11
 	g++ -shared -fPIC $(SRC_SDL2) -o lib/arcade_sdl2.so -lSDL2 -lSDL2_ttf $(DARWIN_SDL2_FLAGS) $(FLAGS)
