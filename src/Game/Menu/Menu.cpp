@@ -36,10 +36,10 @@ void Menu::draw_game(IRenderer *renderer)
     string title_2 = "Joueur:";
     string title_3 = "Affichage:";
 
-    renderer->DrawText1(((screenWidth / 2) - (title.length() / 2)), 0, title);
-    renderer->DrawText1((((screenWidth / 3) / 2) - (title_1.length() / 2)), 3, title_1);
-    renderer->DrawText1((((screenWidth / 1) / 2) - (title_2.length() / 2)), 3, title_2);
-    renderer->DrawText1((((screenWidth / 3) * 2.5) - (title_3.length() / 2)), 3, title_3);
+    renderer->DrawText1(((screenWidth / 2) - (title.length() / 2)), (screenHeight / 10 * 0), title);
+    renderer->DrawText1((((screenWidth / 3) / 2) - (title_1.length() / 2)), (screenHeight / 10 * 1), title_1);
+    renderer->DrawText1((((screenWidth / 1) / 2) - (title_2.length() / 2)), (screenHeight / 10 * 1), title_2);
+    renderer->DrawText1((((screenWidth / 3) * 2.5) - (title_3.length() / 2)), (screenHeight / 10 * 1), title_3);
 
     pacman->draw_game(renderer);
     modules(renderer);
