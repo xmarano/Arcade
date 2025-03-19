@@ -29,8 +29,6 @@ void NcursesMenu::Draw_Module1()
 {
     pos_x = getScreenWidth();
     pos_y = getScreenHeight();
-
-    nc->DrawText1((pos_x / 4) / 1.5, (pos_y / 4) / 1.5, "Jeux disponibles");
 }
 
 void NcursesMenu::Draw_Module2()
