@@ -9,11 +9,6 @@
 
 void SDL2::display()
 {
-    clearScreen();
-    if (gameModule) {
-        gameModule->draw_game(this);
-    }
-    refreshScreen();
     SDL_Event event;
     bool running = true;
     while (running) {
@@ -22,6 +17,10 @@ void SDL2::display()
                 running = false;
             }
         }
+        clearScreen();
+        if (gameModule)
+            gameModule->draw_game(this);
+        refreshScreen();
         SDL_Delay(16);
     }
 }
