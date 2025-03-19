@@ -30,16 +30,14 @@ int main(int ac, char **av)
 
         DLLoader<IDisplayModule> loader;
         IDisplayModule *current_display = loader.getInstance(av[1]);
-        ADisplayModule::setCurrentDisplayModule(current_display);
-        bool running = true;
+        // ADisplayModule::setCurrentDisplayModule(current_display);
+        // bool running = true;
 
         Menu menu;
         current_display->setGameModule(&menu);
 
         current_display->init();
-        while (running) {
-            current_display->display();
-        }
+        current_display->display();
         current_display->stop();
 
         delete current_display;

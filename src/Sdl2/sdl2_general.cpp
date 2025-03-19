@@ -16,9 +16,9 @@ void SDL2::display()
             if (event.type == SDL_QUIT) {
                 running = false;
             }
-            if (event.key.keysym.sym == SDLK_n) {
-                // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
-            }
+            // if (event.key.keysym.sym == SDLK_n) {
+            //     // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
+            // }
         }
         clearScreen();
         if (gameModule)

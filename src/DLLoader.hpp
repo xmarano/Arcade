@@ -28,5 +28,5 @@ class DLLoader {
             T *module = create();
             return module;
         }
-        void changeLibrary(IDisplayModule* &currentDisplay, std::string newLibraryPath);
+        // void changeLibrary(IDisplayModule* &currentDisplay, std::string newLibraryPath);
 };
