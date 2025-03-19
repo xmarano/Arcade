@@ -7,7 +7,8 @@
 
 #include "sdl2_setup.hpp"
 
-void SDL2::display() {
+void SDL2::display()
+{
     SDL_Event event;
     bool running = true;
     while (running) {
@@ -15,10 +16,8 @@ void SDL2::display() {
             if (event.type == SDL_QUIT) {
                 running = false;
             }
-            if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_n) {
-                    // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
-                }
+            if (event.key.keysym.sym == SDLK_n) {
+                // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
             }
         }
         clearScreen();

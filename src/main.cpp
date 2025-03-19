@@ -9,18 +9,18 @@
 #include "ArcadeExeption.hpp"
 #include "Game/Menu/Menu.hpp"
 
-void DLLoader<IDisplayModule>::changeLibrary(IDisplayModule*& currentDisplay, std::string newLibraryPath)
-{
-    DLLoader<IDisplayModule> loader;
-    IDisplayModule* newDisplay = loader.getInstance(newLibraryPath);
+// void DLLoader<IDisplayModule>::changeLibrary(IDisplayModule*& currentDisplay, std::string newLibraryPath)
+// {
+//     DLLoader<IDisplayModule> loader;
+//     IDisplayModule* newDisplay = loader.getInstance(newLibraryPath);
 
-    if (currentDisplay) {
-        currentDisplay->stop();
-        delete currentDisplay;
-    }
-    currentDisplay = newDisplay;
-    currentDisplay->init();
-}
+//     if (currentDisplay) {
+//         currentDisplay->stop();
+//         delete currentDisplay;
+//     }
+//     currentDisplay = newDisplay;
+//     currentDisplay->init();
+// }
 
 int main(int ac, char **av)
 {

@@ -12,7 +12,7 @@ NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc) {}
 
 void NcursesPacman::print_map(std::string *map)
 {
-    for (int i = 0; i < MAP_HEIGHT; i++) {
-        mvprintw(i, 0, map[i]);
-    }
+    // for (int i = 0; i < MAP_HEIGHT; i++) {
+    //     mvprintw(i, 0, map[i]);
+    // }
 }

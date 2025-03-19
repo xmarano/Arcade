@@ -19,6 +19,9 @@ void Ncurses::display()
         if (ch == 'q') {
             break;
         }
+        if (ch == 'n') {
+            // loader.changeLibrary(current_display, "./lib/arcade_ncurses.so");
+        }
     }
 }
 
