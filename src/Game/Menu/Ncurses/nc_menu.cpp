@@ -14,14 +14,16 @@ MenuEvent NcursesMenu::pollEvent()
 {
     int ch = getch();
 
-    if (ch == 'j') {
+    if (ch == 'j')
         return MenuEvent::Down;
-    }
-    if (ch == 'k') {
+    if (ch == 'k')
         return MenuEvent::PlayPacman;
-    }
     if (ch == 'q')
         return MenuEvent::Quit;
+    if (ch == KEY_UP)
+        return MenuEvent::Up;
+    if (ch == KEY_DOWN)
+        return MenuEvent::Down;
     return MenuEvent::None;
 }
 
