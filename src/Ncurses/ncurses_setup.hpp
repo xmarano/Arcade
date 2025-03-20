@@ -23,7 +23,7 @@ class Ncurses : public ADisplayModule, public IRenderer
         ~Ncurses();
         void init() override;
         void stop() override;
-        void display() override;
+        int display() override;
 
         virtual IMenuRenderer* getMenuRenderer() override { return menuRenderer; }
         virtual IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; }
@@ -38,6 +38,4 @@ class Ncurses : public ADisplayModule, public IRenderer
 
         int getScreenWidth() override;
         int getScreenHeight() override;
-
-        // Event pollEvent() override;
 };

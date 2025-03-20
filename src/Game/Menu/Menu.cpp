@@ -79,7 +79,7 @@ void Menu::DisplayModules3(IRenderer *renderer)
     }
 }
 
-void Menu::draw_game(IRenderer *renderer)
+int Menu::draw_game(IRenderer *renderer)
 {
     string title_0 = "Bienvenue sur Arcade !";
     string title_1 = "Jeux disponibles:";
@@ -91,6 +91,8 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_1, 1, 2);
     DisplayText(renderer, title_2, 2, 2);
     DisplayText(renderer, title_3, 3, 2);
+
+    vector<int> Selected;
 
     DisplayModules1(renderer);
     DisplayModules2(renderer);
@@ -125,8 +127,8 @@ void Menu::draw_game(IRenderer *renderer)
         }
     }
 
-    // Selected.push_back(module1Selected);
-    // Selected.push_back(module2Selected);
-    // Selected.push_back(module3Selected);
-    // à optimiser
+    if (ev == MenuEvent::SwapToNcurses) return 1;
+    if (ev == MenuEvent::SwapToSdl2) return 2;
+    if (ev == MenuEvent::SwapToSfml) return 3;
+    return 0;
 }

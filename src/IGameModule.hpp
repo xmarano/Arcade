@@ -14,6 +14,6 @@
 class IGameModule {
     public:
         virtual ~IGameModule() = default;
-        virtual void draw_game(IRenderer *renderer) = 0;
+        virtual int draw_game(IRenderer *renderer) = 0;
         virtual std::string get_game_name() = 0;
 };

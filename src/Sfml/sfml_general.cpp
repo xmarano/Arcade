@@ -22,13 +22,19 @@
 //     return Event::None;
 // }
 
-void Sfml::display()
+int Sfml::display()
 {
+    int code = 0;
+
     clearScreen();
-    if (gameModule)
-        gameModule->draw_game(this);
+    if (gameModule) {
+        code = gameModule->draw_game(this);
+        if (code > 0)
+            return code;
+    }
     refreshScreen();
     sf::sleep(sf::milliseconds(16));
+    return 0;
 }
 
 void Sfml::DrawText1(int pos_x, int pos_y, string mess)

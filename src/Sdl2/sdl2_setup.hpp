@@ -30,7 +30,7 @@ class SDL2 : public ADisplayModule, public IRenderer
         ~SDL2() = default;
         void init() override;
         void stop() override;
-        void display() override;
+        int display() override;
 
         IMenuRenderer* getMenuRenderer() override { return menuRenderer; };
         IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; };

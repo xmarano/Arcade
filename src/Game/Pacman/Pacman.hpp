@@ -32,7 +32,7 @@ class Pacman : public IGameModule
     public:
         Pacman();
         ~Pacman() = default;
-        void draw_game(IRenderer *renderer) override; // Royal delux
+        int draw_game(IRenderer *renderer) override; // Royal delux
 
         void move_player();
         int load_map_from_file(std::string filename);
