@@ -22,7 +22,9 @@ enum class MenuEvent {
     Quit,
     Up,
     Down,
-    PlayPacman
+    Enter,
+    PlayPacman,
+    PlaySnake
 };
 
 class Menu : public IGameModule
