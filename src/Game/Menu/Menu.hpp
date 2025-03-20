@@ -9,9 +9,9 @@
 
 #include "../../IGameModule.hpp"
 #include "../../ArcadeExeption.hpp"
-#include <fstream>
 #include "../../Sdl2/sdl2_setup.hpp"
 #include "../Pacman/Pacman.hpp"
+#include <vector>
 #include "../../Ncurses/ncurses_setup.hpp"
 
 class Pacman;
@@ -27,9 +27,10 @@ class Menu : public IGameModule
         void draw_game(IRenderer *renderer) override;
         void modules(IRenderer *renderer);
         void DisplayText(IRenderer *renderer, string text, int module, int height);
-        int DisplayModules1(IRenderer *renderer);
-        int DisplayModules2(IRenderer *renderer);
-        int DisplayModules3(IRenderer *renderer);
+        void DisplayModules1(IRenderer *renderer);
+        void DisplayModules2(IRenderer *renderer);
+        void DisplayModules3(IRenderer *renderer);
+
 };
 
 class IMenuRenderer {

@@ -5,6 +5,8 @@
 ** Menu.cpp
 */
 
+#include <iostream>
+#include <filesystem>
 #include "Menu.hpp"
 
 Menu::Menu() : selectedOption(0)
@@ -47,33 +49,28 @@ void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
     }
 }
 
-int Menu::DisplayModules1(IRenderer *renderer)
+void Menu::DisplayModules1(IRenderer *renderer)
 {
     std::vector<std::string> moduleGames;
     moduleGames.push_back("Pacman");
     moduleGames.push_back("Snake");
 
     for (int i = 0; i < moduleGames.size(); i++) {
-        if (i % selectedOption == 0)
-            DisplayText(renderer, moduleGames[i] + " <", 1, i + 4);
-        else
-            DisplayText(renderer, moduleGames[i], 1, i + 4);
+        DisplayText(renderer, moduleGames[i], 1, i + 4);
     }
-    return selectedOption;
 }
 
-int Menu::DisplayModules2(IRenderer *renderer)
+void Menu::DisplayModules2(IRenderer *renderer)
 {
     DisplayText(renderer, "USER", 2, 4);
     DisplayText(renderer, "Score Pacman : 100", 2, 5);
-    return selectedOption;
 }
 
-int Menu::DisplayModules3(IRenderer *renderer)
+void Menu::DisplayModules3(IRenderer *renderer)
 {
-    std::vector<std::string> moduleFiles;
+    vector<string> moduleFiles;
 
-    for (const auto &entry : std::filesystem::directory_iterator("./lib")) {
+    for (const auto &entry : filesystem::directory_iterator("./lib")) {
         if (entry.path().extension() == ".so") {
             string temp_file = entry.path().string();
             int start = temp_file.find("arcade_") + 7;
@@ -100,14 +97,16 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_3, 3, 2);
 
     std::vector<int> optionSelected;
-    int module1Selected = DisplayModules1(renderer);
-    int module2Selected = DisplayModules2(renderer);
-    int module3Selected = DisplayModules3(renderer);
-    optionSelected.push_back(module1Selected);
-    optionSelected.push_back(module2Selected);
-    optionSelected.push_back(module3Selected);
+
+    DisplayModules1(renderer);
+    DisplayModules2(renderer);
+    DisplayModules3(renderer);
+    // optionSelected.push_back(module1Selected);
+    // optionSelected.push_back(module2Selected);
+    // optionSelected.push_back(module3Selected);
     // à optimiser
 
     // pacman->draw_game(renderer);
     modules(renderer);
-}
+}  
+   
