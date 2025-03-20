@@ -23,6 +23,7 @@ enum class MenuEvent {
     Up,
     Down,
     Enter,
+    Back,
     PlayPacman,
     PlaySnake,
     SwapToNcurses,

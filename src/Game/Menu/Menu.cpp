@@ -47,7 +47,7 @@ void Menu::DisplayModules1(IRenderer *renderer)
 
     for (int i = 0; i < moduleGames.size(); i++) {
         if (current.first == 1 && current.second == i + 1) {
-            DisplayText(renderer, "> " + moduleGames[i], 1, i + 4);
+            DisplayText(renderer, "> " + moduleGames[i] + " <", 1, i + 4);
         } else {
             DisplayText(renderer, moduleGames[i], 1, i + 4);
         }
@@ -75,7 +75,11 @@ void Menu::DisplayModules3(IRenderer *renderer)
         }
     }
     for (int i = 0; i < moduleFiles.size(); i++) {
-        DisplayText(renderer, moduleFiles[i], 3, i + 4);
+        if (current.first == 2 && current.second == i + 1) {
+            DisplayText(renderer, "> " + moduleFiles[i] + " <", 3, i + 4);
+        } else {
+            DisplayText(renderer, moduleFiles[i], 3, i + 4);
+        }
     }
 }
 
@@ -126,6 +130,18 @@ int Menu::draw_game(IRenderer *renderer)
             }
         }
     }
+    if (ev == MenuEvent::Enter) {
+        current.first = 2;
+    }
+    if (ev == MenuEvent::Back) {
+        current.first = 1;
+        if (current.second == 3) {
+            current.second = 2;
+        }
+    }
+
+    // if par{1, 1}
+        // pacman->draw_game(renderer);
 
     if (ev == MenuEvent::SwapToNcurses) return 1;
     if (ev == MenuEvent::SwapToSdl2) return 2;

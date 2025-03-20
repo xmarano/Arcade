@@ -17,12 +17,22 @@ MenuEvent Sdl2Menu::pollEvent()
         if (event.type == SDL_QUIT)
             return MenuEvent::Quit;
         if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_q || event.key.keysym.sym == SDLK_ESCAPE)
+                return MenuEvent::Quit;
             if (event.key.keysym.sym == SDLK_i)
                 return MenuEvent::SwapToNcurses;
             if (event.key.keysym.sym == SDLK_p)
                 return MenuEvent::SwapToSfml;
             if (event.key.keysym.sym == SDLK_k)
                 return MenuEvent::PlayPacman;
+            if (event.key.keysym.sym == SDLK_DOWN)
+                return MenuEvent::Down;
+            if (event.key.keysym.sym == SDLK_UP)
+                return MenuEvent::Up;
+            if (event.key.keysym.sym == SDLK_RETURN)
+                return MenuEvent::Enter;
+            if (event.key.keysym.sym == SDLK_BACKSPACE)
+                return MenuEvent::Back;
         }
     }
     return MenuEvent::None;

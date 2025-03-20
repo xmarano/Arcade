@@ -26,6 +26,10 @@ MenuEvent NcursesMenu::pollEvent()
         return MenuEvent::Up;
     if (ch == KEY_DOWN)
         return MenuEvent::Down;
+    if (ch == '\n')
+        return MenuEvent::Enter;
+    if (ch == 127) // A fix
+        return MenuEvent::Back;
 
     return MenuEvent::None;
 }
