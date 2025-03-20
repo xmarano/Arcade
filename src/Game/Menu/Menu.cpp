@@ -51,7 +51,7 @@ void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
 
 void Menu::DisplayModules1(IRenderer *renderer)
 {
-    std::vector<std::string> moduleGames;
+    vector<string> moduleGames;
     moduleGames.push_back("Pacman");
     moduleGames.push_back("Snake");
 
@@ -63,7 +63,8 @@ void Menu::DisplayModules1(IRenderer *renderer)
 void Menu::DisplayModules2(IRenderer *renderer)
 {
     DisplayText(renderer, "USER", 2, 4);
-    DisplayText(renderer, "Score Pacman : 100", 2, 5);
+    DisplayText(renderer, "Score Pacman : 0", 2, 5);
+    DisplayText(renderer, "Score Snake  : 0", 2, 5);
 }
 
 void Menu::DisplayModules3(IRenderer *renderer)
@@ -96,14 +97,15 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_2, 2, 2);
     DisplayText(renderer, title_3, 3, 2);
 
-    std::vector<int> optionSelected;
+    vector<int> Selected;
 
     DisplayModules1(renderer);
     DisplayModules2(renderer);
     DisplayModules3(renderer);
-    // optionSelected.push_back(module1Selected);
-    // optionSelected.push_back(module2Selected);
-    // optionSelected.push_back(module3Selected);
+
+    // Selected.push_back(module1Selected);
+    // Selected.push_back(module2Selected);
+    // Selected.push_back(module3Selected);
     // à optimiser
 
     // pacman->draw_game(renderer);
