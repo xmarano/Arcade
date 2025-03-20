@@ -74,7 +74,7 @@ sfml:
 ifeq ($(UNAME),Linux)
 	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
-	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(DARWIN_SFML_FLAGS) $(FLAGS)
+	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(DARWIN_SFML_FLAGS) $(FLAGS) $(DARWIN_SDL2_FLAGS)
 endif
 
 clean:

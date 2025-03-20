@@ -28,6 +28,10 @@ bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& lo
         newDisplay->init();
         currentDisplay = newDisplay;
     }
+    // if (event == Event::Up)
+    //     selectedOption++;
+    // if (event == Event::Down && selectedOption > 0)
+    //     selectedOption--;
     return true;
 }
 

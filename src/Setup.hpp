@@ -15,5 +15,7 @@ enum class Event {
     None,
     Quit,
     SwitchToSDL2,
-    SwitchToNCurses
+    SwitchToNCurses,
+    // Up,
+    // Down
 };

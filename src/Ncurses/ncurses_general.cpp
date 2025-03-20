@@ -15,10 +15,10 @@ Event Ncurses::pollEvent()
         return Event::Quit;
     if (ch == 's')
         return Event::SwitchToSDL2;
-    if (ch == KEY_DOWN)
-        return Event::Down;
-    if (ch == KEY_UP)
-        return Event::Up;
+    // if (ch == KEY_DOWN)
+    //     return Event::Down;
+    // if (ch == KEY_UP)
+    //     return Event::Up;
     return Event::None;
 }
 
