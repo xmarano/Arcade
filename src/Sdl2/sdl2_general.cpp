@@ -12,8 +12,10 @@ Event SDL2::pollEvent() {
     if (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
             return Event::Quit;
-        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_n)
+        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_i)
             return Event::SwitchToNCurses;
+        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
+            return Event::SwitchToSFML;
     }
     return Event::None;
 }

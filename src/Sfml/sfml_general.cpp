@@ -14,8 +14,10 @@ Event Sfml::pollEvent()
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             return Event::Quit;
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::N)
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
             return Event::SwitchToNCurses;
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O)
+            return Event::SwitchToSDL2;
     }
     return Event::None;
 }

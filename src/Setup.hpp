@@ -16,6 +16,7 @@ enum class Event {
     Quit,
     SwitchToSDL2,
     SwitchToNCurses,
+    SwitchToSFML,
     // Up,
     // Down
 };

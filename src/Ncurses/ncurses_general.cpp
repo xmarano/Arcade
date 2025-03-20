@@ -13,8 +13,10 @@ Event Ncurses::pollEvent()
 
     if (ch == 'q')
         return Event::Quit;
-    if (ch == 's')
+    if (ch == 'o')
         return Event::SwitchToSDL2;
+    if (ch == 'p')
+        return Event::SwitchToSFML;
     // if (ch == KEY_DOWN)
     //     return Event::Down;
     // if (ch == KEY_UP)

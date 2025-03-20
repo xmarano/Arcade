@@ -16,22 +16,20 @@ bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& lo
 
     if (event == Event::Quit)
         return false;
-    if (event == Event::SwitchToSDL2 || event == Event::SwitchToNCurses) {
+    if (event == Event::SwitchToSDL2 || event == Event::SwitchToNCurses || event == Event::SwitchToSFML) {
         std::string newLib;
         if (event == Event::SwitchToSDL2)
             newLib = "./lib/arcade_sdl2.so";
-        else
+        else if (event == Event::SwitchToNCurses)
             newLib = "./lib/arcade_ncurses.so";
+        else if (event == Event::SwitchToSFML)
+            newLib = "./lib/arcade_sfml.so";
         currentDisplay->stop();
         IDisplayModule* newDisplay = loader.getInstance(newLib);
         newDisplay->setGameModule(currentGame);
         newDisplay->init();
         currentDisplay = newDisplay;
     }
-    // if (event == Event::Up)
-    //     selectedOption++;
-    // if (event == Event::Down && selectedOption > 0)
-    //     selectedOption--;
     return true;
 }
 
