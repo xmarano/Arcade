@@ -23,7 +23,7 @@
     #define POWERUP '@'
     #define TELEPORT 'T'
     #define MAP_HEIGHT 25
-    #define DEFAULT_PLAYER_POSITION std::make_pair(19, 13)
+    #define DEFAULT_PLAYER_POSITION std::make_pair(17, 9)
     #define TELEPORT_1 std::make_pair(1, 11)
     #define TELEPORT_2 std::make_pair(22, 13)
 
@@ -52,6 +52,6 @@ class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
 
-        virtual void print_map(std::string *map) = 0;
+        virtual void print_map(std::string *map, int score, int lives) = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

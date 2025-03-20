@@ -10,11 +10,13 @@
 
 NcursesPacman::NcursesPacman(Ncurses *nc) : nc(nc) {}
 
-void NcursesPacman::print_map(std::string *map)
+void NcursesPacman::print_map(std::string *map, int score, int lives)
 {
     int screenWidth = this->nc->getScreenWidth();
     int screenHeight = this->nc->getScreenHeight();
 
+    mvprintw(0, 0, "Score: %d", score);
+    mvprintw(1, 0, "Lives: %d", lives);
     for (int i = 0; i < MAP_HEIGHT; i++) {
         mvprintw(i + screenHeight / 2 - (MAP_HEIGHT / 2), screenWidth / 2 - (MAP_HEIGHT / 2), map[i].c_str());
     }

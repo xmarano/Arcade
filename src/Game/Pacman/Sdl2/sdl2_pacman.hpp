@@ -17,5 +17,5 @@ class Sdl2Pacman : public IPacmanRenderer
         Sdl2Pacman(SDL2 *sdl2);
         ~Sdl2Pacman() = default;
 
-        void print_map(std::string *map) override;
+        void print_map(std::string *map, int score, int lives) override;
 };

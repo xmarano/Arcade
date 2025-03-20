@@ -14,7 +14,14 @@ void Pacman::draw_game(IRenderer *renderer)
     int screenHeight = renderer->getScreenHeight();
     IPacmanRenderer* pacmanRenderer = renderer->getPacmanRenderer();
 
-    pacmanRenderer->print_map(map);
+    while (this->lives > 0) {
+        clear();
+        pacmanRenderer->print_map(this->map, this->score, this->lives);
+        move_player();
+        refresh();
+    }
+    this->highscore = this->score;
+    this->score = 0;
 }
 
 Pacman::Pacman()
