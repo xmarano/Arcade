@@ -38,6 +38,8 @@ class Pacman : public IGameModule
         int load_map_from_file(std::string filename);
         int check_bonuses(char new_pos);
         std::string get_game_name() override { return "Pacman"; }
+        int win_condition();
+        void game_over();
 
     private:
         int score;

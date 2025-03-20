@@ -19,6 +19,8 @@ void Pacman::draw_game(IRenderer *renderer)
         pacmanRenderer->print_map(this->map, this->score, this->lives);
         move_player();
         refresh();
+        if (win_condition() == 1)
+            break;
     }
     this->highscore = this->score;
     this->score = 0;
@@ -140,4 +142,15 @@ int Pacman::check_bonuses(char new_pos)
         return 1;
     }
     return 0;
+}
+
+int Pacman::win_condition()
+{
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < this->map[i].length(); j++) {
+            if (this->map[i][j] == COIN)
+                return 0;
+        }
+    }
+    return 1;
 }
