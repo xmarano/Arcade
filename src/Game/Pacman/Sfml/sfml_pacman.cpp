@@ -9,6 +9,6 @@
 
 SfmlPacman::SfmlPacman(Sfml *sfml) : sfml(sfml) {}
 
-void SfmlPacman::print_map(std::string *map, int score, int lives, int level)
+void SfmlPacman::print_map(std::string *map, int score, int lives, int level, int highscore)
 {
 }

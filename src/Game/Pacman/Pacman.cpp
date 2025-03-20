@@ -16,7 +16,7 @@ void Pacman::draw_game(IRenderer *renderer)
 
     while (this->lives > 0) {
         clear();
-        pacmanRenderer->print_map(this->map, this->score, this->lives, this->level);
+        pacmanRenderer->print_map(this->map, this->score, this->lives, this->level, this->highscore);
         move_player();
         refresh();
         if (win_condition() == 1) {
