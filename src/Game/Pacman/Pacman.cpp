@@ -26,8 +26,7 @@ void Pacman::draw_game(IRenderer *renderer)
             break;
         }
     }
-    this->highscore = this->score;
-    this->score = 0;
+    end_of_level();
 }
 
 Pacman::Pacman()
@@ -161,4 +160,16 @@ int Pacman::win_condition()
         }
     }
     return 1;
+}
+
+void Pacman::end_of_level()
+{
+    if (this->lives == 0) {
+        this->lives = 3;
+        this->highscore = this->score;
+        this->score = 0;
+        this->level = 1;
+    } else {
+        this->level += 1;
+    }
 }

@@ -18,7 +18,7 @@
     #define PLAYER 'C'
     #define WALL '#'
     #define GHOST 'G'
-    #define COIN '*'
+    #define COIN '.'
     #define EMPTY ' '
     #define POWERUP '@'
     #define TELEPORT 'T'
@@ -39,7 +39,7 @@ class Pacman : public IGameModule
         int check_bonuses(char new_pos);
         std::string get_game_name() override { return "Pacman"; }
         int win_condition();
-        void game_over();
+        void end_of_level();
 
     private:
         int score;
