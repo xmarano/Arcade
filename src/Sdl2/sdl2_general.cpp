@@ -22,9 +22,14 @@
 
 int SDL2::display()
 {
+    int code = 0;
+
     clearScreen();
-    if (gameModule)
-        gameModule->draw_game(this);
+    if (gameModule) {
+        code = gameModule->draw_game(this);
+        if (code > 0)
+            return code;
+    }
     refreshScreen();
     SDL_Delay(16);
     return 0;

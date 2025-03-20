@@ -96,14 +96,13 @@ int Menu::draw_game(IRenderer *renderer)
 
     MenuEvent ev = menuRenderer->pollEvent();
     menuRenderer->rep_event(ev);
-    if (ev == MenuEvent::SwapToSdl2) {
-        return 1;
-    }
-    return 0;
-    // Selected.push_back(module1Selected);
-    // Selected.push_back(module2Selected);
-    // Selected.push_back(module3Selected);
-    // à optimiser
 
-    //pacman->draw_game(renderer);
+    if (ev == MenuEvent::PlayPacman) {
+        pacman->draw_game(renderer);
+    }
+
+    if (ev == MenuEvent::SwapToNcurses) return 1;
+    if (ev == MenuEvent::SwapToSdl2) return 2;
+    if (ev == MenuEvent::SwapToSfml) return 3;
+    return 0;
 }

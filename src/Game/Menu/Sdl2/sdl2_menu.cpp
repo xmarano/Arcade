@@ -19,6 +19,10 @@ MenuEvent Sdl2Menu::pollEvent()
         if (event.type == SDL_KEYDOWN) {
             if (event.key.keysym.sym == SDLK_i)
                 return MenuEvent::SwapToNcurses;
+            if (event.key.keysym.sym == SDLK_p)
+                return MenuEvent::SwapToSfml;
+            if (event.key.keysym.sym == SDLK_k)
+                return MenuEvent::PlayPacman;
         }
     }
     return MenuEvent::None;

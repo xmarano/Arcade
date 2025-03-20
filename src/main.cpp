@@ -9,17 +9,19 @@
 #include "ArcadeExeption.hpp"
 #include "Game/Menu/Menu.hpp"
 #include "ADisplayModule.hpp"
+#include <iostream>
+#include <filesystem>
 
 void handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //! A mettre ds une classe
 {
     if (code > 0) {
         std::string newLib;
         if (code == 1)
+            newLib = "./lib/arcade_ncurses.so";
+        else if (code == 2)
             newLib = "./lib/arcade_sdl2.so";
-        // else if (event == Event::SwitchToNCurses)
-        //     newLib = "./lib/arcade_ncurses.so";
-        // else if ()
-        //     newLib = "./lib/arcade_sfml.so";
+        else if (code == 3)
+            newLib = "./lib/arcade_sfml.so";
         currentDisplay->stop();
         IDisplayModule* newDisplay = loader.getInstance(newLib);
         newDisplay->setGameModule(currentGame);

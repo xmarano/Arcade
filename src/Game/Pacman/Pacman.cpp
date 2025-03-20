@@ -27,6 +27,7 @@ int Pacman::draw_game(IRenderer *renderer)
         }
     }
     end_of_level();
+    return 0;
 }
 
 Pacman::Pacman()
