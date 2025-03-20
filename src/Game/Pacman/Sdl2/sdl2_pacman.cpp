@@ -9,7 +9,7 @@
 
 Sdl2Pacman::Sdl2Pacman(SDL2 *sdl2) : sdl2(sdl2) {}
 
-void Sdl2Pacman::print_map(std::string *map, int score, int lives)
+void Sdl2Pacman::print_map(std::string *map, int score, int lives, int level)
 {
     // for (int i = 0; i < MAP_HEIGHT; i++) {
     //     sdl2->DrawText1(0, i, map[i]->c_str());

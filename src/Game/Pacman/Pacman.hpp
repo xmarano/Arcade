@@ -24,8 +24,8 @@
     #define TELEPORT 'T'
     #define MAP_HEIGHT 25
     #define DEFAULT_PLAYER_POSITION std::make_pair(18, 11)
-    #define TELEPORT_1 std::make_pair(1, 11)
-    #define TELEPORT_2 std::make_pair(22, 11)
+    #define TELEPORT_1 std::make_pair(11, 1)
+    #define TELEPORT_2 std::make_pair(11, 22)
 
 class Pacman : public IGameModule
 {
@@ -55,6 +55,6 @@ class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
 
-        virtual void print_map(string *map, int score, int lives) = 0;
+        virtual void print_map(string *map, int score, int lives, int level) = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

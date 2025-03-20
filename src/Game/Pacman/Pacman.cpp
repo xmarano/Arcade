@@ -16,11 +16,15 @@ void Pacman::draw_game(IRenderer *renderer)
 
     while (this->lives > 0) {
         clear();
-        pacmanRenderer->print_map(this->map, this->score, this->lives);
+        pacmanRenderer->print_map(this->map, this->score, this->lives, this->level);
         move_player();
         refresh();
-        if (win_condition() == 1)
+        if (win_condition() == 1) {
+            this->level += 1;
+            load_map_from_file("src/Game/Pacman/pacman_map.txt");
+            this->pos_player = DEFAULT_PLAYER_POSITION;
             break;
+        }
     }
     this->highscore = this->score;
     this->score = 0;
@@ -47,36 +51,36 @@ void Pacman::move_player()
             if (this->map[x - 1][y] != WALL) {
                 if (check_bonuses(this->map[x - 1][y]) == 0) {
                     this->map[x - 1][y] = PLAYER;
-                    this->map[x][y] = EMPTY;
                     this->pos_player.first = x - 1;
                 }
+                this->map[x][y] = EMPTY;
             }
             break;
         case KEY_DOWN:
             if (this->map[x + 1][y] != WALL) {
                 if (check_bonuses(this->map[x + 1][y]) == 0) {
                     this->map[x + 1][y] = PLAYER;
-                    this->map[x][y] = EMPTY;
                     this->pos_player.first = x + 1;
                 }
+                this->map[x][y] = EMPTY;
             }
             break;
         case KEY_LEFT:
             if (this->map[x][y - 1] != WALL) {
-                if (check_bonuses(this->map[y - 1][y]) == 0) {
+                if (check_bonuses(this->map[x][y - 1]) == 0) {
                     this->map[x][y - 1] = PLAYER;
-                    this->map[x][y] = EMPTY;
                     this->pos_player.second = y - 1;
                 }
+                this->map[x][y] = EMPTY;
             }
             break;
         case KEY_RIGHT:
             if (this->map[x][y + 1] != WALL) {
                 if (check_bonuses(this->map[x][y + 1]) == 0) {
                     this->map[x][y + 1] = PLAYER;
-                    this->map[x][y] = EMPTY;
                     this->pos_player.second = y + 1;
                 }
+                this->map[x][y] = EMPTY;
             }
             break;
     }
@@ -122,10 +126,10 @@ int Pacman::load_map_from_file(std::string filename)
 int Pacman::check_bonuses(char new_pos)
 {
     if (new_pos == COIN) {
-        this->score += 10;
+        this->score += (10 * level);
         return 0;
     } else if (new_pos == POWERUP) {
-        this->score += 50;
+        this->score += (50 * level);
         this->is_sous_frozen = true;
         return 0;
     }
@@ -135,10 +139,14 @@ int Pacman::check_bonuses(char new_pos)
         return 1;
     }
     if (new_pos == TELEPORT) {
-        if (this->pos_player != TELEPORT_1)
-            this->pos_player = TELEPORT_1;
-        else
+        if (this->pos_player == std::make_pair(TELEPORT_1.first, TELEPORT_1.second + 1)) {
             this->pos_player = TELEPORT_2;
+            this->pos_player.second -= 2;
+        } else {
+            this->pos_player = TELEPORT_1;
+            this->pos_player.second += 1;
+        }
+        this->map[pos_player.first][pos_player.second] = PLAYER;
         return 1;
     }
     return 0;
