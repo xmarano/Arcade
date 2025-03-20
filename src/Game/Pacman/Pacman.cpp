@@ -30,7 +30,7 @@ Pacman::Pacman()
     this->lives = 3;
     this->level = 1;
     this->highscore = 0;
-    this->pos_player = std::make_pair(19, 13);
+    this->pos_player = DEFAULT_PLAYER_POSITION;
     load_map_from_file("src/Game/Pacman/pacman_map.txt");
 }
 
