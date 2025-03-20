@@ -4,19 +4,16 @@
 ** File description:
 ** Encap.hpp
 */
-
-#pragma once
-
 #include "DLLoader.hpp"
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
+
+#pragma once
 
 enum class Event {
     None,
     Quit,
     SwitchToSDL2,
     SwitchToNCurses,
-    SwitchToSFML,
-    // Up,
-    // Down
+    SwitchToSFML
 };

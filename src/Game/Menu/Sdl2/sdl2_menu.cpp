@@ -9,17 +9,19 @@
 
 Sdl2Menu::Sdl2Menu(SDL2 *sdl2) : sdl2(sdl2) {}
 
-void Sdl2Menu::Draw_Module1()
+MenuEvent Sdl2Menu::pollEvent()
 {
-    //std::ofstream file("Sdl2Menu_module1.txt");
-    //file << "Module 1" << std::endl;
-}
+    SDL_Event event;
 
-void Sdl2Menu::Draw_Module2()
-{
-}
-
-void Sdl2Menu::Draw_Module3()
-{
-
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT)
+            return MenuEvent::Quit;
+        if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_DOWN)
+                return MenuEvent::Down;
+            if (event.key.keysym.sym == SDLK_UP)
+                return MenuEvent::Up;
+        }
+    }
+    return MenuEvent::None;
 }

@@ -6,37 +6,20 @@
 */
 
 #include "nc_menu.hpp"
+#include <fstream>
 
 NcursesMenu::NcursesMenu(Ncurses* nc) : nc(nc) {}
 
-int getScreenWidth()
+MenuEvent NcursesMenu::pollEvent()
 {
-    int maxX, maxY;
+    int ch = getch();
 
-    getmaxyx(stdscr, maxY, maxX);
-    return maxX;
-}
-
-int getScreenHeight()
-{
-    int maxX, maxY;
-
-    getmaxyx(stdscr, maxY, maxX);
-    return maxY;
-}
-
-void NcursesMenu::Draw_Module1()
-{
-    pos_x = getScreenWidth();
-    pos_y = getScreenHeight();
-}
-
-void NcursesMenu::Draw_Module2()
-{
-
-}
-
-void NcursesMenu::Draw_Module3()
-{
-
+    if (ch == KEY_DOWN) {
+        ofstream file ("okok.txt");
+        file << "ok";
+        return MenuEvent::Down;
+    }
+    if (ch == KEY_UP)
+        return MenuEvent::Up;
+    return MenuEvent::None;
 }

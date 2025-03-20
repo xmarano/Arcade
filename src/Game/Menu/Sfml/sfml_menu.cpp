@@ -9,14 +9,19 @@
 
 SfmlMenu::SfmlMenu(Sfml *sfml) : sfml(sfml) {}
 
-void SfmlMenu::Draw_Module1()
+MenuEvent SfmlMenu::pollEvent()
 {
-}
+    sf::Event event;
 
-void SfmlMenu::Draw_Module2()
-{
-}
-
-void SfmlMenu::Draw_Module3()
-{
+    while (sfml->window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            return MenuEvent::Quit;
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Down)
+                return MenuEvent::Down;
+            if (event.key.code == sf::Keyboard::Up)
+                return MenuEvent::Up;
+        }
+    }
+    return MenuEvent::None;
 }

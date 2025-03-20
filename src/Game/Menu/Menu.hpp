@@ -17,16 +17,21 @@
 
 class Pacman;
 
+enum class MenuEvent {
+    None,
+    Quit,
+    Up,
+    Down
+};
+
 class Menu : public IGameModule
 {
     private:
         Pacman *pacman;
-        int selectedOption;
     public:
         Menu();
         ~Menu();
         void draw_game(IRenderer *renderer) override;
-        void modules(IRenderer *renderer);
         void DisplayText(IRenderer *renderer, string text, int module, int height);
         void DisplayModules1(IRenderer *renderer);
         void DisplayModules2(IRenderer *renderer);
@@ -37,7 +42,6 @@ class Menu : public IGameModule
 class IMenuRenderer {
     public:
         virtual ~IMenuRenderer() = default;
-        virtual void Draw_Module1() = 0;
-        virtual void Draw_Module2() = 0;
-        virtual void Draw_Module3() = 0;
+
+        virtual MenuEvent pollEvent() = 0;
 };

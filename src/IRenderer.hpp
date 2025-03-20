@@ -15,7 +15,6 @@ class IPacmanRenderer;
 class IRenderer {
     public:
         virtual ~IRenderer() = default;
-        // Fonctions d'affichage pour Ncurses, SDL2 et [?]
         virtual IMenuRenderer* getMenuRenderer() = 0;
         virtual IPacmanRenderer* getPacmanRenderer() = 0;
         virtual void DrawText1(int pos_x, int pos_y, std::string mess) = 0; // Font text.ttf

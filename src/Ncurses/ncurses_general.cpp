@@ -17,10 +17,6 @@ Event Ncurses::pollEvent()
         return Event::SwitchToSDL2;
     if (ch == 'p')
         return Event::SwitchToSFML;
-    // if (ch == KEY_DOWN)
-    //     return Event::Down;
-    // if (ch == KEY_UP)
-    //     return Event::Up;
     return Event::None;
 }
 

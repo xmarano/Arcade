@@ -9,7 +9,7 @@
 #include <filesystem>
 #include "Menu.hpp"
 
-Menu::Menu() : selectedOption(0)
+Menu::Menu()
 {
     pacman = new Pacman();
 }
@@ -17,16 +17,6 @@ Menu::Menu() : selectedOption(0)
 Menu::~Menu()
 {
     delete pacman;
-}
-
-void Menu::modules(IRenderer *renderer)
-{
-    int screenWidth = renderer->getScreenWidth();
-    int screenHeight = renderer->getScreenHeight();
-
-    IMenuRenderer* menuRenderer = renderer->getMenuRenderer();
-    menuRenderer->Draw_Module1();
-
 }
 
 void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
@@ -64,7 +54,7 @@ void Menu::DisplayModules2(IRenderer *renderer)
 {
     DisplayText(renderer, "USER", 2, 4);
     DisplayText(renderer, "Score Pacman : 0", 2, 5);
-    DisplayText(renderer, "Score Snake  : 0", 2, 5);
+    DisplayText(renderer, "Score Snake  : 0", 2, 6);
 }
 
 void Menu::DisplayModules3(IRenderer *renderer)
@@ -91,6 +81,7 @@ void Menu::draw_game(IRenderer *renderer)
     string title_1 = "Jeux disponibles:";
     string title_2 = "Joueur:";
     string title_3 = "Affichage:";
+    IMenuRenderer *menuRenderer = renderer->getMenuRenderer();
 
     DisplayText(renderer, title_0, 0, 0);
     DisplayText(renderer, title_1, 1, 2);
@@ -103,12 +94,13 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayModules2(renderer);
     DisplayModules3(renderer);
 
+    menuRenderer->pollEvent();
+
     // Selected.push_back(module1Selected);
     // Selected.push_back(module2Selected);
     // Selected.push_back(module3Selected);
     // à optimiser
 
     // pacman->draw_game(renderer);
-    modules(renderer);
 }  
    

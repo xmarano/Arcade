@@ -16,7 +16,6 @@
 class Sfml : public ADisplayModule, public IRenderer
 {
     private:
-        sf::RenderWindow window;
         sf::Font font;
         sf::Font litle_font;
         sf::Font arcade_font;
@@ -30,6 +29,7 @@ class Sfml : public ADisplayModule, public IRenderer
         void init() override;
         void stop() override;
         void display() override;
+        sf::RenderWindow window;
 
         IMenuRenderer* getMenuRenderer() override { return menuRenderer; };
         IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; };
