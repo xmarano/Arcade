@@ -7,18 +7,18 @@
 
 #include "ncurses_setup.hpp"
 
-Event Ncurses::pollEvent()
-{
-    int ch = getch();
+// Event Ncurses::pollEvent()
+// {
+//     int ch = getch();
 
-    if (ch == 'q')
-        return Event::Quit;
-    if (ch == 'o')
-        return Event::SwitchToSDL2;
-    if (ch == 'p')
-        return Event::SwitchToSFML;
-    return Event::None;
-}
+//     if (ch == 'q')
+//         return Event::Quit;
+//     if (ch == 'o')
+//         return Event::SwitchToSDL2;
+//     if (ch == 'p')
+//         return Event::SwitchToSFML;
+//     return Event::None;
+// }
 
 void Ncurses::display()
 {

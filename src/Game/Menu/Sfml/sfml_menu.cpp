@@ -9,19 +9,27 @@
 
 SfmlMenu::SfmlMenu(Sfml *sfml) : sfml(sfml) {}
 
-// MenuEvent SfmlMenu::pollEvent()
-// {
-//     sf::Event event;
+MenuEvent SfmlMenu::pollEvent()
+{
+    sf::Event event;
 
-//     while (sfml->window.pollEvent(event)) {
-//         if (event.type == sf::Event::Closed)
-//             return MenuEvent::Quit;
-//         if (event.type == sf::Event::KeyPressed) {
-//             if (event.key.code == sf::Keyboard::Down)
-//                 return MenuEvent::Down;
-//             if (event.key.code == sf::Keyboard::Up)
-//                 return MenuEvent::Up;
-//         }
-//     }
-//     return MenuEvent::None;
-// }
+    // while (sfml->window->pollEvent(event)) {
+    //     if (event.type == sf::Event::Closed)
+    //         return MenuEvent::Quit;
+    //     if (event.type == sf::Event::KeyPressed) {
+    //         if (event.key.code == sf::Keyboard::Down)
+    //             return MenuEvent::Down;
+    //         if (event.key.code == sf::Keyboard::Up)
+    //             return MenuEvent::Up;
+    //     }
+    // }
+    return MenuEvent::None;
+}
+
+void SfmlMenu::rep_event(MenuEvent event)
+{
+    if (event == MenuEvent::Quit) {
+        this->sfml->stop();
+        exit(0);
+    }
+}

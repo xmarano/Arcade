@@ -7,10 +7,10 @@
 
 #pragma once
 
-enum class Event {
-    None,
-    Quit,
-    SwitchToSDL2,
-    SwitchToNCurses,
-    SwitchToSFML
-};
+// enum class Event {
+//     None,
+//     Quit,
+//     SwitchToSDL2,
+//     SwitchToNCurses,
+//     SwitchToSFML,
+// };

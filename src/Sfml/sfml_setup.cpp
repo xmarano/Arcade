@@ -12,7 +12,7 @@
 Sfml::Sfml() : ADisplayModule("SDL2"), window()
 {
     menuRenderer = new SfmlMenu(this);
-    // pacmanRenderer = new Sdl2Pacman(this);
+    //pacmanRenderer = new Sdl2Pacman(this);
 }
 
 void Sfml::init()

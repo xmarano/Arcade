@@ -39,5 +39,5 @@ class Ncurses : public ADisplayModule, public IRenderer
         int getScreenWidth() override;
         int getScreenHeight() override;
 
-        Event pollEvent() override;
+        // Event pollEvent() override;
 };

@@ -24,5 +24,5 @@ class IDisplayModule {
         virtual void stop() = 0;
         virtual void display() = 0;
         virtual void setGameModule(IGameModule *game) = 0;
-        virtual Event pollEvent() = 0;
+        // virtual Event pollEvent() = 0;
 };

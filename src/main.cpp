@@ -10,33 +10,28 @@
 #include "Game/Menu/Menu.hpp"
 #include "ADisplayModule.hpp"
 
-void handle_menu_events() //! A mettre ds une classe
-{
-    
-}
+// bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
+// {
+//     Event event = currentDisplay->pollEvent();
 
-bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
-{
-    Event event = currentDisplay->pollEvent();
-
-    if (event == Event::Quit)
-        return false;
-    if (event == Event::SwitchToSDL2 || event == Event::SwitchToNCurses || event == Event::SwitchToSFML) {
-        std::string newLib;
-        if (event == Event::SwitchToSDL2)
-            newLib = "./lib/arcade_sdl2.so";
-        else if (event == Event::SwitchToNCurses)
-            newLib = "./lib/arcade_ncurses.so";
-        else if (event == Event::SwitchToSFML)
-            newLib = "./lib/arcade_sfml.so";
-        currentDisplay->stop();
-        IDisplayModule* newDisplay = loader.getInstance(newLib);
-        newDisplay->setGameModule(currentGame);
-        newDisplay->init();
-        currentDisplay = newDisplay;
-    }
-    return true;
-}
+//     if (event == Event::Quit)
+//         return false;
+//     if (event == Event::SwitchToSDL2 || event == Event::SwitchToNCurses || event == Event::SwitchToSFML) {
+//         std::string newLib;
+//         if (event == Event::SwitchToSDL2)
+//             newLib = "./lib/arcade_sdl2.so";
+//         else if (event == Event::SwitchToNCurses)
+//             newLib = "./lib/arcade_ncurses.so";
+//         else if (event == Event::SwitchToSFML)
+//             newLib = "./lib/arcade_sfml.so";
+//         currentDisplay->stop();
+//         IDisplayModule* newDisplay = loader.getInstance(newLib);
+//         newDisplay->setGameModule(currentGame);
+//         newDisplay->init();
+//         currentDisplay = newDisplay;
+//     }
+//     return true;
+// }
 
 void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
 {
@@ -44,10 +39,7 @@ void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loade
 
     while (running) {
         currentDisplay->display(); // Affiche le jeu (Menu)
-        running = handle_events(currentDisplay, loader, currentGame); // Gere les event de swap de lib.
-        if (currentGame->get_game_name() == "Menu") { // Si le jeu est fini
-            handle_menu_events();
-        }
+        // running = handle_events(currentDisplay, loader, currentGame); // Gere les event de swap de lib.
     }
 }
 

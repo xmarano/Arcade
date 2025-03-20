@@ -88,18 +88,19 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_2, 2, 2);
     DisplayText(renderer, title_3, 3, 2);
 
-    vector<int> Selected;
-
     DisplayModules1(renderer);
     DisplayModules2(renderer);
     DisplayModules3(renderer);
 
-    //menuRenderer->pollEvent();
+    MenuEvent ev = menuRenderer->pollEvent();
+    menuRenderer->rep_event(ev);
+
+    if (ev == MenuEvent::PlayPacman) {
+        pacman->draw_game(renderer);
+    }
 
     // Selected.push_back(module1Selected);
     // Selected.push_back(module2Selected);
     // Selected.push_back(module3Selected);
     // à optimiser
-
-    // pacman->draw_game(renderer);
 }

@@ -1,6 +1,4 @@
-# ARCADE
-
-### How to implement new graphics/games libraries
+# How to implement new graphics/games libraries
 
 1. Set your `.so` file into the [`./lib`](../lib/) directory
 2. Compile with `make`
