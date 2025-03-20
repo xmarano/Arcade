@@ -28,6 +28,7 @@ SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 SRC_SFML	=	src/Sfml/sfml_setup.cpp	\
 				src/Sfml/sfml_general.cpp	\
 				src/Game/Menu/Sfml/sfml_menu.cpp	\
+				src/Game/Pacman/Sfml/sfml_pacman.cpp	\
 
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
