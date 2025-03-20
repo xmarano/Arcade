@@ -9,7 +9,7 @@
 
 using namespace std;
 #include <SDL.h>
-#include <SDL_ttf.h>
+#include <SDL_ttf.h> //! crash mouli
 #include <ncurses.h>
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -23,5 +23,4 @@ class IDisplayModule {
         virtual void stop() = 0;
         virtual int display() = 0;
         virtual void setGameModule(IGameModule *game) = 0;
-        // virtual Event pollEvent() = 0;
 };

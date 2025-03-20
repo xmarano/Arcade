@@ -45,7 +45,6 @@ void SDL2::DrawText1(int pos_x, int pos_y, string mess)
     SDL_RenderCopy(renderer, texture_text, nullptr, &rect_text);
     SDL_DestroyTexture(texture_text);
     SDL_FreeSurface(surface_text);
-
 }
 
 void SDL2::DrawText2(int pos_x, int pos_y, string mess)
@@ -58,5 +57,4 @@ void SDL2::DrawText2(int pos_x, int pos_y, string mess)
     SDL_RenderCopy(renderer, texture_text, nullptr, &rect_text);
     SDL_DestroyTexture(texture_text);
     SDL_FreeSurface(surface_text);
-
 }
