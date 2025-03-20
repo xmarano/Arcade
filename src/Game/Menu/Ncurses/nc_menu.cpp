@@ -10,16 +10,16 @@
 
 NcursesMenu::NcursesMenu(Ncurses* nc) : nc(nc) {}
 
-MenuEvent NcursesMenu::pollEvent()
-{
-    int ch = getch();
+// MenuEvent NcursesMenu::pollEvent()
+// {
+//     int ch = getch();
 
-    if (ch == KEY_DOWN) {
-        ofstream file ("okok.txt");
-        file << "ok";
-        return MenuEvent::Down;
-    }
-    if (ch == KEY_UP)
-        return MenuEvent::Up;
-    return MenuEvent::None;
-}
+//     if (ch == KEY_DOWN) {
+//         ofstream file ("okok.txt");
+//         file << "ok";
+//         return MenuEvent::Down;
+//     }
+//     if (ch == KEY_UP)
+//         return MenuEvent::Up;
+//     return MenuEvent::None;
+// }

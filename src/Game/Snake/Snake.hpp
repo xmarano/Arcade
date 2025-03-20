@@ -12,6 +12,6 @@
 #include "../../Ncurses/ncurses_setup.hpp"
 #include "../../Sdl2/sdl2_setup.hpp"
 
-class Snake : public IGameModule {
+// class Snake : public IGameModule {
 
-};
+// };

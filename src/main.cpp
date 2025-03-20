@@ -10,6 +10,11 @@
 #include "Game/Menu/Menu.hpp"
 #include "ADisplayModule.hpp"
 
+void handle_menu_events() //! A mettre ds une classe
+{
+    
+}
+
 bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
 {
     Event event = currentDisplay->pollEvent();
@@ -40,6 +45,9 @@ void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loade
     while (running) {
         currentDisplay->display(); // Affiche le jeu (Menu)
         running = handle_events(currentDisplay, loader, currentGame); // Gere les event de swap de lib.
+        if (currentGame->get_game_name() == "Menu") { // Si le jeu est fini
+            handle_menu_events();
+        }
     }
 }
 

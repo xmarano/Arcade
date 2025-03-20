@@ -15,5 +15,5 @@ class SfmlMenu : public IMenuRenderer
         SfmlMenu(Sfml *sfml);
         ~SfmlMenu() = default;
 
-        MenuEvent pollEvent() override;
+        // MenuEvent pollEvent() override;
 };

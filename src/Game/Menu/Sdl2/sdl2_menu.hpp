@@ -17,5 +17,5 @@ class Sdl2Menu : public IMenuRenderer
         Sdl2Menu(SDL2 *sdl2);
         ~Sdl2Menu() = default;
 
-        MenuEvent pollEvent() override;
+        // MenuEvent pollEvent() override;
 };

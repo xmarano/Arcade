@@ -15,7 +15,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include "IGameModule.hpp"
-#include "Setup.hpp"
+#include "Event.hpp"
 
 class IDisplayModule {
     public:

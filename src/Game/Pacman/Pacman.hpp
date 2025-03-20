@@ -37,6 +37,7 @@ class Pacman : public IGameModule
         void move_player();
         int load_map_from_file(std::string filename);
         int check_bonuses(char new_pos);
+        std::string get_game_name() override { return "Pacman"; }
 
     private:
         int score;
@@ -44,14 +45,14 @@ class Pacman : public IGameModule
         int level;
         int highscore;
         bool is_sous_frozen;
-        std::pair<int, int> pos_player;
-        std::string* map;
+        pair<int, int> pos_player;
+        string* map;
 };
 
 class IPacmanRenderer {
     public:
         virtual ~IPacmanRenderer() = default;
 
-        virtual void print_map(std::string *map, int score, int lives) = 0;
+        virtual void print_map(string *map, int score, int lives) = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

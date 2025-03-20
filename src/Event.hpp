@@ -4,9 +4,6 @@
 ** File description:
 ** Encap.hpp
 */
-#include "DLLoader.hpp"
-#include "IDisplayModule.hpp"
-#include "IGameModule.hpp"
 
 #pragma once
 

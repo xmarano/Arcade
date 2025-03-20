@@ -9,7 +9,6 @@
 
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
-#include "Setup.hpp"
 
 class ADisplayModule : public IDisplayModule
 {

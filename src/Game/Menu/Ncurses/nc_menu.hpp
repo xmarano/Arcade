@@ -18,6 +18,6 @@ class NcursesMenu : public IMenuRenderer
     public:
         NcursesMenu(Ncurses* nc);
         ~NcursesMenu() = default;
-    
-        MenuEvent pollEvent() override;
+
+        // MenuEvent pollEvent() override;
 };
