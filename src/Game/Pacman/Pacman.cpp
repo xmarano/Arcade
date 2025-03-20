@@ -43,34 +43,38 @@ void Pacman::move_player()
     switch (ch) {
         case KEY_UP:
             if (this->map[x - 1][y] != WALL) {
-                check_bonuses(this->map[x - 1][y]);
-                this->map[x - 1][y] = PLAYER;
-                this->map[x][y] = EMPTY;
-                this->pos_player.first = x - 1;
+                if (check_bonuses(this->map[x - 1][y]) == 0) {
+                    this->map[x - 1][y] = PLAYER;
+                    this->map[x][y] = EMPTY;
+                    this->pos_player.first = x - 1;
+                }
             }
             break;
         case KEY_DOWN:
             if (this->map[x + 1][y] != WALL) {
-                check_bonuses(this->map[x + 1][y]);
-                this->map[x + 1][y] = PLAYER;
-                this->map[x][y] = EMPTY;
-                this->pos_player.first = x + 1;
+                if (check_bonuses(this->map[x + 1][y]) == 0) {
+                    this->map[x + 1][y] = PLAYER;
+                    this->map[x][y] = EMPTY;
+                    this->pos_player.first = x + 1;
+                }
             }
             break;
         case KEY_LEFT:
             if (this->map[x][y - 1] != WALL) {
-                check_bonuses(this->map[y - 1][y]);
-                this->map[x][y - 1] = PLAYER;
-                this->map[x][y] = EMPTY;
-                this->pos_player.second = y - 1;
+                if (check_bonuses(this->map[y - 1][y]) == 0) {
+                    this->map[x][y - 1] = PLAYER;
+                    this->map[x][y] = EMPTY;
+                    this->pos_player.second = y - 1;
+                }
             }
             break;
         case KEY_RIGHT:
             if (this->map[x][y + 1] != WALL) {
-                check_bonuses(this->map[x][y + 1]);
-                this->map[x][y + 1] = PLAYER;
-                this->map[x][y] = EMPTY;
-                this->pos_player.second = y + 1;
+                if (check_bonuses(this->map[x][y + 1]) == 0) {
+                    this->map[x][y + 1] = PLAYER;
+                    this->map[x][y] = EMPTY;
+                    this->pos_player.second = y + 1;
+                }
             }
             break;
     }
@@ -113,22 +117,27 @@ int Pacman::load_map_from_file(std::string filename)
 //     }
 // }
 
-void Pacman::check_bonuses(char new_pos)
+int Pacman::check_bonuses(char new_pos)
 {
     if (new_pos == COIN) {
         this->score += 10;
+        return 0;
     } else if (new_pos == POWERUP) {
         this->score += 50;
         this->is_sous_frozen = true;
+        return 0;
     }
     if (new_pos == GHOST) {
         this->lives -= 1;
         this->pos_player = DEFAULT_PLAYER_POSITION;
+        return 1;
     }
     if (new_pos == TELEPORT) {
         if (this->pos_player != TELEPORT_1)
             this->pos_player = TELEPORT_1;
         else
             this->pos_player = TELEPORT_2;
+        return 1;
     }
+    return 0;
 }

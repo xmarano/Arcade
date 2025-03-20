@@ -25,7 +25,7 @@
     #define MAP_HEIGHT 25
     #define DEFAULT_PLAYER_POSITION std::make_pair(18, 11)
     #define TELEPORT_1 std::make_pair(1, 11)
-    #define TELEPORT_2 std::make_pair(22, 13)
+    #define TELEPORT_2 std::make_pair(22, 11)
 
 class Pacman : public IGameModule
 {
@@ -36,7 +36,7 @@ class Pacman : public IGameModule
 
         void move_player();
         int load_map_from_file(std::string filename);
-        void check_bonuses(char new_pos);
+        int check_bonuses(char new_pos);
 
     private:
         int score;
