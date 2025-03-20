@@ -13,6 +13,7 @@ NAME	=	arcade
 SRC_FILES	=	src/main.cpp	\
 				src/Game/Menu/Menu.cpp	\
 				src/Game/Pacman/Pacman.cpp	\
+				src/Game/Snake/Snake.cpp	\
 				src/DLLoader.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
