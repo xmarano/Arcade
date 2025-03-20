@@ -33,7 +33,7 @@ SRC_SFML	=	src/Sfml/sfml_setup.cpp	\
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
 DARWIN_SDL2_FLAGS = -I/opt/homebrew/include/SDL2 -L/opt/homebrew/lib
-DARWIN_SFML_FLAGS = -I/opt/homebrew/Cellar/csfml/2.6.1_1/include/ -L/opt/homebrew/Cellar/csfml/2.6.1_1/lib
+DARWIN_SFML_FLAGS = -I/opt/homebrew/include -L/opt/homebrew/lib
 
 UNAME	:=	$(shell uname -s)
 
@@ -75,7 +75,7 @@ sfml:
 ifeq ($(UNAME),Linux)
 	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
-	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(DARWIN_SFML_FLAGS) $(FLAGS) $(DARWIN_SDL2_FLAGS)
+	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(FLAGS) $(DARWIN_SDL2_FLAGS) $(DARWIN_SFML_FLAGS)
 endif
 
 clean:
