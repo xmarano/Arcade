@@ -7,20 +7,20 @@
 
 #include "sfml_setup.hpp"
 
-Event Sfml::pollEvent()
-{
-    sf::Event event;
+// Event Sfml::pollEvent()
+// {
+//     sf::Event event;
 
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            return Event::Quit;
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
-            return Event::SwitchToNCurses;
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O)
-            return Event::SwitchToSDL2;
-    }
-    return Event::None;
-}
+//     while (window.pollEvent(event)) {
+//         if (event.type == sf::Event::Closed)
+//             return Event::Quit;
+//         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
+//             return Event::SwitchToNCurses;
+//         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O)
+//             return Event::SwitchToSDL2;
+//     }
+//     return Event::None;
+// }
 
 void Sfml::display()
 {

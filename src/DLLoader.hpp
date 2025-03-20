@@ -22,4 +22,5 @@ class DLLoader
         DLLoader() = default;
         ~DLLoader();
         T* getInstance(const std::string &path);
+        // string getLibName(const std::string &path);
 };

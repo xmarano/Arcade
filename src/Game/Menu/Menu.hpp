@@ -17,6 +17,13 @@
 
 class Pacman;
 
+enum class MenuEvent {
+    None,
+    Quit,
+    Up,
+    Down
+};
+
 class Menu : public IGameModule
 {
     private:
@@ -31,10 +38,13 @@ class Menu : public IGameModule
         void DisplayModules3(IRenderer *renderer);
 
         std::string get_game_name() override { return "Menu"; }
-
 };
 
 class IMenuRenderer {
     public:
         virtual ~IMenuRenderer() = default;
+        virtual MenuEvent pollEvent() = 0;
+
+        virtual void rep_event(MenuEvent event) = 0;
+
 };

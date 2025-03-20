@@ -94,12 +94,13 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayModules2(renderer);
     DisplayModules3(renderer);
 
-    //menuRenderer->pollEvent();
+    MenuEvent ev = menuRenderer->pollEvent();
+    menuRenderer->rep_event(ev);
 
     // Selected.push_back(module1Selected);
     // Selected.push_back(module2Selected);
     // Selected.push_back(module3Selected);
     // à optimiser
 
-    // pacman->draw_game(renderer);
+    //pacman->draw_game(renderer);
 }

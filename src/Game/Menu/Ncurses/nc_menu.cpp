@@ -10,16 +10,28 @@
 
 NcursesMenu::NcursesMenu(Ncurses* nc) : nc(nc) {}
 
-// MenuEvent NcursesMenu::pollEvent()
-// {
-//     int ch = getch();
+MenuEvent NcursesMenu::pollEvent()
+{
+    int ch = getch();
 
-//     if (ch == KEY_DOWN) {
-//         ofstream file ("okok.txt");
-//         file << "ok";
-//         return MenuEvent::Down;
-//     }
-//     if (ch == KEY_UP)
-//         return MenuEvent::Up;
-//     return MenuEvent::None;
-// }
+    if (ch == 'j') {
+        return MenuEvent::Down;
+    }
+    if (ch == KEY_UP)
+        return MenuEvent::Up;
+    if (ch == 'q')
+        return MenuEvent::Quit;
+    return MenuEvent::None;
+}
+
+void NcursesMenu::rep_event(MenuEvent event)
+{
+    if (event == MenuEvent::Down) {
+    }
+    if (event == MenuEvent::Up) {
+    }
+    if (event == MenuEvent::Quit) {
+        this->nc->stop();
+        exit(0);
+    }
+}

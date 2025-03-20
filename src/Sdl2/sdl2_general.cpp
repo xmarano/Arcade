@@ -7,18 +7,18 @@
 
 #include "sdl2_setup.hpp"
 
-Event SDL2::pollEvent() {
-    SDL_Event event;
-    if (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT)
-            return Event::Quit;
-        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_i)
-            return Event::SwitchToNCurses;
-        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
-            return Event::SwitchToSFML;
-    }
-    return Event::None;
-}
+// Event SDL2::pollEvent() {
+//     SDL_Event event;
+//     if (SDL_PollEvent(&event)) {
+//         if (event.type == SDL_QUIT)
+//             return Event::Quit;
+//         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_i)
+//             return Event::SwitchToNCurses;
+//         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
+//             return Event::SwitchToSFML;
+//     }
+//     return Event::None;
+// }
 
 void SDL2::display()
 {
