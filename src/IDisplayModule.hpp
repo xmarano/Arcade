@@ -11,6 +11,7 @@ using namespace std;
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <ncurses.h>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <fstream>
 #include "IGameModule.hpp"

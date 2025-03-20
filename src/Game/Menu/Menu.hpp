@@ -13,6 +13,7 @@
 #include "../Pacman/Pacman.hpp"
 #include <vector>
 #include "../../Ncurses/ncurses_setup.hpp"
+#include "../../Sfml/sfml_setup.hpp"
 
 class Pacman;
 
