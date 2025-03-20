@@ -21,7 +21,7 @@ int Pacman::draw_game(IRenderer *renderer)
         refresh();
         if (win_condition() == 1) {
             this->level += 1;
-            load_map_from_file("src/Game/Pacman/pacman_map.txt");
+            load_map_from_file(DEFAULT_MAP);
             this->pos_player = DEFAULT_PLAYER_POSITION;
             break;
         }
@@ -37,7 +37,7 @@ Pacman::Pacman()
     this->level = 1;
     this->highscore = 0;
     this->pos_player = DEFAULT_PLAYER_POSITION;
-    load_map_from_file("src/Game/Pacman/pacman_map.txt");
+    load_map_from_file(DEFAULT_MAP);
 }
 
 void Pacman::move_player()
@@ -109,19 +109,6 @@ int Pacman::load_map_from_file(std::string filename)
     file.close();
     return 0;
 }
-
-// void Pacman::game()
-// {
-//     int ch = 0;
-
-//     while (ch != 27) {
-//         for (int i = 0; i < MAP_HEIGHT; i++) {
-//             this->nc->DrawText1(0, i, this->map[i]);
-//         }
-//         ch = getch();
-//         move_player();
-//     }
-// }
 
 int Pacman::check_bonuses(char new_pos)
 {

@@ -26,6 +26,7 @@
     #define DEFAULT_PLAYER_POSITION std::make_pair(18, 11)
     #define TELEPORT_1 std::make_pair(11, 1)
     #define TELEPORT_2 std::make_pair(11, 22)
+    #define DEFAULT_MAP "Assets/Maps/pacman_map.txt"
 
 class Pacman : public IGameModule
 {
