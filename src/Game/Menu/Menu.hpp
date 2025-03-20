@@ -34,6 +34,8 @@ class Menu : public IGameModule
 {
     private:
         Pacman *pacman;
+        pair<int, int> current;
+        pair<int, int> selectedOption;
     public:
         Menu();
         ~Menu();

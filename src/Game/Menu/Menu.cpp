@@ -9,7 +9,7 @@
 #include <filesystem>
 #include "Menu.hpp"
 
-Menu::Menu()
+Menu::Menu() : current({1, 1}), selectedOption({0, 0})
 {
     pacman = new Pacman();
 }
@@ -46,7 +46,11 @@ void Menu::DisplayModules1(IRenderer *renderer)
     moduleGames.push_back("Snake");
 
     for (int i = 0; i < moduleGames.size(); i++) {
-        DisplayText(renderer, moduleGames[i], 1, i + 4);
+        if (current.first == 1 && current.second == i + 1) {
+            DisplayText(renderer, "> " + moduleGames[i], 1, i + 4);
+        } else {
+            DisplayText(renderer, moduleGames[i], 1, i + 4);
+        }
     }
 }
 
@@ -99,6 +103,28 @@ int Menu::draw_game(IRenderer *renderer)
 
     if (ev == MenuEvent::PlayPacman) {
         pacman->draw_game(renderer);
+    }
+    if (ev == MenuEvent::PlaySnake) {
+        // snake->draw_game(renderer);
+    }
+    // mouv up
+    if (ev == MenuEvent::Up) {
+        if (current.second > 1) {
+            current.second--;
+        }
+    }
+    // mouv down
+    if (ev == MenuEvent::Down) {
+        if (current.first == 1) {
+            if (current.second < 2) {
+                current.second++;
+            }
+        }
+        if (current.first == 2) {
+            if (current.second < 3) {
+                current.second++;
+            }
+        }
     }
 
     if (ev == MenuEvent::SwapToNcurses) return 1;
