@@ -19,7 +19,7 @@ MenuEvent SfmlMenu::pollEvent()
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::I)
                 return MenuEvent::SwapToNcurses;
-            if (event.key.code == sf::Keyboard::P)
+            if (event.key.code == sf::Keyboard::O)
                 return MenuEvent::SwapToSdl2;
             if (event.key.code == sf::Keyboard::K)
                 return MenuEvent::PlayPacman;
