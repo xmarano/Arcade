@@ -28,7 +28,7 @@ class Sfml : public ADisplayModule, public IRenderer
         ~Sfml() = default;
         void init() override;
         void stop() override;
-        void display() override;
+        int display() override;
         sf::RenderWindow window;
 
         IMenuRenderer* getMenuRenderer() override { return menuRenderer; };

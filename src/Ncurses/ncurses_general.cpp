@@ -7,25 +7,18 @@
 
 #include "ncurses_setup.hpp"
 
-// Event Ncurses::pollEvent()
-// {
-//     int ch = getch();
-
-//     if (ch == 'q')
-//         return Event::Quit;
-//     if (ch == 'o')
-//         return Event::SwitchToSDL2;
-//     if (ch == 'p')
-//         return Event::SwitchToSFML;
-//     return Event::None;
-// }
-
-void Ncurses::display()
+int Ncurses::display()
 {
+    int code = 0;
+
     clearScreen();
-    if (gameModule)
-        gameModule->draw_game(this);
+    if (gameModule) {
+        code = gameModule->draw_game(this);
+        if (code > 0)
+            return code;
+    }
     refreshScreen();
+    return 0;
 }
 
 void Ncurses::DrawText1(int pos_x, int pos_y, string mess)

@@ -8,7 +8,7 @@
 #include "Pacman.hpp"
 #include <fstream>
 
-void Pacman::draw_game(IRenderer *renderer)
+int Pacman::draw_game(IRenderer *renderer)
 {
     int screenWidth = renderer->getScreenWidth();
     int screenHeight = renderer->getScreenHeight();

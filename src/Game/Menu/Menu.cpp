@@ -75,7 +75,7 @@ void Menu::DisplayModules3(IRenderer *renderer)
     }
 }
 
-void Menu::draw_game(IRenderer *renderer)
+int Menu::draw_game(IRenderer *renderer)
 {
     string title_0 = "Bienvenue sur Arcade !";
     string title_1 = "Jeux disponibles:";
@@ -88,19 +88,22 @@ void Menu::draw_game(IRenderer *renderer)
     DisplayText(renderer, title_2, 2, 2);
     DisplayText(renderer, title_3, 3, 2);
 
+    vector<int> Selected;
+
     DisplayModules1(renderer);
     DisplayModules2(renderer);
     DisplayModules3(renderer);
 
     MenuEvent ev = menuRenderer->pollEvent();
     menuRenderer->rep_event(ev);
-
-    if (ev == MenuEvent::PlayPacman) {
-        pacman->draw_game(renderer);
+    if (ev == MenuEvent::SwapToSdl2) {
+        return 1;
     }
-
+    return 0;
     // Selected.push_back(module1Selected);
     // Selected.push_back(module2Selected);
     // Selected.push_back(module3Selected);
     // à optimiser
+
+    //pacman->draw_game(renderer);
 }

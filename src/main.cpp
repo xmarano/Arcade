@@ -10,36 +10,32 @@
 #include "Game/Menu/Menu.hpp"
 #include "ADisplayModule.hpp"
 
-// bool handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
-// {
-//     Event event = currentDisplay->pollEvent();
-
-//     if (event == Event::Quit)
-//         return false;
-//     if (event == Event::SwitchToSDL2 || event == Event::SwitchToNCurses || event == Event::SwitchToSFML) {
-//         std::string newLib;
-//         if (event == Event::SwitchToSDL2)
-//             newLib = "./lib/arcade_sdl2.so";
-//         else if (event == Event::SwitchToNCurses)
-//             newLib = "./lib/arcade_ncurses.so";
-//         else if (event == Event::SwitchToSFML)
-//             newLib = "./lib/arcade_sfml.so";
-//         currentDisplay->stop();
-//         IDisplayModule* newDisplay = loader.getInstance(newLib);
-//         newDisplay->setGameModule(currentGame);
-//         newDisplay->init();
-//         currentDisplay = newDisplay;
-//     }
-//     return true;
-// }
+void handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //! A mettre ds une classe
+{
+    if (code > 0) {
+        std::string newLib;
+        if (code == 1)
+            newLib = "./lib/arcade_sdl2.so";
+        // else if (event == Event::SwitchToNCurses)
+        //     newLib = "./lib/arcade_ncurses.so";
+        // else if ()
+        //     newLib = "./lib/arcade_sfml.so";
+        currentDisplay->stop();
+        IDisplayModule* newDisplay = loader.getInstance(newLib);
+        newDisplay->setGameModule(currentGame);
+        newDisplay->init();
+        currentDisplay = newDisplay;
+    }
+}
 
 void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
 {
     bool running = true;
+    int code = 0;
 
     while (running) {
-        currentDisplay->display(); // Affiche le jeu (Menu)
-        // running = handle_events(currentDisplay, loader, currentGame); // Gere les event de swap de lib.
+        code = currentDisplay->display(); // Affiche le jeu (Menu)
+        handle_events(currentDisplay, loader, currentGame, code); // Gere les event de swap de lib.
     }
 }
 

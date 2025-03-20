@@ -20,13 +20,14 @@
 //     return Event::None;
 // }
 
-void SDL2::display()
+int SDL2::display()
 {
     clearScreen();
     if (gameModule)
         gameModule->draw_game(this);
     refreshScreen();
     SDL_Delay(16);
+    return 0;
 }
 
 void SDL2::DrawText1(int pos_x, int pos_y, string mess)

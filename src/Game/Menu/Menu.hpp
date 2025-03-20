@@ -24,7 +24,10 @@ enum class MenuEvent {
     Down,
     Enter,
     PlayPacman,
-    PlaySnake
+    PlaySnake,
+    SwapToNcurses,
+    SwapToSfml,
+    SwapToSdl2
 };
 
 class Menu : public IGameModule
@@ -34,7 +37,7 @@ class Menu : public IGameModule
     public:
         Menu();
         ~Menu();
-        void draw_game(IRenderer *renderer) override;
+        int draw_game(IRenderer *renderer) override;
         void DisplayText(IRenderer *renderer, string text, int module, int height);
         void DisplayModules1(IRenderer *renderer);
         void DisplayModules2(IRenderer *renderer);

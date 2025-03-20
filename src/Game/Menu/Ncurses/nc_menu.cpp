@@ -14,19 +14,19 @@ MenuEvent NcursesMenu::pollEvent()
 {
     int ch = getch();
 
-    if (ch == 'j') {
-        return MenuEvent::Down;
-    }
-    if (ch == 'k') {
-        return MenuEvent::PlayPacman;
-    }
     if (ch == 'q')
         return MenuEvent::Quit;
+    if (ch == 'i')
+        return MenuEvent::SwapToSdl2;
     return MenuEvent::None;
 }
 
 void NcursesMenu::rep_event(MenuEvent event)
 {
+    if (event == MenuEvent::Down) {
+    }
+    if (event == MenuEvent::Up) {
+    }
     if (event == MenuEvent::Quit) {
         this->nc->stop();
         exit(0);

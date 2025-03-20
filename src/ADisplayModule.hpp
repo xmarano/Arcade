@@ -20,7 +20,7 @@ class ADisplayModule : public IDisplayModule
         void setGameModule(IGameModule *game) override { gameModule = game; }
         virtual void init() = 0;
         virtual void stop() = 0;
-        virtual void display() = 0;
+        virtual int display() = 0;
     private:
         std::string name;
 };
