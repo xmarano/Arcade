@@ -13,13 +13,23 @@ MenuEvent Sdl2Menu::pollEvent()
 {
     SDL_Event event;
 
-    if (event.type == SDL_QUIT)
-        return MenuEvent::Quit;
-    if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_DOWN)
-            return MenuEvent::Down;
-        if (event.key.keysym.sym == SDLK_UP)
-            return MenuEvent::Up;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT)
+            return MenuEvent::Quit;
+        if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_DOWN)
+                return MenuEvent::Down;
+            if (event.key.keysym.sym == SDLK_UP)
+                return MenuEvent::Up;
+        }
     }
     return MenuEvent::None;
+}
+
+void Sdl2Menu::rep_event(MenuEvent event)
+{
+    if (event == MenuEvent::Quit) {
+        this->sdl2->stop();
+        exit(0);
+    }
 }
