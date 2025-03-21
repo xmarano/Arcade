@@ -117,7 +117,7 @@ void Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.second = 1;
         } else if (current.first == 3) {
             if (selectedOption.first == 1) {
-                set_game("./lib/arcade_pacman.so");
+                set_game(PACMAN_GAME);
                 game->draw_game(renderer);
             }
         }

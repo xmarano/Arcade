@@ -15,6 +15,8 @@
 #include "../../Ncurses/ncurses_setup.hpp"
 #include "../../Sfml/sfml_setup.hpp"
 
+#define PACMAN_GAME "./lib/arcade_pacman.so"
+
 class Pacman;
 
 enum class MenuEvent {
