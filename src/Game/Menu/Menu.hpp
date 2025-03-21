@@ -16,6 +16,7 @@
 #include "../../Sfml/sfml_setup.hpp"
 
 #define PACMAN_GAME "./lib/arcade_pacman.so"
+#define SNAKE_GAME "./lib/arcade_snake.so"
 
 class Pacman;
 

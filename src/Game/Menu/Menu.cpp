@@ -55,7 +55,7 @@ void Menu::DisplayModules1(IRenderer *renderer)
 
 void Menu::DisplayModules2(IRenderer *renderer)
 {
-    DisplayText(renderer, "USER", 2, 4);
+    DisplayText(renderer, "USER : __________", 2, 4);
     DisplayText(renderer, "Score Pacman : 0", 2, 5);
     DisplayText(renderer, "Score Snake  : 0", 2, 6);
 
@@ -70,15 +70,18 @@ void Menu::DisplayModules3(IRenderer *renderer)
 {
     vector<string> moduleFiles;
 
-    for (const auto &entry : filesystem::directory_iterator("./lib")) {
-        if (entry.path().extension() == ".so") {
-            string temp_file = entry.path().string();
-            int start = temp_file.find("arcade_") + 7;
-            int end = temp_file.find(".so");
-            temp_file = temp_file.substr(start, end - start);
-            moduleFiles.push_back(temp_file);
-        }
-    }
+    // for (const auto &entry : filesystem::directory_iterator("./lib")) {
+    //     if (entry.path().extension() == ".so") {
+    //         string temp_file = entry.path().string();
+    //         int start = temp_file.find("arcade_") + 7;
+    //         int end = temp_file.find(".so");
+    //         temp_file = temp_file.substr(start, end - start);
+    //         moduleFiles.push_back(temp_file);
+    //     }
+    // }
+    moduleFiles.push_back("Ncurses");
+    moduleFiles.push_back("Sdl2");
+    moduleFiles.push_back("Sfml");
     for (int i = 0; i < moduleFiles.size(); i++) {
         if (current.first == 2 && current.second == i + 1) {
             DisplayText(renderer, "> " + moduleFiles[i] + " <", 3, i + 4);
@@ -117,12 +120,19 @@ int Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.first = 3;
             current.second = 1;
         } else if (current.first == 3) {
+            // pacman
             if (selectedOption.first == 1 && selectedOption.second == 1) {
                 return CODE_NC_PACMAN;
             } else if (selectedOption.first == 1 && selectedOption.second == 2) {
                 return CODE_SDL2_PACMAN;
             } else if (selectedOption.first == 1 && selectedOption.second == 3) {
                 return CODE_SFML_PACMAN;
+            }
+            // snake
+            if (selectedOption.first == 2) {
+                set_game(SNAKE_GAME);
+                game->draw_game(renderer);
+                return selectedOption.second;
             }
         }
     }
