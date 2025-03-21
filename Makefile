@@ -31,6 +31,8 @@ SRC_SFML	=	src/Sfml/sfml_setup.cpp	\
 				src/Game/Menu/Sfml/sfml_menu.cpp	\
 				src/Game/Pacman/Sfml/sfml_pacman.cpp	\
 
+SRC_PACMAN	=	src/Game/Pacman/Pacman.cpp	\
+
 FLAGS	=	-std=c++17
 LDFLAGS		=	-ldl -lncurses -lSDL2 -lSDL2_ttf
 DARWIN_SDL2_FLAGS = -I/opt/homebrew/include/SDL2 -L/opt/homebrew/lib
@@ -53,7 +55,7 @@ else ifeq ($(UNAME),Darwin)
 	g++ $(SRC_FILES) -o $(NAME) -ldl -lncurses -lSDL2 -lSDL2_ttf $(DARWIN_SDL2_FLAGS) $(FLAGS)
 endif
 
-graphicals: ncurses sdl2 sfml
+graphicals: ncurses sdl2 sfml pacman
 
 ncurses:
 	@echo "$(GREEN)ncurses$(RESET)"
@@ -77,6 +79,14 @@ ifeq ($(UNAME),Linux)
 	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(FLAGS) -I/usr/include/SDL2
 else ifeq ($(UNAME),Darwin)
 	g++ -shared -fPIC $(SRC_SFML) -o lib/arcade_sfml.so -lsfml-graphics -lsfml-window -lsfml-system $(FLAGS) $(DARWIN_SDL2_FLAGS) $(DARWIN_SFML_FLAGS)
+endif
+
+pacman:
+	@echo "$(GREEN)pacman$(RESET)"
+ifeq ($(UNAME),Linux)
+	g++ -shared -fPIC $(SRC_PACMAN) -o lib/arcade_pacman.so -lncurses -lSDL2 -lSDL2_ttf $(FLAGS) -I/usr/include/SDL2
+else ifeq ($(UNAME),Darwin)
+	g++ -shared -fPIC $(SRC_PACMAN) -o lib/arcade_pacman.so -lncurses -lSDL2 -lSDL2_ttf $(DARWIN_SDL2_FLAGS) $(FLAGS)
 endif
 
 clean:

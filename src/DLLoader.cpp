@@ -35,3 +35,4 @@ DLLoader<T>::~DLLoader()
 }
 
 template class DLLoader<IDisplayModule>;
+template class DLLoader<IGameModule>;

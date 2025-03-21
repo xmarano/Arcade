@@ -11,12 +11,11 @@
 
 Menu::Menu() : current({1, 1}), selectedOption({0, 0})
 {
-    pacman = new Pacman();
+    
 }
 
 Menu::~Menu()
 {
-    delete pacman;
 }
 
 void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
@@ -119,9 +118,8 @@ void Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.second = 1;
         } else if (current.first == 3) {
             if (selectedOption.first == 1) {
-                pacman->draw_game(renderer);
-            } else if (selectedOption.first == 2) {
-                // snake->draw_game(renderer);
+                set_game("./lib/arcade_pacman.so");
+                game->draw_game(renderer);
             }
         }
     }
@@ -165,4 +163,12 @@ int Menu::draw_game(IRenderer *renderer)
     if (ev == MenuEvent::SwapToSdl2) return 2;
     if (ev == MenuEvent::SwapToSfml) return 3;
     return 0;
+}
+
+void Menu::set_game(std::string path_game)
+{
+    if (this->game != this) {
+        delete game;
+    }
+    this->game = gameLoader.getInstance(path_game);
 }

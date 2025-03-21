@@ -34,9 +34,10 @@ enum class MenuEvent {
 class Menu : public IGameModule
 {
     private:
-        Pacman *pacman;
         pair<int, int> current;
         pair<int, int> selectedOption;
+        DLLoader<IGameModule> gameLoader;
+        IGameModule *game;
     public:
         Menu();
         ~Menu();
@@ -48,6 +49,7 @@ class Menu : public IGameModule
         void Actions(IRenderer *renderer, MenuEvent ev);
 
         std::string get_game_name() override { return "Menu"; }
+        void set_game(std::string game);
 };
 
 class IMenuRenderer {

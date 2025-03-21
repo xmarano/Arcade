@@ -161,3 +161,9 @@ void Pacman::end_of_level()
         this->level += 1;
     }
 }
+
+extern "C" {
+    IGameModule *create() {
+        return new Pacman();
+    }
+}
