@@ -23,3 +23,20 @@ void NcursesPacman::print_map(std::string *map, int score, int lives, int level,
         mvprintw(i + screenHeight / 2 - (MAP_HEIGHT / 2), screenWidth / 2 - (MAP_HEIGHT / 2), map[i].c_str());
     }
 }
+
+PacmanEvent NcursesPacman::pollEvent(int ch)
+{
+    // switch (ch) {
+    //     case 'q':
+    //         return PacmanEvent::Quit;
+    //     case 'm':
+    //         return PacmanEvent::BackToMenu;
+    //     case 'o':
+    //         return PacmanEvent::SwapToSdl2;
+    //     case 'p':
+    //         return PacmanEvent::SwapToSfml;
+    //     default:
+    //         return PacmanEvent::None;
+    // }
+    return PacmanEvent::None;
+}

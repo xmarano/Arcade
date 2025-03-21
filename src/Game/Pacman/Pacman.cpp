@@ -13,12 +13,17 @@ int Pacman::draw_game(IRenderer *renderer)
     int screenWidth = renderer->getScreenWidth();
     int screenHeight = renderer->getScreenHeight();
     IPacmanRenderer* pacmanRenderer = renderer->getPacmanRenderer();
+    int ret = 0;
 
     while (this->lives > 0) {
-        clear();
+        ret = move_player(pacmanRenderer);
         pacmanRenderer->print_map(this->map, this->score, this->lives, this->level, this->highscore);
-        move_player(pacmanRenderer);
-        refresh();
+        if (ret == 1) return 1;
+        if (ret == 2) return 2;
+        if (ret == 3) return 3;
+        if (ret == 99) {
+            return 0;
+        };
         if (win_condition() == 1) {
             this->level += 1;
             load_map_from_file(DEFAULT_MAP);
@@ -40,7 +45,7 @@ Pacman::Pacman()
     load_map_from_file(DEFAULT_MAP);
 }
 
-void Pacman::move_player(IPacmanRenderer* pacmanRenderer)
+int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
 {
     int ch = getch();
     int x = this->pos_player.first;
@@ -84,9 +89,18 @@ void Pacman::move_player(IPacmanRenderer* pacmanRenderer)
             }
             break;
         default:
-            PacmanEvent ev = pacmanRenderer->pollEvent();
+            PacmanEvent ev = pacmanRenderer->pollEvent(ch);
+            if (ev == PacmanEvent::Quit)
+                return 99;
+            if (ev == PacmanEvent::SwapToNcurses)
+                return 1;
+            if (ev == PacmanEvent::SwapToSdl2)
+                return 2;
+            if (ev == PacmanEvent::SwapToSfml)
+                return 3;
             break;
     }
+    return 0;
 }
 
 int Pacman::load_map_from_file(std::string filename)

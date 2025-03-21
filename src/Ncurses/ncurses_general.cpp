@@ -14,8 +14,9 @@ int Ncurses::display()
     clearScreen();
     if (gameModule) {
         code = gameModule->draw_game(this);
-        if (code > 0)
+        if (code > 0) {
             return code;
+        }
     }
     refreshScreen();
     return 0;

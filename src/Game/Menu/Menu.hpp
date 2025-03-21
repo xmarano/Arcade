@@ -48,7 +48,7 @@ class Menu : public IGameModule
         void DisplayModules1(IRenderer *renderer);
         void DisplayModules2(IRenderer *renderer);
         void DisplayModules3(IRenderer *renderer);
-        void Actions(IRenderer *renderer, MenuEvent ev);
+        int Actions(IRenderer *renderer, MenuEvent ev);
 
         std::string get_game_name() override { return "Menu"; }
         void set_game(std::string game);

@@ -16,12 +16,6 @@ MenuEvent NcursesMenu::pollEvent()
 
     if (ch == 'q')
         return MenuEvent::Quit;
-    if (ch == 'o')
-        return MenuEvent::SwapToSdl2;
-    if (ch == 'p')
-        return MenuEvent::SwapToSfml;
-    if (ch == 'k')
-        return MenuEvent::PlayPacman;
     if (ch == KEY_UP)
         return MenuEvent::Up;
     if (ch == KEY_DOWN)

@@ -15,6 +15,7 @@ Menu::Menu() : current({1, 1}), selectedOption({0, 0})
 
 Menu::~Menu()
 {
+    delete game;
 }
 
 void Menu::DisplayText(IRenderer *renderer, string text, int module, int height)
@@ -87,7 +88,7 @@ void Menu::DisplayModules3(IRenderer *renderer)
     }
 }
 
-void Menu::Actions(IRenderer *renderer, MenuEvent ev)
+int Menu::Actions(IRenderer *renderer, MenuEvent ev)
 {
     if (ev == MenuEvent::Up) {
         if (current.second > 1) {
@@ -116,9 +117,12 @@ void Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.first = 3;
             current.second = 1;
         } else if (current.first == 3) {
-            if (selectedOption.first == 1) {
-                set_game(PACMAN_GAME);
-                game->draw_game(renderer);
+            if (selectedOption.first == 1 && selectedOption.second == 1) {
+                return CODE_NC_PACMAN;
+            } else if (selectedOption.first == 1 && selectedOption.second == 2) {
+                return CODE_SDL2_PACMAN;
+            } else if (selectedOption.first == 1 && selectedOption.second == 3) {
+                return CODE_SFML_PACMAN;
             }
         }
     }
@@ -132,6 +136,7 @@ void Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.first = 2;
         }
     }
+    return 0;
 }
 
 int Menu::draw_game(IRenderer *renderer)
@@ -154,13 +159,11 @@ int Menu::draw_game(IRenderer *renderer)
     MenuEvent ev = menuRenderer->pollEvent();
     menuRenderer->rep_event(ev);
 
-    // int var = Actions(renderer, ev);
-    // if (var != 0) return var;
-    Actions(renderer, ev);
+    int ret = Actions(renderer, ev);
 
-    if (ev == MenuEvent::SwapToNcurses) return 1;
-    if (ev == MenuEvent::SwapToSdl2) return 2;
-    if (ev == MenuEvent::SwapToSfml) return 3;
+    if (ret == CODE_NC_PACMAN) return CODE_NC_PACMAN;
+    if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;
+    if (ret == CODE_SFML_PACMAN) return CODE_SFML_PACMAN;
     return 0;
 }
 

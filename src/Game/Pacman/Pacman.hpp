@@ -33,7 +33,8 @@ enum class PacmanEvent {
     Quit,
     SwapToNcurses,
     SwapToSdl2,
-    SwapToSfml
+    SwapToSfml,
+    BackToMenu
 };
 
 class Pacman : public IGameModule
@@ -43,7 +44,7 @@ class Pacman : public IGameModule
         ~Pacman() = default;
         int draw_game(IRenderer *renderer) override; // Royal delux
 
-        void move_player(IPacmanRenderer* pacmanRenderer);
+        int move_player(IPacmanRenderer* pacmanRenderer);
         int load_map_from_file(std::string filename);
         int check_bonuses(char new_pos);
         std::string get_game_name() override { return "Pacman"; }
@@ -69,6 +70,6 @@ class IPacmanRenderer {
         virtual ~IPacmanRenderer() = default;
 
         virtual void print_map(string *map, int score, int lives, int level, int highscore) = 0;
-        virtual PacmanEvent pollEvent() = 0;
+        virtual PacmanEvent pollEvent(int ch) = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

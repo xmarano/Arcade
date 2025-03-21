@@ -12,9 +12,30 @@
 #include <iostream>
 #include <filesystem>
 
+void go_pacman(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //!
+{
+    std::string newLib;
+
+    if (code == CODE_NC_PACMAN) {
+        newLib = "./lib/arcade_ncurses.so";
+    } else if (code == CODE_SDL2_PACMAN) {
+        newLib = "./lib/arcade_sdl2.so";
+    } else if (code == CODE_SFML_PACMAN) {
+        newLib = "./lib/arcade_sfml.so";
+    }
+    currentDisplay->stop();
+    IDisplayModule* newDisplay = loader.getInstance(newLib);
+    newDisplay->setGameModule(currentGame);
+    newDisplay->init();
+    currentDisplay = newDisplay;
+    delete currentGame;
+    currentGame = new Pacman();
+    return;
+}
+
 void handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //! A mettre ds une classe
 {
-    if (code > 0) {
+    if (code > 0 && code < 4) {
         std::string newLib;
         if (code == 1)
             newLib = "./lib/arcade_ncurses.so";
@@ -27,6 +48,8 @@ void handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& lo
         newDisplay->setGameModule(currentGame);
         newDisplay->init();
         currentDisplay = newDisplay;
+    } else if (code > 3 && code < 7) {
+        go_pacman(currentDisplay, loader, currentGame, code);
     }
 }
 

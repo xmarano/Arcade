@@ -10,6 +10,10 @@
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
 
+#define CODE_NC_PACMAN 4
+#define CODE_SDL2_PACMAN 5
+#define CODE_SFML_PACMAN 6
+
 class ADisplayModule : public IDisplayModule
 {
     protected:
