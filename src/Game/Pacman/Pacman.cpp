@@ -17,7 +17,7 @@ int Pacman::draw_game(IRenderer *renderer)
     while (this->lives > 0) {
         clear();
         pacmanRenderer->print_map(this->map, this->score, this->lives, this->level, this->highscore);
-        move_player();
+        move_player(pacmanRenderer);
         refresh();
         if (win_condition() == 1) {
             this->level += 1;
@@ -40,7 +40,7 @@ Pacman::Pacman()
     load_map_from_file(DEFAULT_MAP);
 }
 
-void Pacman::move_player()
+void Pacman::move_player(IPacmanRenderer* pacmanRenderer)
 {
     int ch = getch();
     int x = this->pos_player.first;
@@ -82,6 +82,9 @@ void Pacman::move_player()
                 }
                 this->map[x][y] = EMPTY;
             }
+            break;
+        default:
+            PacmanEvent ev = pacmanRenderer->pollEvent();
             break;
     }
 }

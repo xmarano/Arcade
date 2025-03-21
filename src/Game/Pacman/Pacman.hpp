@@ -28,6 +28,14 @@
     #define TELEPORT_2 std::make_pair(11, 22)
     #define DEFAULT_MAP "Assets/Maps/pacman_map.txt"
 
+enum class PacmanEvent {
+    None,
+    Quit,
+    SwapToNcurses,
+    SwapToSdl2,
+    SwapToSfml
+};
+
 class Pacman : public IGameModule
 {
     public:
@@ -35,7 +43,7 @@ class Pacman : public IGameModule
         ~Pacman() = default;
         int draw_game(IRenderer *renderer) override; // Royal delux
 
-        void move_player();
+        void move_player(IPacmanRenderer* pacmanRenderer);
         int load_map_from_file(std::string filename);
         int check_bonuses(char new_pos);
         std::string get_game_name() override { return "Pacman"; }
@@ -61,5 +69,6 @@ class IPacmanRenderer {
         virtual ~IPacmanRenderer() = default;
 
         virtual void print_map(string *map, int score, int lives, int level, int highscore) = 0;
+        virtual PacmanEvent pollEvent() = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };
