@@ -34,12 +34,4 @@ DLLoader<T>::~DLLoader()
     }
 }
 
-// template <typename T>
-// string DLLoader<T>::getLibName(const std::string &path)
-// {
-//     size_t pos = path.find_last_of("/");
-//     string libName = path.substr(pos + 1);
-//     return libName;
-// }
-
 template class DLLoader<IDisplayModule>;
