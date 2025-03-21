@@ -11,7 +11,6 @@
 
 Menu::Menu() : current({1, 1}), selectedOption({0, 0})
 {
-    
 }
 
 Menu::~Menu()
