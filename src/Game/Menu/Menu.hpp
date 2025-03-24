@@ -39,6 +39,8 @@ class Menu : public IGameModule
     private:
         pair<int, int> current;
         pair<int, int> selectedOption;
+        pair<std::string, std::string> highScorePacman;
+        pair<std::string, std::string> highScoreSnake;
         DLLoader<IGameModule> gameLoader;
         IGameModule *game;
     public:
@@ -50,6 +52,7 @@ class Menu : public IGameModule
         void DisplayModules2(IRenderer *renderer);
         void DisplayModules3(IRenderer *renderer);
         int Actions(IRenderer *renderer, MenuEvent ev);
+        void get_highscore();
 
         std::string get_game_name() override { return "Menu"; }
         void set_game(std::string game);

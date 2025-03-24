@@ -9,7 +9,7 @@
 #include <filesystem>
 #include "Menu.hpp"
 
-Menu::Menu() : current({1, 1}), selectedOption({0, 0})
+Menu::Menu() : current({1, 1}), selectedOption({0, 0}), highScorePacman({"0", "0"}), highScoreSnake({"0", "0"})
 {
 }
 
@@ -53,16 +53,46 @@ void Menu::DisplayModules1(IRenderer *renderer)
     }
 }
 
+void Menu::get_highscore()
+{
+    std::ifstream highscorePacman("stats/pacman_highscore.txt");
+    std::ifstream highlevelPacman("stats/pacman_highlevel.txt");
+
+    if (!highscorePacman.is_open() || !highlevelPacman.is_open())
+        throw ArcadeException("Error opening highscore or highlevel file for pacman");
+
+    highscorePacman >> highScorePacman.first;
+    highlevelPacman >> highScorePacman.second;
+
+    highscorePacman.close();
+    highlevelPacman.close();
+
+    // std::ifstream highscoreSnake("stats/snake_highscore.txt");
+    // std::ifstream highlevelSnake("stats/snake_highlevel.txt");
+
+    // if (!highscoreSnake.is_open() || !highlevelSnake.is_open())
+    //     throw ArcadeException("Error opening highscore or highlevel file for snake");
+
+    // highscoreSnake >> highScoreSnake.first;
+    // highlevelSnake >> highScoreSnake.second;
+
+    // highscoreSnake.close();
+    // highlevelSnake.close();
+}
+
 void Menu::DisplayModules2(IRenderer *renderer)
 {
+    get_highscore();
     DisplayText(renderer, "USER : __________", 2, 4);
-    DisplayText(renderer, "Score Pacman : 0", 2, 5);
-    DisplayText(renderer, "Score Snake  : 0", 2, 6);
+    DisplayText(renderer, "HighScore Pacman : " + highScorePacman.first, 2, 5);
+    DisplayText(renderer, "HighLevel Pacman  : " + highScorePacman.second, 2, 6);
+    DisplayText(renderer, "HighScore Snake  : " + highScoreSnake.first, 2, 8);
+    DisplayText(renderer, "HighLevel Snake  : " + highScoreSnake.second, 2, 9);
 
     if (current.first == 3 && current.second == 1) {
-        DisplayText(renderer, ">> CONFIRM <<", 2, 8);
+        DisplayText(renderer, ">> CONFIRM <<", 2, 10);
     } else {
-        DisplayText(renderer, "CONFIRM", 2, 8);
+        DisplayText(renderer, "CONFIRM", 2, 10);
     }
 }
 
