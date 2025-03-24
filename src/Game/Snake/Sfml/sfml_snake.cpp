@@ -9,7 +9,7 @@
 
 SfmlSnake::SfmlSnake(Sfml *sfml) : sfml(sfml) {}
 
-void SfmlSnake::print_map()
+void SfmlSnake::print_map(string *map)
 {
     int y = this->sfml->getScreenHeight() / 2;
     int x = this->sfml->getScreenWidth() / 2;

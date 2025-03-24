@@ -17,7 +17,7 @@ class SfmlSnake : public ISnakeRenderer
         SfmlSnake(Sfml *sfml);
         ~SfmlSnake() = default;
 
-        void print_map() override;
+        void print_map(string *map) override;
         SnakeEvent pollEvent() override;
         void quit() override;
 };

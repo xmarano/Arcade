@@ -10,7 +10,7 @@
 
 Sdl2Snake::Sdl2Snake(SDL2 *sdl2) : sdl2(sdl2) {}
 
-void Sdl2Snake::print_map()
+void Sdl2Snake::print_map(string *map)
 {
     // int y = this->sdl2->getScreenHeight() / 2;
     // int x = this->sdl2->getScreenWidth() / 2;

@@ -17,7 +17,7 @@ class Sdl2Snake : public ISnakeRenderer
         Sdl2Snake(SDL2 *sdl2);
         ~Sdl2Snake() = default;
 
-        void print_map() override;
+        void print_map(string *map) override;
         SnakeEvent pollEvent() override;
         void quit() override;
 };

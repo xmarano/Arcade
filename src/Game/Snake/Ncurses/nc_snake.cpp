@@ -10,12 +10,14 @@
 
 NcursesSnake::NcursesSnake(Ncurses *nc) : nc(nc) {}
 
-void NcursesSnake::print_map()
+void NcursesSnake::print_map(string *map)
 {
-    // int screenWidth = this->nc->getScreenWidth();
-    // int screenHeight = this->nc->getScreenHeight();
+    int screenWidth = this->nc->getScreenWidth();
+    int screenHeight = this->nc->getScreenHeight();
 
-    this->nc->DrawText1(0, 0, "COUCOU SNAKE!");
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        this->nc->DrawText1(screenWidth / 2 - (MAP_HEIGHT / 2), screenHeight / 2 - (MAP_HEIGHT / 2) + i, map[i]);
+    }
 }
 
 SnakeEvent NcursesSnake::pollEvent()

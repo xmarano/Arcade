@@ -17,7 +17,7 @@ class NcursesSnake: public ISnakeRenderer
         NcursesSnake(Ncurses *nc);
         ~NcursesSnake() = default;
 
-        void print_map() override;
+        void print_map(string *map) override;
         SnakeEvent pollEvent() override;
         void quit() override;
 };

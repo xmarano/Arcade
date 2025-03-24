@@ -35,30 +35,24 @@ class Snake : public IGameModule {
         int draw_game(IRenderer *renderer) override;
 
         int move_snake(ISnakeRenderer* snakeRenderer);
-        // int load_map_from_file(std::string filename);
+        std::string *load_snake_map(std::string filename);
         // int check_eat_apple(char new_pos);
-        // int win_condition();
+        bool check_game_over();
         // void end_of_level();
         std::string get_game_name() override { return "Snake"; }
     private:
-        // std::string *map;
+        std::string *map;
+        bool is_game_over;
         // std::pair<int, int> pos_player;
         // int score;
-        // int lives;
-        // int level;
         // int highscore;
-        // bool is_sous_frozen;
-        // std::pair<int, int> pos_blue_ghost;
-        // std::pair<int, int> pos_orange_ghost;
-        // std::pair<int, int> pos_pink_ghost;
-        // std::pair<int, int> pos_red_ghost;
 };
 
 class ISnakeRenderer {
     public:
         virtual ~ISnakeRenderer() = default;
 
-        virtual void print_map() = 0;
+        virtual void print_map(string *map) = 0;
         virtual SnakeEvent pollEvent() = 0;
         virtual void quit() = 0;
 };
