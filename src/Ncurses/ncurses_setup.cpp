@@ -8,11 +8,13 @@
 #include "ncurses_setup.hpp"
 #include "../Game/Menu/Ncurses/nc_menu.hpp"
 #include "../Game/Pacman/Ncurses/nc_pacman.hpp"
+#include "../Game/Snake/Ncurses/nc_snake.hpp"
 
 Ncurses::Ncurses() : ADisplayModule("Ncurses")
 {
     menuRenderer = new NcursesMenu(this);
     pacmanRenderer = new NcursesPacman(this);
+    snakeRenderer = new NcursesSnake(this);
 }
 
 Ncurses::~Ncurses()

@@ -8,11 +8,13 @@
 #include "sdl2_setup.hpp"
 #include "../Game/Menu/Sdl2/sdl2_menu.hpp"
 #include "../Game/Pacman/Sdl2/sdl2_pacman.hpp"
+#include "../Game/Snake/Sdl2/sdl2_snake.hpp"
 
 SDL2::SDL2() : ADisplayModule("SDL2") , window(nullptr), renderer(nullptr), font(nullptr)
 {
     menuRenderer = new Sdl2Menu(this);
     pacmanRenderer = new Sdl2Pacman(this);
+    snakeRenderer = new Sdl2Snake(this);
 }
 
 void SDL2::init()

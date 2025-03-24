@@ -9,7 +9,7 @@
 
 using namespace std;
 #include <SDL.h>
-// ⬇ FIX crash mouli 💀
+// ⬇ FIX crash mouli ⬇ //
 #if defined(__linux__)
     #include <SDL2/SDL_ttf.h>
 #elif defined(__APPLE__)

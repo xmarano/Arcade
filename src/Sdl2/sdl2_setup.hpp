@@ -11,6 +11,7 @@
 #include "../IRenderer.hpp"
 #include "../Game/Menu/Menu.hpp"
 #include "../Game/Pacman/Pacman.hpp"
+#include "../Game/Snake/Snake.hpp"
 #include "../DLLoader.hpp"
 
 class SDL2 : public ADisplayModule, public IRenderer
@@ -25,6 +26,7 @@ class SDL2 : public ADisplayModule, public IRenderer
         TTF_Font *arial_font;
         IMenuRenderer* menuRenderer = nullptr;
         IPacmanRenderer* pacmanRenderer = nullptr;
+        ISnakeRenderer* snakeRenderer = nullptr;
     public:
         SDL2();
         ~SDL2() = default;
@@ -34,6 +36,7 @@ class SDL2 : public ADisplayModule, public IRenderer
 
         IMenuRenderer* getMenuRenderer() override { return menuRenderer; };
         IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; };
+        ISnakeRenderer* getSnakeRenderer() override { return snakeRenderer; };
 
         void DrawText1(int pos_x, int pos_y, string mess) override;
         void DrawText2(int pos_x, int pos_y, string mess) override;

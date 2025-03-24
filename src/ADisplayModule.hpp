@@ -10,9 +10,15 @@
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
 
-#define CODE_NC_PACMAN 4
-#define CODE_SDL2_PACMAN 5
-#define CODE_SFML_PACMAN 6
+    #define CODE_NC_PACMAN 4
+    #define CODE_SDL2_PACMAN 5
+    #define CODE_SFML_PACMAN 6
+    #define CODE_NC_SNAKE 7
+    #define CODE_SDL2_SNAKE 8
+    #define CODE_SFML_SNAKE 9
+
+    #define PACMAN_GAME "./lib/arcade_pacman.so"
+    #define SNAKE_GAME "./lib/arcade_snake.so"
 
 class ADisplayModule : public IDisplayModule
 {

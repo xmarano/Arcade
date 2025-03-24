@@ -8,59 +8,27 @@
 #include "DLLoader.hpp"
 #include "ArcadeExeption.hpp"
 #include "Game/Menu/Menu.hpp"
+#include "Launcher.hpp"
 #include "ADisplayModule.hpp"
 #include <iostream>
 #include <filesystem>
 
-void go_pacman(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //!
-{
-    std::string newLib;
-
-    if (code == CODE_NC_PACMAN) {
-        newLib = "./lib/arcade_ncurses.so";
-    } else if (code == CODE_SDL2_PACMAN) {
-        newLib = "./lib/arcade_sdl2.so";
-    } else if (code == CODE_SFML_PACMAN) {
-        newLib = "./lib/arcade_sfml.so";
-    }
-    currentDisplay->stop();
-    IDisplayModule* newDisplay = loader.getInstance(newLib);
-    newDisplay->setGameModule(currentGame);
-    newDisplay->init();
-    currentDisplay = newDisplay;
-    delete currentGame;
-    currentGame = new Pacman();
-    return;
-}
-
-void handle_events(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame, int code) //! A mettre ds une classe
-{
-    if (code > 0 && code < 4) {
-        std::string newLib;
-        if (code == 1)
-            newLib = "./lib/arcade_ncurses.so";
-        else if (code == 2)
-            newLib = "./lib/arcade_sdl2.so";
-        else if (code == 3)
-            newLib = "./lib/arcade_sfml.so";
-        currentDisplay->stop();
-        IDisplayModule* newDisplay = loader.getInstance(newLib);
-        newDisplay->setGameModule(currentGame);
-        newDisplay->init();
-        currentDisplay = newDisplay;
-    } else if (code > 3 && code < 7) {
-        go_pacman(currentDisplay, loader, currentGame, code);
-    }
-}
-
-void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& loader, IGameModule* currentGame) //! A mettre ds une classe
+void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& displayLoader,
+    IGameModule*& currentGame, DLLoader<IGameModule>& gameLoader)
 {
     bool running = true;
     int code = 0;
+    Launcher launcher;
 
     while (running) {
-        code = currentDisplay->display(); // Affiche le jeu (Menu)
-        handle_events(currentDisplay, loader, currentGame, code); // Gere les event de swap de lib.
+        code = currentDisplay->display();
+        if (code > 0 && code < 4) {
+            launcher.handle_events(currentDisplay, displayLoader, currentGame, code);
+        } else if (code >= CODE_NC_PACMAN && code <= CODE_SFML_PACMAN) {
+            launcher.go_pacman(currentDisplay, displayLoader, currentGame, gameLoader, code);
+        } else if (code == CODE_NC_SNAKE || code == CODE_SDL2_SNAKE || code == CODE_SFML_SNAKE) {
+            launcher.go_snake(currentDisplay, displayLoader, currentGame, gameLoader, code);
+        }
     }
 }
 
@@ -82,13 +50,14 @@ int main(int ac, char **av)
 {
     try {
         Parsing(ac, av);
-        DLLoader<IDisplayModule> loader;
-        IGameModule* currentGame = new Menu(); // Lance le menu au démarrage
-        IDisplayModule* currentDisplay = loader.getInstance(av[1]);
+        DLLoader<IDisplayModule> displayLoader;
+        DLLoader<IGameModule> gameLoader;
+        IGameModule* currentGame = new Menu();
+        IDisplayModule* currentDisplay = displayLoader.getInstance(av[1]);
         currentDisplay->setGameModule(currentGame);
         currentDisplay->init();
 
-        run_arcade(currentDisplay, loader, currentGame); // Boucle des jeux
+        run_arcade(currentDisplay, displayLoader, currentGame, gameLoader);
 
         currentDisplay->stop();
         delete currentGame;

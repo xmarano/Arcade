@@ -163,8 +163,12 @@ int Menu::Actions(IRenderer *renderer, MenuEvent ev)
                 return CODE_SFML_PACMAN;
             }
             // snake
-            if (selectedOption.first == 2) {
-                // ok
+            if (selectedOption.first == 2 && selectedOption.second == 1) {
+                return CODE_NC_SNAKE;
+            } else if (selectedOption.first == 2 && selectedOption.second == 2) {
+                return CODE_SDL2_SNAKE;
+            } else if (selectedOption.first == 2 && selectedOption.second == 3) {
+                return CODE_SFML_SNAKE;
             }
         }
     }
@@ -206,5 +210,8 @@ int Menu::draw_game(IRenderer *renderer)
     if (ret == CODE_NC_PACMAN) return CODE_NC_PACMAN;
     if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;
     if (ret == CODE_SFML_PACMAN) return CODE_SFML_PACMAN;
+    if (ret == CODE_NC_SNAKE) return CODE_NC_SNAKE;
+    if (ret == CODE_SDL2_SNAKE) return CODE_SDL2_SNAKE;
+    if (ret == CODE_SFML_SNAKE) return CODE_SFML_SNAKE;
     return 0;
 }

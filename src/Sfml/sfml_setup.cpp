@@ -9,11 +9,13 @@
 #include "../Game/Menu/Sfml/sfml_menu.hpp"
 #include "../Game/Pacman/Sdl2/sdl2_pacman.hpp"
 #include "../Game/Pacman/Sfml/sfml_pacman.hpp"
+#include "../Game/Snake/Sfml/sfml_snake.hpp"
 
 Sfml::Sfml() : ADisplayModule("SDL2"), window()
 {
     menuRenderer = new SfmlMenu(this);
     pacmanRenderer = new SfmlPacman(this);
+    snakeRenderer = new SfmlSnake(this);
 }
 
 void Sfml::init()
