@@ -180,17 +180,17 @@ void Pacman::pacmanHighStats(string stat)
         infile >> old_highscore;
         infile.close();
     }
-
+    int new_score = 999;
     if (stat == "score") {
-        this->highscore = this->score;
+        new_score = this->highscore;
     } else if (stat == "level") {
-        this->highscore = this->level;
+        new_score = this->level;
     }
 
-    if (this->highscore > old_highscore) {
+    if (new_score > old_highscore) {
         ofstream outfile("Assets/Stats/pacman_high" + stat + ".txt");
         if (outfile.is_open()) {
-            outfile << this->highscore;
+            outfile << new_score;
             outfile.close();
         }
     }
