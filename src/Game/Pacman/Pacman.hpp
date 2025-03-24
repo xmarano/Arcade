@@ -67,6 +67,7 @@ class Pacman : public IGameModule
         int get_level() { return this->level; }
         int get_highscore() { return this->highscore; }
         int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
+        std::pair<int, int> move_ghost(std::pair<int, int> pos_ghost, char Ghost);
 
     private:
         int score;
@@ -75,11 +76,12 @@ class Pacman : public IGameModule
         int highscore;
         bool is_sous_frozen;
         pair<int, int> pos_player;
-        // pair<int, int> pos_red_ghost;
-        // pair<int, int> pos_pink_ghost;
-        // pair<int, int> pos_blue_ghost;
-        // pair<int, int> pos_orange_ghost;
+        pair<int, int> pos_red_ghost;
+        pair<int, int> pos_pink_ghost;
+        pair<int, int> pos_blue_ghost;
+        pair<int, int> pos_orange_ghost;
         string* map;
+        string* original_map;
 };
 
 class IPacmanRenderer {

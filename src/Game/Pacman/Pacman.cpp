@@ -19,6 +19,10 @@ int Pacman::draw_game(IRenderer *renderer)
         renderer->clearScreen();
         pacmanRenderer->print_map(this->map, this->score, this->lives, this->level, this->highscore);
         renderer->refreshScreen();
+        this->pos_blue_ghost = move_ghost(this->pos_blue_ghost, BLUE_GHOST);
+        this->pos_orange_ghost = move_ghost(this->pos_orange_ghost, ORANGE_GHOST);
+        this->pos_pink_ghost = move_ghost(this->pos_pink_ghost, PINK_GHOST);
+        this->pos_red_ghost = move_ghost(this->pos_red_ghost, RED_GHOST);
         ret = move_player(pacmanRenderer);
         if (ret == 1) return 1;
         if (ret == 2) return 2;
@@ -40,12 +44,12 @@ Pacman::Pacman()
     this->lives = 3;
     this->level = 1;
     this->highscore = 0;
+    this->pos_blue_ghost = BLUE_GHOST_POS;
+    this->pos_orange_ghost = ORANGE_GHOST_POS;
+    this->pos_pink_ghost = PINK_GHOST_POS;
+    this->pos_red_ghost = RED_GHOST_POS;
     this->pos_player = DEFAULT_PLAYER_POSITION;
-    // this->is_sous_frozen = false;
-    // this->pos_blue_ghost = BLUE_GHOST_POS;
-    // this->pos_orange_ghost = ORANGE_GHOST_POS;
-    // this->pos_pink_ghost = PINK_GHOST_POS;
-    // this->pos_red_ghost = RED_GHOST_POS;
+    this->is_sous_frozen = false;
     load_map_from_file(DEFAULT_MAP);
 }
 
@@ -118,10 +122,12 @@ int Pacman::load_map_from_file(std::string filename)
         return -1;
     }
     this->map = new std::string[MAP_HEIGHT];
+    this->original_map = new std::string[MAP_HEIGHT];
 
     while (std::getline(file, line)) {
         if (i < MAP_HEIGHT) {
             this->map[i].assign(line);
+            this->original_map[i].assign(line);
             i++;
         } else {
             break;
@@ -219,4 +225,43 @@ extern "C" {
 int Pacman::manhattan_distance(std::pair<int, int> a, std::pair<int, int> b)
 {
     return abs(a.first - b.first) + abs(a.second - b.second);
+}
+
+std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost)
+{
+    int distance, tmp = manhattan_distance(pos_ghost, this->pos_player);
+    std::pair<int, int> new_pos = pos_ghost;
+
+    if (this->map[pos_ghost.first - 1][pos_ghost.second] != WALL && this->map[pos_ghost.first - 1][pos_ghost.second] != BLUE_GHOST && this->map[pos_ghost.first - 1][pos_ghost.second] != ORANGE_GHOST && this->map[pos_ghost.first - 1][pos_ghost.second] != PINK_GHOST && this->map[pos_ghost.first - 1][pos_ghost.second] != RED_GHOST && this->map[pos_ghost.first - 1][pos_ghost.second] != PLAYER) {
+        if (distance >= manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first - 1, pos_ghost.second);
+        }
+    }
+    if (this->map[pos_ghost.first + 1][pos_ghost.second] != WALL && this->map[pos_ghost.first + 1][pos_ghost.second] != BLUE_GHOST && this->map[pos_ghost.first + 1][pos_ghost.second] != ORANGE_GHOST && this->map[pos_ghost.first + 1][pos_ghost.second] != PINK_GHOST && this->map[pos_ghost.first + 1][pos_ghost.second] != RED_GHOST && this->map[pos_ghost.first + 1][pos_ghost.second] != PLAYER) {
+        if (distance >= manhattan_distance(std::make_pair(pos_ghost.first + 1, pos_ghost.second), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first + 1, pos_ghost.second), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first + 1, pos_ghost.second);
+        }
+    }
+    if (this->map[pos_ghost.first][pos_ghost.second - 1] != WALL && this->map[pos_ghost.first][pos_ghost.second - 1] != BLUE_GHOST && this->map[pos_ghost.first][pos_ghost.second - 1] != ORANGE_GHOST && this->map[pos_ghost.first][pos_ghost.second - 1] != PINK_GHOST && this->map[pos_ghost.first][pos_ghost.second - 1] != RED_GHOST && this->map[pos_ghost.first][pos_ghost.second - 1] != PLAYER) {
+        if (distance >= manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second - 1), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second - 1), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first, pos_ghost.second - 1);
+        }
+    }
+    if (this->map[pos_ghost.first][pos_ghost.second + 1] != WALL && this->map[pos_ghost.first][pos_ghost.second + 1] != BLUE_GHOST && this->map[pos_ghost.first][pos_ghost.second + 1] != ORANGE_GHOST && this->map[pos_ghost.first][pos_ghost.second + 1] != PINK_GHOST && this->map[pos_ghost.first][pos_ghost.second + 1] != RED_GHOST && this->map[pos_ghost.first][pos_ghost.second + 1] != PLAYER) {
+        if (distance >= manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second + 1), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second + 1), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first, pos_ghost.second + 1);
+        }
+    }
+    if (tmp == distance)
+        return new_pos;
+    if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST)
+        this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
+    else
+        this->map[pos_ghost.first][pos_ghost.second] = this->original_map[pos_ghost.first][pos_ghost.second];
+    this->map[new_pos.first][new_pos.second] = Ghost;
+    return new_pos;
 }
