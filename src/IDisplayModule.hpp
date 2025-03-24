@@ -9,7 +9,12 @@
 
 using namespace std;
 #include <SDL.h>
-#include <SDL_ttf.h> //! crash mouli
+// ⬇ FIX crash mouli 💀
+#if defined(__linux__)
+    #include <SDL2/SDL_ttf.h>
+#elif defined(__APPLE__)
+    #include <SDL_ttf.h>
+#endif
 #include <ncurses.h>
 #include <SFML/Graphics.hpp>
 #include <iostream>
