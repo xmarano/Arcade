@@ -88,15 +88,15 @@ void Menu::DisplayModules2(IRenderer *renderer)
 {
     vector<string> highScore = get_highscore();
     DisplayText(renderer, "USER : __________", 2, 4);
-    DisplayText(renderer, "HighScore Pacman : " + highScore[0], 2, 6);
-    DisplayText(renderer, "HighLevel Pacman  : " + highScore[1], 2, 7);
-    DisplayText(renderer, "HighScore Snake  : " + highScore[2], 2, 9);
-    DisplayText(renderer, "HighLevel Snake  : " + highScore[3], 2, 10);
+    DisplayText(renderer, "HighScore Pacman : " + highScore[0], 2, 5);
+    DisplayText(renderer, "HighLevel Pacman  : " + highScore[1], 2, 6);
+    DisplayText(renderer, "HighScore Snake  : " + highScore[2], 2, 7);
+    DisplayText(renderer, "HighLevel Snake  : " + highScore[3], 2, 8);
 
     if (current.first == 3 && current.second == 1) {
-        DisplayText(renderer, ">> CONFIRM <<", 2, 12);
+        DisplayText(renderer, ">> CONFIRM <<", 2, 9);
     } else {
-        DisplayText(renderer, "CONFIRM", 2, 12);
+        DisplayText(renderer, "CONFIRM", 2, 9);
     }
 }
 
