@@ -22,7 +22,7 @@ MenuEvent NcursesMenu::pollEvent()
         return MenuEvent::Down;
     if (ch == '\n')
         return MenuEvent::Enter;
-    if (ch == 127)
+    if (ch == 127 || ch == KEY_BACKSPACE)
         return MenuEvent::Back;
 
     return MenuEvent::None;
