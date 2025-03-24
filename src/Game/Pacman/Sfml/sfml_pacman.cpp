@@ -11,12 +11,11 @@ SfmlPacman::SfmlPacman(Sfml *sfml) : sfml(sfml) {}
 
 void SfmlPacman::print_map(std::string *map, int score, int lives, int level, int highscore)
 {
-    (void)map;
-    (void)score;
-    (void)lives;
-    (void)level;
-    (void)highscore;
-    this->sfml->DrawText1(0, 0, "COUCOU SFML");
+    int y = this->sfml->getScreenHeight() / 2;
+    int x = this->sfml->getScreenWidth() / 2;
+
+    this->sfml->DrawText2(0, 0, "COUCOU SFML");
+    // Version sfml
 }
 
 PacmanEvent SfmlPacman::pollEvent()
