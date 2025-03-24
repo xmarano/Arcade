@@ -164,9 +164,7 @@ int Menu::Actions(IRenderer *renderer, MenuEvent ev)
             }
             // snake
             if (selectedOption.first == 2) {
-                set_game(SNAKE_GAME);
-                game->draw_game(renderer);
-                return selectedOption.second;
+                // ok
             }
         }
     }
@@ -209,12 +207,4 @@ int Menu::draw_game(IRenderer *renderer)
     if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;
     if (ret == CODE_SFML_PACMAN) return CODE_SFML_PACMAN;
     return 0;
-}
-
-void Menu::set_game(std::string path_game)
-{
-    if (this->game != this) {
-        delete game;
-    }
-    this->game = gameLoader.getInstance(path_game);
 }

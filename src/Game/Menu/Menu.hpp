@@ -15,9 +15,6 @@
 #include "../../Ncurses/ncurses_setup.hpp"
 #include "../../Sfml/sfml_setup.hpp"
 
-#define PACMAN_GAME "./lib/arcade_pacman.so"
-#define SNAKE_GAME "./lib/arcade_snake.so"
-
 class Pacman;
 
 enum class MenuEvent {
@@ -53,7 +50,6 @@ class Menu : public IGameModule
         vector<string> get_highscore();
 
         std::string get_game_name() override { return "Menu"; }
-        void set_game(std::string game);
 };
 
 class IMenuRenderer {
