@@ -53,16 +53,50 @@ void Menu::DisplayModules1(IRenderer *renderer)
     }
 }
 
+vector<string> Menu::get_highscore()
+{
+    vector<string> highScore(4);
+    // Pacman
+    ifstream highscorePacman("stats/pacman_highscore.txt");
+    ifstream highlevelPacman("stats/pacman_highlevel.txt");
+
+    if (!highscorePacman.is_open() || !highlevelPacman.is_open())
+        throw ArcadeException("Error opening highscore or highlevel file for pacman");
+
+    highscorePacman >> highScore[0];
+    highlevelPacman >> highScore[1];
+
+    highscorePacman.close();
+    highlevelPacman.close();
+
+    // Snake
+    ifstream highscoreSnake("stats/snake_highscore.txt");
+    ifstream highlevelSnake("stats/snake_highlevel.txt");
+
+    if (!highscoreSnake.is_open() || !highlevelSnake.is_open())
+        throw ArcadeException("Error opening highscore or highlevel file for snake");
+
+    highscoreSnake >> highScore[2];
+    highlevelSnake >> highScore[3];
+
+    highscoreSnake.close();
+    highlevelSnake.close();
+    return highScore;
+}
+
 void Menu::DisplayModules2(IRenderer *renderer)
 {
+    vector<string> highScore = get_highscore();
     DisplayText(renderer, "USER : __________", 2, 4);
-    DisplayText(renderer, "Score Pacman : 0", 2, 5);
-    DisplayText(renderer, "Score Snake  : 0", 2, 6);
+    DisplayText(renderer, "HighScore Pacman : " + highScore[0], 2, 6);
+    DisplayText(renderer, "HighLevel Pacman  : " + highScore[1], 2, 7);
+    DisplayText(renderer, "HighScore Snake  : " + highScore[2], 2, 9);
+    DisplayText(renderer, "HighLevel Snake  : " + highScore[3], 2, 10);
 
     if (current.first == 3 && current.second == 1) {
-        DisplayText(renderer, ">> CONFIRM <<", 2, 8);
+        DisplayText(renderer, ">> CONFIRM <<", 2, 12);
     } else {
-        DisplayText(renderer, "CONFIRM", 2, 8);
+        DisplayText(renderer, "CONFIRM", 2, 12);
     }
 }
 

@@ -61,6 +61,7 @@ class Pacman : public IGameModule
         std::string get_game_name() override { return "Pacman"; }
         int win_condition();
         void end_of_level();
+        void pacmanHighStats(string stats);
         int get_score() { return this->score; }
         int get_lives() { return this->lives; }
         int get_level() { return this->level; }

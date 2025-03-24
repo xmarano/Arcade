@@ -171,6 +171,31 @@ int Pacman::win_condition()
     return 1;
 }
 
+void Pacman::pacmanHighStats(string stat)
+{
+    ifstream infile("stats/pacman_high" + stat + ".txt");
+    int old_highscore = 0;
+
+    if (infile.is_open()) {
+        infile >> old_highscore;
+        infile.close();
+    }
+
+    if (stat == "score") {
+        this->highscore = this->score;
+    } else if (stat == "level") {
+        this->highscore = this->level;
+    }
+
+    if (this->highscore > old_highscore) {
+        ofstream outfile("stats/pacman_high" + stat + ".txt");
+        if (outfile.is_open()) {
+            outfile << this->highscore;
+            outfile.close();
+        }
+    }
+}
+
 void Pacman::end_of_level()
 {
     if (this->lives == 0) {

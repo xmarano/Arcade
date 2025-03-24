@@ -50,6 +50,7 @@ class Menu : public IGameModule
         void DisplayModules2(IRenderer *renderer);
         void DisplayModules3(IRenderer *renderer);
         int Actions(IRenderer *renderer, MenuEvent ev);
+        vector<string> get_highscore();
 
         std::string get_game_name() override { return "Menu"; }
         void set_game(std::string game);
