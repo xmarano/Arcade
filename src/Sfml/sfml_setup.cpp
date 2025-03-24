@@ -7,12 +7,13 @@
 
 #include "sfml_setup.hpp"
 #include "../Game/Menu/Sfml/sfml_menu.hpp"
-// #include "../Game/Pacman/Sfml/sfml_pacman.hpp"
+#include "../Game/Pacman/Sdl2/sdl2_pacman.hpp"
+#include "../Game/Pacman/Sfml/sfml_pacman.hpp"
 
 Sfml::Sfml() : ADisplayModule("SDL2"), window()
 {
     menuRenderer = new SfmlMenu(this);
-    //pacmanRenderer = new Sdl2Pacman(this);
+    pacmanRenderer = new SfmlPacman(this);
 }
 
 void Sfml::init()

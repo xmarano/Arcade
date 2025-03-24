@@ -6,6 +6,7 @@
 */
 
 #include "sdl2_pacman.hpp"
+#include "../../../Sdl2/sdl2_setup.hpp"
 
 Sdl2Pacman::Sdl2Pacman(SDL2 *sdl2) : sdl2(sdl2) {}
 
@@ -16,7 +17,10 @@ void Sdl2Pacman::print_map(std::string *map, int score, int lives, int level, in
     (void)lives;
     (void)level;
     (void)highscore;
-    this->sdl2->DrawText1(0, 0, "COUCOU SDL2");
+    int x = this->sdl2->getScreenHeight();
+    int y = this->sdl2->getScreenWidth();
+
+    this->sdl2->DrawText1(x / 2, y / 2, "COUCOU SDL2");
 }
 
 PacmanEvent Sdl2Pacman::pollEvent()
