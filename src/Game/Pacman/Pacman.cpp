@@ -16,14 +16,11 @@ int Pacman::draw_game(IRenderer *renderer)
     int ret = 0;
 
     while (this->lives > 0) {
-        ret = move_player(pacmanRenderer);
         pacmanRenderer->print_map(this->map, this->score, this->lives, this->level, this->highscore);
+        ret = move_player(pacmanRenderer);
         if (ret == 1) return 1;
         if (ret == 2) return 2;
         if (ret == 3) return 3;
-        if (ret == 99) {
-            return 0;
-        };
         if (win_condition() == 1) {
             this->level += 1;
             load_map_from_file(DEFAULT_MAP);
@@ -47,12 +44,13 @@ Pacman::Pacman()
 
 int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
 {
-    int ch = getch();
     int x = this->pos_player.first;
     int y = this->pos_player.second;
 
-    switch (ch) {
-        case KEY_UP:
+    PacmanEvent ev = pacmanRenderer->pollEvent();
+
+    switch (ev) {
+        case PacmanEvent::UP:
             if (this->map[x - 1][y] != WALL) {
                 if (check_bonuses(this->map[x - 1][y]) == 0) {
                     this->map[x - 1][y] = PLAYER;
@@ -61,7 +59,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                 this->map[x][y] = EMPTY;
             }
             break;
-        case KEY_DOWN:
+        case PacmanEvent::Down:
             if (this->map[x + 1][y] != WALL) {
                 if (check_bonuses(this->map[x + 1][y]) == 0) {
                     this->map[x + 1][y] = PLAYER;
@@ -70,7 +68,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                 this->map[x][y] = EMPTY;
             }
             break;
-        case KEY_LEFT:
+        case PacmanEvent::Left:
             if (this->map[x][y - 1] != WALL) {
                 if (check_bonuses(this->map[x][y - 1]) == 0) {
                     this->map[x][y - 1] = PLAYER;
@@ -79,7 +77,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                 this->map[x][y] = EMPTY;
             }
             break;
-        case KEY_RIGHT:
+        case PacmanEvent::Right:
             if (this->map[x][y + 1] != WALL) {
                 if (check_bonuses(this->map[x][y + 1]) == 0) {
                     this->map[x][y + 1] = PLAYER;
@@ -89,9 +87,8 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
             }
             break;
         default:
-            PacmanEvent ev = pacmanRenderer->pollEvent(ch);
             if (ev == PacmanEvent::Quit)
-                return 99;
+                pacmanRenderer->quit();
             if (ev == PacmanEvent::SwapToNcurses)
                 return 1;
             if (ev == PacmanEvent::SwapToSdl2)

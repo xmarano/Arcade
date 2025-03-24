@@ -34,7 +34,11 @@ enum class PacmanEvent {
     SwapToNcurses,
     SwapToSdl2,
     SwapToSfml,
-    BackToMenu
+    BackToMenu,
+    UP,
+    Down,
+    Right,
+    Left
 };
 
 class Pacman : public IGameModule
@@ -70,6 +74,7 @@ class IPacmanRenderer {
         virtual ~IPacmanRenderer() = default;
 
         virtual void print_map(string *map, int score, int lives, int level, int highscore) = 0;
-        virtual PacmanEvent pollEvent(int ch) = 0;
+        virtual PacmanEvent pollEvent() = 0;
+        virtual void quit() = 0;
         // Autre methodes comunes a toutes les librairies graphiques pour Pacman
 };

@@ -18,5 +18,6 @@ class NcursesPacman: public IPacmanRenderer
         ~NcursesPacman() = default;
 
         void print_map(std::string *map, int score, int lives, int level, int highscore) override;
-        PacmanEvent pollEvent(int ch);
+        PacmanEvent pollEvent();
+        void quit() override;
 };

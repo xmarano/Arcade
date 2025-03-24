@@ -18,5 +18,6 @@ class Sdl2Pacman : public IPacmanRenderer
         ~Sdl2Pacman() = default;
 
         void print_map(std::string *map, int score, int lives, int level, int highscore) override;
-        PacmanEvent pollEvent(int ch) override;
+        PacmanEvent pollEvent() override;
+        void quit() override;
 };

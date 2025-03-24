@@ -20,23 +20,39 @@ void NcursesPacman::print_map(std::string *map, int score, int lives, int level,
     mvprintw(2, 0, "Level: %d", level);
     mvprintw(3, 0, "Score: %d", score);
     for (int i = 0; i < MAP_HEIGHT; i++) {
-        mvprintw(i + screenHeight / 2 - (MAP_HEIGHT / 2), screenWidth / 2 - (MAP_HEIGHT / 2), map[i].c_str());
+        this->nc->DrawText1(screenWidth / 2 - (MAP_HEIGHT / 2), screenHeight / 2 - (MAP_HEIGHT / 2) + i, map[i]);
     }
 }
 
-PacmanEvent NcursesPacman::pollEvent(int ch)
+PacmanEvent NcursesPacman::pollEvent()
 {
-    // switch (ch) {
-    //     case 'q':
-    //         return PacmanEvent::Quit;
-    //     case 'm':
-    //         return PacmanEvent::BackToMenu;
-    //     case 'o':
-    //         return PacmanEvent::SwapToSdl2;
-    //     case 'p':
-    //         return PacmanEvent::SwapToSfml;
-    //     default:
-    //         return PacmanEvent::None;
-    // }
+    int ch = getch();
+
+    switch (ch) {
+        case 'q':
+            return PacmanEvent::Quit;
+        case 'm':
+            return PacmanEvent::BackToMenu;
+        case 'o':
+            return PacmanEvent::SwapToSdl2;
+        case 'p':
+            return PacmanEvent::SwapToSfml;
+        case KEY_UP:
+            return PacmanEvent::UP;
+        case KEY_DOWN:
+            return PacmanEvent::Down;
+        case KEY_LEFT:
+            return PacmanEvent::Left;
+        case KEY_RIGHT:
+            return PacmanEvent::Right;
+        default:
+            return PacmanEvent::None;
+    }
     return PacmanEvent::None;
+}
+
+void NcursesPacman::quit()
+{
+    this->nc->stop();
+    exit(0);
 }
