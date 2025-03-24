@@ -15,7 +15,7 @@ void NcursesPacman::print_map(std::string *map, int score, int lives, int level,
     int screenWidth = this->nc->getScreenWidth();
     int screenHeight = this->nc->getScreenHeight();
 
-    this->nc->DrawText1(0, 0, "Hight socre: " + to_string(highscore));
+    this->nc->DrawText1(0, 0, "Highscore: " + to_string(highscore));
     this->nc->DrawText1(0, 1, "Lives: " + to_string(lives));
     this->nc->DrawText1(0, 2, "Score: " + to_string(score));
     this->nc->DrawText1(0, 3, "Level: " + to_string(level));
