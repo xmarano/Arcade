@@ -24,8 +24,6 @@ int SDL2::display()
 
 void SDL2::DrawText1(int pos_x, int pos_y, string mess)
 {
-    ofstream file("log.txt");
-    file << "DrawText1" << endl;
     SDL_Color color = {255, 255, 255, 255};
     SDL_Surface *surface_text = TTF_RenderText_Solid(font, mess.c_str(), color);
     SDL_Texture *texture_text = SDL_CreateTextureFromSurface(renderer, surface_text);
