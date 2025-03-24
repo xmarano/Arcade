@@ -57,8 +57,8 @@ vector<string> Menu::get_highscore()
 {
     vector<string> highScore(4);
     // Pacman
-    ifstream highscorePacman("stats/pacman_highscore.txt");
-    ifstream highlevelPacman("stats/pacman_highlevel.txt");
+    ifstream highscorePacman("Assets/Stats/pacman_highscore.txt");
+    ifstream highlevelPacman("Assets/Stats/pacman_highlevel.txt");
 
     if (!highscorePacman.is_open() || !highlevelPacman.is_open())
         throw ArcadeException("Error opening highscore or highlevel file for pacman");
@@ -70,8 +70,8 @@ vector<string> Menu::get_highscore()
     highlevelPacman.close();
 
     // Snake
-    ifstream highscoreSnake("stats/snake_highscore.txt");
-    ifstream highlevelSnake("stats/snake_highlevel.txt");
+    ifstream highscoreSnake("Assets/Stats/snake_highscore.txt");
+    ifstream highlevelSnake("Assets/Stats/snake_highlevel.txt");
 
     if (!highscoreSnake.is_open() || !highlevelSnake.is_open())
         throw ArcadeException("Error opening highscore or highlevel file for snake");
