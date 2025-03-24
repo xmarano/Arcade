@@ -17,13 +17,20 @@
 
     #define PLAYER 'C'
     #define WALL '#'
-    #define GHOST 'G'
+    #define RED_GHOST 'R'
+    #define PINK_GHOST 'P'
+    #define BLUE_GHOST 'B'
+    #define ORANGE_GHOST 'O'
     #define COIN '.'
     #define EMPTY ' '
     #define POWERUP '@'
     #define TELEPORT 'T'
     #define MAP_HEIGHT 25
     #define DEFAULT_PLAYER_POSITION std::make_pair(18, 11)
+    #define RED_GHOST_POS std::make_pair(11, 9)
+    #define PINK_GHOST_POS std::make_pair(11, 13)
+    #define BLUE_GHOST_POS std::make_pair(11, 12)
+    #define ORANGE_GHOST_POS std::make_pair(11, 10)
     #define TELEPORT_1 std::make_pair(11, 1)
     #define TELEPORT_2 std::make_pair(11, 22)
     #define DEFAULT_MAP "Assets/Maps/pacman_map.txt"
@@ -58,6 +65,7 @@ class Pacman : public IGameModule
         int get_lives() { return this->lives; }
         int get_level() { return this->level; }
         int get_highscore() { return this->highscore; }
+        int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
 
     private:
         int score;
@@ -66,6 +74,10 @@ class Pacman : public IGameModule
         int highscore;
         bool is_sous_frozen;
         pair<int, int> pos_player;
+        // pair<int, int> pos_red_ghost;
+        // pair<int, int> pos_pink_ghost;
+        // pair<int, int> pos_blue_ghost;
+        // pair<int, int> pos_orange_ghost;
         string* map;
 };
 

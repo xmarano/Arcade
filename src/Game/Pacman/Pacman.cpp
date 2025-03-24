@@ -39,6 +39,11 @@ Pacman::Pacman()
     this->level = 1;
     this->highscore = 0;
     this->pos_player = DEFAULT_PLAYER_POSITION;
+    // this->is_sous_frozen = false;
+    // this->pos_blue_ghost = BLUE_GHOST_POS;
+    // this->pos_orange_ghost = ORANGE_GHOST_POS;
+    // this->pos_pink_ghost = PINK_GHOST_POS;
+    // this->pos_red_ghost = RED_GHOST_POS;
     load_map_from_file(DEFAULT_MAP);
 }
 
@@ -134,7 +139,7 @@ int Pacman::check_bonuses(char new_pos)
         this->is_sous_frozen = true;
         return 0;
     }
-    if (new_pos == GHOST) {
+    if (new_pos == RED_GHOST || new_pos == PINK_GHOST || new_pos == BLUE_GHOST || new_pos == ORANGE_GHOST) {
         this->lives -= 1;
         this->pos_player = DEFAULT_PLAYER_POSITION;
         return 1;
@@ -157,7 +162,7 @@ int Pacman::win_condition()
 {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < this->map[i].length(); j++) {
-            if (this->map[i][j] == COIN)
+            if (this->map[i][j] == COIN || this->map[i][j] == POWERUP)
                 return 0;
         }
     }
@@ -180,4 +185,9 @@ extern "C" {
     IGameModule *create() {
         return new Pacman();
     }
+}
+
+int Pacman::manhattan_distance(std::pair<int, int> a, std::pair<int, int> b)
+{
+    return abs(a.first - b.first) + abs(a.second - b.second);
 }
