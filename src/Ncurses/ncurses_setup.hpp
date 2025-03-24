@@ -27,8 +27,12 @@ class Ncurses : public ADisplayModule, public IRenderer
 
         virtual IMenuRenderer* getMenuRenderer() override { return menuRenderer; }
         virtual IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; }
+
         void DrawText1(int pos_x, int pos_y, string mess) override;
-        void DrawText2(int pos_x, int pos_y, string mess) override;
+        void DrawText2(int pos_x, int pos_y, string mess) override { return DrawText1(pos_x, pos_y, mess); }
+        void DrawText3(int pos_x, int pos_y, string mess) override { return DrawText1(pos_x, pos_y, mess); }
+        void DrawText4(int pos_x, int pos_y, string mess) override { return DrawText1(pos_x, pos_y, mess); }
+        void DrawText5(int pos_x, int pos_y, string mess) override { return DrawText1(pos_x, pos_y, mess); }
 
         void clearScreen() override;
         void refreshScreen() override;

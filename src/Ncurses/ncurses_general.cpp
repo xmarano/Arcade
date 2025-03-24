@@ -24,10 +24,5 @@ int Ncurses::display()
 
 void Ncurses::DrawText1(int pos_x, int pos_y, string mess)
 {
-    mvprintw(pos_y, pos_x, "%s", mess.c_str());
-}
-
-void Ncurses::DrawText2(int pos_x, int pos_y, string mess)
-{
-    DrawText1(pos_x, pos_y, mess);
+    mvprintw(pos_y, pos_x, mess.c_str());
 }

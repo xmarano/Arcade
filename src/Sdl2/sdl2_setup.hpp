@@ -34,8 +34,12 @@ class SDL2 : public ADisplayModule, public IRenderer
 
         IMenuRenderer* getMenuRenderer() override { return menuRenderer; };
         IPacmanRenderer* getPacmanRenderer() override { return pacmanRenderer; };
+
         void DrawText1(int pos_x, int pos_y, string mess) override;
         void DrawText2(int pos_x, int pos_y, string mess) override;
+        void DrawText3(int pos_x, int pos_y, string mess) override;
+        void DrawText4(int pos_x, int pos_y, string mess) override;
+        void DrawText5(int pos_x, int pos_y, string mess) override;
 
         void clearScreen() override;
         void refreshScreen() override;

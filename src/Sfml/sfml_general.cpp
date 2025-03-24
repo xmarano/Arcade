@@ -36,9 +36,42 @@ void Sfml::DrawText1(int pos_x, int pos_y, string mess)
 void Sfml::DrawText2(int pos_x, int pos_y, string mess)
 {
     sf::Text text;
+    text.setFont(goofy_font);
+    text.setString(mess);
+    text.setCharacterSize(14);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(pos_x, pos_y);
+    window.draw(text);
+}
+
+void Sfml::DrawText3(int pos_x, int pos_y, string mess)
+{
+    sf::Text text;
+    text.setFont(arial_font);
+    text.setString(mess);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(pos_x, pos_y);
+    window.draw(text);
+}
+
+void Sfml::DrawText4(int pos_x, int pos_y, string mess)
+{
+    sf::Text text;
     text.setFont(litle_font);
     text.setString(mess);
     text.setCharacterSize(14);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(pos_x, pos_y);
+    window.draw(text);
+}
+
+void Sfml::DrawText5(int pos_x, int pos_y, string mess)
+{
+    sf::Text text;
+    text.setFont(arcade_font);
+    text.setString(mess);
+    text.setCharacterSize(20);
     text.setFillColor(sf::Color::White);
     text.setPosition(pos_x, pos_y);
     window.draw(text);

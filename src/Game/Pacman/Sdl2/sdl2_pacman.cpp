@@ -20,7 +20,7 @@ void Sdl2Pacman::print_map(std::string *map, int score, int lives, int level, in
     int y = this->sdl2->getScreenHeight() / 2;
     int x = this->sdl2->getScreenWidth() / 2;
 
-    this->sdl2->DrawText1(x, y, "COUCOU SDL2");
+    this->sdl2->DrawText2(0, 0, "COUCOU SDL2");
 }
 
 PacmanEvent Sdl2Pacman::pollEvent()

@@ -15,10 +15,10 @@ void NcursesPacman::print_map(std::string *map, int score, int lives, int level,
     int screenWidth = this->nc->getScreenWidth();
     int screenHeight = this->nc->getScreenHeight();
 
-    mvprintw(0, 0, "Highscore: %d", highscore);
-    mvprintw(1, 0, "Lives: %d", lives);
-    mvprintw(2, 0, "Level: %d", level);
-    mvprintw(3, 0, "Score: %d", score);
+    this->nc->DrawText1(0, 0, "Hight socre: " + to_string(highscore));
+    this->nc->DrawText1(0, 1, "Lives: " + to_string(lives));
+    this->nc->DrawText1(0, 2, "Score: " + to_string(score));
+    this->nc->DrawText1(0, 3, "Level: " + to_string(level));
     for (int i = 0; i < MAP_HEIGHT; i++) {
         this->nc->DrawText1(screenWidth / 2 - (MAP_HEIGHT / 2), screenHeight / 2 - (MAP_HEIGHT / 2) + i, map[i]);
     }
