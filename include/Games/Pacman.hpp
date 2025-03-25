@@ -26,46 +26,45 @@
     #define TELEPORT_2 std::make_pair(11, 22)
     #define DEFAULT_MAP "Assets/Maps/pacman_map.txt"
 
-
 class Pacman : public IGame {
-protected:
-    GameState state;
-    int score;
-    int lives;
-    int level;
-    int highscore;
-    bool is_sous_frozen;
-    std::pair<int, int> pos_player;
-    std::pair<int, int> pos_red_ghost;
-    std::pair<int, int> pos_pink_ghost;
-    std::pair<int, int> pos_blue_ghost;
-    std::pair<int, int> pos_orange_ghost;
-    std::vector<std::string> map;
-    std::vector<std::string> original_map;
-    std::vector<std::string> coin_map;
+    protected:
+        GameState state;
+        int score;
+        int lives;
+        int level;
+        int highscore;
+        bool is_sous_frozen;
+        std::pair<int, int> pos_player;
+        std::pair<int, int> pos_red_ghost;
+        std::pair<int, int> pos_pink_ghost;
+        std::pair<int, int> pos_blue_ghost;
+        std::pair<int, int> pos_orange_ghost;
+        std::vector<std::string> map;
+        std::vector<std::string> original_map;
+        std::vector<std::string> coin_map;
 
-public:
-    Pacman();
-    GameState update() override;
-    void handleInput(int key) override;
-    std::string getName() const override { return "Pacman"; }
-    void reset() override;
-    EntityType charToEntityType(char c) {
-    switch (c) {
-        case 'C': return EntityType::PLAYER;
-        case '#': return EntityType::WALL;
-        case '.': return EntityType::BONUS;
-        case '@': return EntityType::POWERUP;
-        case 'R': case 'P': case 'B': case 'O': return EntityType::ENEMY;
-        default: return EntityType::EMPTY;
-    }
-}
+    public:
+        Pacman();
+        GameState update() override;
+        void handleInput(int key) override;
+        std::string getName() const override { return "Pacman"; }
+        void reset() override;
+        EntityType charToEntityType(char c) {
+            switch (c) {
+                case 'C': return EntityType::PLAYER;
+                case '#': return EntityType::WALL;
+                case '.': return EntityType::BONUS;
+                case '@': return EntityType::POWERUP;
+                case 'R': case 'P': case 'B': case 'O': return EntityType::ENEMY;
+                default: return EntityType::EMPTY;
+            }
+        }
 
-private:
-    void loadMap();
-    void movePlayer(int new_x, int new_y);
-    int check_bonuses(char cell);
-    bool win_condition();
-    std::pair<int, int> move_ghost(std::pair<int, int> pos, char type);
-    int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
+    private:
+        void loadMap();
+        void movePlayer(int new_x, int new_y);
+        int check_bonuses(char cell);
+        bool win_condition();
+        std::pair<int, int> move_ghost(std::pair<int, int> pos, char type);
+        int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
 };

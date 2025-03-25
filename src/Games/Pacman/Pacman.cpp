@@ -50,14 +50,12 @@ GameState Pacman::update() {
         }
     }
 
-    // Ajout des positions exactes (pour animations/alignement)
     Entity player;
     player.type = PLAYER;
     player.x = pos_player.second; // colonne
     player.y = pos_player.first;  // ligne
     state.entities.push_back(player);
 
-    // [...] (score, lives, etc.)
     return state;
 }
 
@@ -67,16 +65,16 @@ void Pacman::handleInput(int key)
     int y = pos_player.second;
 
     switch(key) {
-        case 0: // UP
+        case 0:
             if (x > 0 && map[x - 1][y] != WALL) movePlayer(x - 1, y);
             break;
-        case 1: // DOWN
+        case 1:
             if (x < MAP_HEIGHT - 1 && map[x + 1][y] != WALL) movePlayer(x + 1, y);
             break;
-        case 2: // LEFT
+        case 2:
             if (y > 0 && map[x][y - 1] != WALL) movePlayer(x, y - 1);
             break;
-        case 3: // RIGHT
+        case 3:
             if (y < (int)map[x].size() - 1 && map[x][y + 1] != WALL) movePlayer(x, y + 1);
             break;
     }

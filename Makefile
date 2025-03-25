@@ -21,6 +21,12 @@ LIBS_GRAPHIC	=	ncurses	\
 					sdl2	\
 					sfml
 
+LIBS_FLAGS	=	-lncurses	\
+				-lSDL2	\
+				-lsfml-graphics	\
+				-lsfml-window	\
+				-lsfml-system
+
 all: core games graphicals
 
 core:
@@ -35,7 +41,7 @@ games:
 
 graphicals:
 	@for lib in $(LIBS_GRAPHIC); do \
-		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS) -lncurses; \
+		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS) $(LIBS_FLAGS); \
 	done
 
 clean:

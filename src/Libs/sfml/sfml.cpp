@@ -5,46 +5,54 @@
 ** SFML.cpp
 */
 
-#include "../../../include/Core/DisplayInterface.hpp"
-#include <SFML/Graphics.hpp>
+#include "sfml.hpp"
 
-class SFMLDisplay : public IDisplay
+void SFMLDisplay::init()
 {
-    sf::RenderWindow window;
-public:
-    void init() override {
-        window.create(sf::VideoMode(800, 600), "Arcade");
+    window.create(sf::VideoMode(800, 600), "Arcade");
+}
+
+void SFMLDisplay::close()
+{
+    window.close();
+}
+
+void SFMLDisplay::render(const GameState &state)
+{
+    window.clear();
+    for (const auto& entity : state.entities) {
+        sf::RectangleShape rect(sf::Vector2f(20, 20));
+        rect.setPosition(entity.x * 20, entity.y * 20);
+        switch (entity.type) {
+            case WALL:  rect.setFillColor(sf::Color::White); break;
+            case PLAYER: rect.setFillColor(sf::Color::Yellow); break;
+            case ENEMY: rect.setFillColor(sf::Color::Red); break;
+            case COIN:  rect.setFillColor(sf::Color::White); break;
+            case POWERUP: rect.setFillColor(sf::Color::Magenta); break;
+        }
+        window.draw(rect);
     }
+    window.display();
+}
 
-    void close() override {
-        window.close();
-    }
+int SFMLDisplay::getInput()
+{
 
-    void render(const GameState& state) override
-    {
-        window.clear(sf::Color::Black);
-
-        
-
-        window.display();
-    }
-
-    int getInput() override {
-        sf::Event e;
-        while(window.pollEvent(e)) {
-            if(e.type == sf::Event::Closed) return -1;
-            if(e.type == sf::Event::KeyPressed) {
-                switch(e.key.code) {
-                    case sf::Keyboard::Up:    return 0;
-                    case sf::Keyboard::Down:  return 1;
-                    case sf::Keyboard::Left:  return 2;
-                    case sf::Keyboard::Right: return 3;
-                }
+    cout << "Ncurszzees input" << endl;
+    sf::Event e;
+    while (window.pollEvent(e)) {
+        if (e.type == sf::Event::Closed)
+            return -1;
+        if (e.type == sf::Event::KeyPressed) {
+            switch (e.key.code) {
+                case sf::Keyboard::I: return 1;
+                case sf::Keyboard::O: return 2;
             }
         }
-        return -2;
     }
-    std::string getName() const override { return "SFML"; }
-};
+    return 0;
+}
 
-extern "C" IDisplay* create() { return new SFMLDisplay(); }
+extern "C" {
+    IDisplay* create() { return new SFMLDisplay(); }
+}
