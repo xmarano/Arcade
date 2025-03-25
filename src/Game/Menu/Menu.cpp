@@ -170,7 +170,7 @@ int Menu::Actions(IRenderer *renderer, MenuEvent ev)
             userFile.close();
             if (username == "") {
                 current.first = 3;
-            } else {
+            } else {
                 current.first = 4;
             }
             current.second = 1;
