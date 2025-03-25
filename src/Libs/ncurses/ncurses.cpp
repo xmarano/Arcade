@@ -22,13 +22,20 @@ class NcursesDisplay : public IDisplay
         {
             endwin();
         }
-
-        void render(const GameState& state) override {
+        void render(const GameState& state) {
             clear();
-            // appel le draw_game de pacman
+            for (const auto& entity : state.entities) {
+                switch (entity.type) {
+                    case WALL:  mvaddch(entity.y, entity.x, '#'); break;
+                    case PLAYER: mvaddch(entity.y, entity.x, 'P'); break;
+                    case ENEMY: mvaddch(entity.y, entity.x, 'G'); break;
+                    case COIN:  mvaddch(entity.y, entity.x, '.'); break;
+                    case POWERUP: mvaddch(entity.y, entity.x, '@'); break;
+                }
+            }
+            printw("Score: %d | Lives: %d\n", state.score, state.lives);
             refresh();
         }
-
         int getInput() override {
             switch(getch()) {
                 case KEY_UP:    return 0;

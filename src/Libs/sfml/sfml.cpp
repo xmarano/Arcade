@@ -20,10 +20,11 @@ public:
         window.close();
     }
 
-    void render(const GameState& state) override {
+    void render(const GameState& state) override
+    {
         window.clear(sf::Color::Black);
 
-        // appel le draw_game de pacman
+        
 
         window.display();
     }

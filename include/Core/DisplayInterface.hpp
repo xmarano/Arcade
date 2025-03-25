@@ -12,13 +12,34 @@
 #include <vector>
 using namespace std;
 
+#pragma once
+#include <vector>
+#include <string>
+
+// Définition des types d'éléments
+enum EntityType {
+    WALL,
+    PLAYER,
+    ENEMY,
+    COIN,
+    POWERUP,
+    TELEPORT,
+    EMPTY,
+    BONUS
+};
+
+struct Entity {
+    EntityType type;   // Type de l'élément (ex: WALL, PLAYER)
+    int x, y;          // Position
+    // Optionnel : données supplémentaires (ex: couleur, état)
+};
+
 struct GameState {
-    std::vector<std::string> map;
+    std::vector<Entity> entities; // Tous les éléments à afficher
     int score;
     int lives;
     int level;
-    std::string gameName;
-    // Ajouter d'autres éléments d'état au besoin
+    std::string gameName;          // Pour adapter le thème graphique
 };
 
 class IDisplay {
@@ -28,5 +49,5 @@ class IDisplay {
         virtual void close() = 0;
         virtual void render(const GameState& state) = 0;
         virtual int getInput() = 0;
-        virtual std::string getName() const = 0;
+        virtual string getName() const = 0;
 };

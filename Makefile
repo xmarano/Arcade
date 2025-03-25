@@ -35,7 +35,7 @@ games:
 
 graphicals:
 	@for lib in $(LIBS_GRAPHIC); do \
-		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS); \
+		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS) -lncurses; \
 	done
 
 clean:

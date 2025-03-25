@@ -25,14 +25,26 @@ public:
         SDL_Quit();
     }
 
-    void render(const GameState& state) override {
+    void render(const GameState& state) override
+    {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        // appel le draw_game de pacman
+        for (const auto& entity : state.entities) {
+            SDL_Rect rect = {entity.x * 20, entity.y * 20, 20, 20};
+            switch (entity.type) {
+                case WALL:  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
+                case PLAYER: SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); break;
+                case ENEMY: SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); break;
+                case COIN:  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
+                case POWERUP: SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
+            }
+            SDL_RenderFillRect(renderer, &rect);
+        }
 
         SDL_RenderPresent(renderer);
     }
+
 
     int getInput() override {
         SDL_Event e;
