@@ -68,6 +68,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                     this->pos_player.first = x - 1;
                 }
                 this->map[x][y] = EMPTY;
+                this->coin_map[x][y] = EMPTY;
             }
             break;
         case PacmanEvent::Down:
@@ -77,6 +78,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                     this->pos_player.first = x + 1;
                 }
                 this->map[x][y] = EMPTY;
+                this->coin_map[x][y] = EMPTY;
             }
             break;
         case PacmanEvent::Left:
@@ -86,6 +88,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                     this->pos_player.second = y - 1;
                 }
                 this->map[x][y] = EMPTY;
+                this->coin_map[x][y] = EMPTY;
             }
             break;
         case PacmanEvent::Right:
@@ -95,6 +98,7 @@ int Pacman::move_player(IPacmanRenderer* pacmanRenderer)
                     this->pos_player.second = y + 1;
                 }
                 this->map[x][y] = EMPTY;
+                this->coin_map[x][y] = EMPTY;
             }
             break;
         default:
@@ -123,11 +127,13 @@ int Pacman::load_map_from_file(std::string filename)
     }
     this->map = new std::string[MAP_HEIGHT];
     this->original_map = new std::string[MAP_HEIGHT];
+    this->coin_map = new std::string[MAP_HEIGHT];
 
     while (std::getline(file, line)) {
         if (i < MAP_HEIGHT) {
             this->map[i].assign(line);
             this->original_map[i].assign(line);
+            this->coin_map[i].assign(line);
             i++;
         } else {
             break;
@@ -204,7 +210,7 @@ void Pacman::pacmanHighStats(string stat)
 
 void Pacman::end_of_level()
 {
-    if (this->lives == 0) {
+    if (this->lives <= 0) {
         this->lives = 3;
         this->highscore = this->score;
         this->score = 0;
@@ -214,6 +220,13 @@ void Pacman::end_of_level()
     } else {
         this->level += 1;
     }
+    this->map = this->original_map;
+    this->pos_blue_ghost = BLUE_GHOST_POS;
+    this->pos_orange_ghost = ORANGE_GHOST_POS;
+    this->pos_pink_ghost = PINK_GHOST_POS;
+    this->pos_red_ghost = RED_GHOST_POS;
+    this->pos_player = DEFAULT_PLAYER_POSITION;
+    this->is_sous_frozen = false;
 }
 
 extern "C" {
@@ -265,7 +278,7 @@ std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost
     if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PLAYER)
         this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
     else {
-        if (this->original_map[pos_ghost.first][pos_ghost.second] == COIN || this->original_map[pos_ghost.first][pos_ghost.second] == POWERUP)
+        if (this->coin_map[pos_ghost.first][pos_ghost.second] == COIN || this->coin_map[pos_ghost.first][pos_ghost.second] == POWERUP)
             this->map[pos_ghost.first][pos_ghost.second] = this->original_map[pos_ghost.first][pos_ghost.second];
         else
             this->map[pos_ghost.first][pos_ghost.second] = EMPTY;

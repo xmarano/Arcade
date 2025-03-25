@@ -82,6 +82,7 @@ class Pacman : public IGameModule
         pair<int, int> pos_orange_ghost;
         string* map;
         string* original_map;
+        string* coin_map;
 };
 
 class IPacmanRenderer {
