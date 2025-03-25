@@ -7,7 +7,7 @@
 
 #include "DLLoader.hpp"
 #include "ArcadeExeption.hpp"
-#include "Game/Menu/Menu.hpp"
+#include "Menu/Menu.hpp"
 #include "Launcher.hpp"
 #include "ADisplayModule.hpp"
 #include <iostream>
@@ -17,21 +17,13 @@ void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& displ
     IGameModule*& currentGame, DLLoader<IGameModule>& gameLoader)
 {
     bool running = true;
-    int code = 0;
     Launcher launcher;
 
     while (running) {
         // get data
         // process data
         // update display
-        code = currentDisplay->display();
-        if (code > 0 && code < 4) {
-            launcher.handle_events(currentDisplay, displayLoader, currentGame, code);
-        } else if (code >= CODE_NC_PACMAN && code <= CODE_SFML_PACMAN) {
-            launcher.go_pacman(currentDisplay, displayLoader, currentGame, gameLoader, code);
-        } else if (code == CODE_NC_SNAKE || code == CODE_SDL2_SNAKE || code == CODE_SFML_SNAKE) {
-            launcher.go_snake(currentDisplay, displayLoader, currentGame, gameLoader, code);
-        }
+        currentDisplay->display();
     }
 }
 

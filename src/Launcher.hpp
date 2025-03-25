@@ -7,7 +7,7 @@
 
 #include "DLLoader.hpp"
 #include "ArcadeExeption.hpp"
-#include "Game/Menu/Menu.hpp"
+#include "Menu/Menu.hpp"
 #include "ADisplayModule.hpp"
 
 class Launcher {

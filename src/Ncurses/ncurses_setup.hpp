@@ -9,7 +9,7 @@
 
 #include "../ADisplayModule.hpp"
 #include "../IRenderer.hpp"
-#include "../Game/Menu/Menu.hpp"
+#include "../Menu/Menu.hpp"
 #include "../Game/Pacman/Pacman.hpp"
 #include "../DLLoader.hpp"
 

@@ -6,7 +6,7 @@
 */
 
 #include "ncurses_setup.hpp"
-#include "../Game/Menu/Ncurses/nc_menu.hpp"
+#include "../Menu/Ncurses/nc_menu.hpp"
 #include "../Game/Pacman/Ncurses/nc_pacman.hpp"
 #include "../Game/Snake/Ncurses/nc_snake.hpp"
 

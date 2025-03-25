@@ -8,7 +8,7 @@
 #pragma once
 
 #include "../Menu.hpp"
-#include "../../../Sdl2/sdl2_setup.hpp"
+#include "../../Sdl2/sdl2_setup.hpp"
 
 class Sdl2Menu : public IMenuRenderer
 {

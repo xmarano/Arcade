@@ -12,25 +12,25 @@ RESET   = $(shell tput sgr0)
 NAME	=	arcade
 
 SRC_FILES	=	src/main.cpp	\
-				src/Game/Menu/Menu.cpp	\
+				src/Menu/Menu.cpp	\
 				src/DLLoader.cpp	\
 				src/Launcher.cpp	\
 
 SRC_NCURSES	=	src/Ncurses/ncurses_setup.cpp	\
 				src/Ncurses/ncurses_general.cpp	\
-				src/Game/Menu/Ncurses/nc_menu.cpp	\
+				src/Menu/Ncurses/nc_menu.cpp	\
 				src/Game/Pacman/Ncurses/nc_pacman.cpp	\
 				src/Game/Snake/Ncurses/nc_snake.cpp	\
 
 SRC_SDL2	=	src/Sdl2/sdl2_setup.cpp	\
 				src/Sdl2/sdl2_general.cpp	\
-				src/Game/Menu/Sdl2/sdl2_menu.cpp	\
+				src/Menu/Sdl2/sdl2_menu.cpp	\
 				src/Game/Pacman/Sdl2/sdl2_pacman.cpp	\
 				src/Game/Snake/Sdl2/sdl2_snake.cpp	\
 
 SRC_SFML	=	src/Sfml/sfml_setup.cpp	\
 				src/Sfml/sfml_general.cpp	\
-				src/Game/Menu/Sfml/sfml_menu.cpp	\
+				src/Menu/Sfml/sfml_menu.cpp	\
 				src/Game/Pacman/Sfml/sfml_pacman.cpp	\
 				src/Game/Snake/Sfml/sfml_snake.cpp	\
 

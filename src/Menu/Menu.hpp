@@ -7,13 +7,13 @@
 
 #pragma once
 
-#include "../../IGameModule.hpp"
-#include "../../ArcadeExeption.hpp"
-#include "../../Sdl2/sdl2_setup.hpp"
-#include "../Pacman/Pacman.hpp"
+#include "../IGameModule.hpp"
+#include "../ArcadeExeption.hpp"
+#include "../Sdl2/sdl2_setup.hpp"
+#include "../Game/Pacman/Pacman.hpp"
 #include <vector>
-#include "../../Ncurses/ncurses_setup.hpp"
-#include "../../Sfml/sfml_setup.hpp"
+#include "../Ncurses/ncurses_setup.hpp"
+#include "../Sfml/sfml_setup.hpp"
 
 class Pacman;
 
@@ -31,7 +31,7 @@ enum class MenuEvent {
     SwapToSdl2
 };
 
-class Menu : public IGameModule
+class Menu
 {
     private:
         pair<int, int> current;

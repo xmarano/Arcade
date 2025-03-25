@@ -6,7 +6,7 @@
 */
 
 #include "../Menu.hpp"
-#include "../../../Sfml/sfml_setup.hpp"
+#include "../../Sfml/sfml_setup.hpp"
 
 class SfmlMenu : public IMenuRenderer
 {

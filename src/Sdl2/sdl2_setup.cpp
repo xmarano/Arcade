@@ -6,7 +6,7 @@
 */
 
 #include "sdl2_setup.hpp"
-#include "../Game/Menu/Sdl2/sdl2_menu.hpp"
+#include "../Menu/Sdl2/sdl2_menu.hpp"
 #include "../Game/Pacman/Sdl2/sdl2_pacman.hpp"
 #include "../Game/Snake/Sdl2/sdl2_snake.hpp"
 
