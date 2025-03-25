@@ -1,0 +1,32 @@
+name: Unitest C++
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt install -y \
+            g++ \
+            libncurses-dev \
+            libsdl2-dev \
+            libsdl2-ttf-dev \
+            libsfml-dev \
+            cmake \
+            make
+
+      - name: Build & Test
+        run: |
+          make unitest

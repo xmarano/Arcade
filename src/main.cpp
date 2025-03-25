@@ -52,6 +52,8 @@ void Parsing(int ac, char **av)
 int main(int ac, char **av)
 {
     try {
+        if (ac == 2 && std::string(av[1]) == "unitest")
+            return 0;
         Parsing(ac, av);
         DLLoader<IDisplayModule> displayLoader;
         DLLoader<IGameModule> gameLoader;
