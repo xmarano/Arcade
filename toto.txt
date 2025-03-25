@@ -1,0 +1,853 @@
+Contenu de ./.github/workflows/unitest.yml :
+name: Unitest C++
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt install -y \
+            g++ \
+            libncurses-dev \
+            libsdl2-dev \
+            libsdl2-ttf-dev \
+            libsfml-dev \
+            cmake \
+            make
+
+      - name: Build & Test
+        run: |
+          make unitest
+
+
+Contenu de ./src/Core/DLLoader.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** DLLoader.cpp
+*/
+
+
+
+Contenu de ./src/Core/Main.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Main.cpp
+*/
+
+#include "../include/Core/DisplayInterface.hpp"
+#include "../include/Core/GameInterface.hpp"
+#include "../include/Core/DLLoader.hpp"
+
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+    try {
+        DLLoader<IDisplay> displayLoader;
+        DLLoader<IGame> gameLoader;
+
+        auto display = displayLoader.load("./lib/arcade_sdl2.so");
+        auto game = gameLoader.load("./lib/arcade_Pacman.so");
+
+        display->init();
+
+        while(true) {
+            int input = display->getInput();
+            if(input == -1) break;
+            game->handleInput(input);
+            GameState state = game->update();
+            display->render(state);
+        }
+        display->close();
+    } catch(const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
+
+Contenu de ./src/Games/Menu/Menu.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Menu.cpp
+*/
+
+
+
+Contenu de ./src/Games/Pacman/Pacman.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Pacman.cpp
+*/
+
+#include "../../../include/Games/Pacman.hpp"
+#include <fstream>
+
+Pacman::Pacman()
+{
+    reset();
+}
+
+void Pacman::reset()
+{
+    score = 0;
+    lives = 3;
+    level = 1;
+    loadMap();
+}
+
+GameState Pacman::update()
+{
+    moveGhosts();
+    state = {map, score, lives, level, getName()};
+    return state;
+}
+
+void Pacman::handleInput(int key)
+{
+    switch(key) {
+        case 0: /* UP */    break;
+        case 1: /* DOWN */  break;
+        case 2: /* LEFT */  break;
+        case 3: /* RIGHT */ break;
+    }
+}
+
+void Pacman::loadMap() {
+    // Chargement original adapté
+    std::ifstream file("Assets/Maps/pacman_map.txt");
+    // ... code original ...
+}
+
+
+Contenu de ./src/Libs/sdl2/sdl2.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** SDL2.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <SDL2/SDL.h>
+
+class SDL2Display : public IDisplay {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+
+public:
+    void init() override {
+        SDL_Init(SDL_INIT_VIDEO);
+        window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    }
+
+    void close() override {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+    }
+
+    void render(const GameState& state) override {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        // Rendu du jeu
+        // ... code original adapté ...
+
+        SDL_RenderPresent(renderer);
+    }
+
+    int getInput() override {
+        SDL_Event e;
+        while(SDL_PollEvent(&e)) {
+            if(e.type == SDL_QUIT) return -1;
+            if(e.type == SDL_KEYDOWN) {
+                switch(e.key.keysym.sym) {
+                    case SDLK_UP:    return 0;
+                    case SDLK_DOWN:  return 1;
+                    case SDLK_LEFT:  return 2;
+                    case SDLK_RIGHT: return 3;
+                }
+            }
+        }
+        return -2;
+    }
+    std::string getName() const override { return "SDL2"; }
+};
+
+extern "C" IDisplay* create() { return new SDL2Display(); }
+
+
+Contenu de ./src/Libs/sfml/sfml.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** SFML.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <SFML/Graphics.hpp>
+
+class SFMLDisplay : public IDisplay
+{
+    sf::RenderWindow window;
+public:
+    void init() override {
+        window.create(sf::VideoMode(800, 600), "Arcade");
+    }
+
+    void close() override {
+        window.close();
+    }
+
+    void render(const GameState& state) override {
+        window.clear(sf::Color::Black);
+
+        // Rendu du jeu
+        // ... code original adapté ...
+
+        window.display();
+    }
+
+    int getInput() override {
+        sf::Event e;
+        while(window.pollEvent(e)) {
+            if(e.type == sf::Event::Closed) return -1;
+            if(e.type == sf::Event::KeyPressed) {
+                switch(e.key.code) {
+                    case sf::Keyboard::Up:    return 0;
+                    case sf::Keyboard::Down:  return 1;
+                    case sf::Keyboard::Left:  return 2;
+                    case sf::Keyboard::Right: return 3;
+                }
+            }
+        }
+        return -2;
+    }
+    std::string getName() const override { return "SFML"; }
+};
+
+
+Contenu de ./src/Libs/ncurses/ncurses.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Ncurses.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <ncurses.h>
+
+class NcursesDisplay : public IDisplay {
+    public:
+        void init() override {
+            initscr();
+            noecho();
+            curs_set(0);
+            keypad(stdscr, TRUE);
+        }
+
+        void close() override {
+            endwin();
+        }
+
+        void render(const GameState& state) override {
+            clear();
+            for(int i = 0; i < state.map.size(); i++) {
+                mvprintw(i, 0, state.map[i].c_str());
+            }
+            mvprintw(state.map.size(), 0, ("Score: " + std::to_string(state.score)).c_str());
+            mvprintw(state.map.size() + 1, 0, ("Lives: " + std::to_string(state.lives)).c_str());
+            mvprintw(state.map.size() + 2, 0, ("Level: " + std::to_string(state.level)).c_str());
+            mvprintw(state.map.size() + 3, 0, ("Game: " + state.gameName).c_str());
+            refresh();
+        }
+
+        int getInput() override {
+            switch(getch()) {
+                case KEY_UP:    return 0;
+                case KEY_DOWN:  return 1;
+                case KEY_LEFT:  return 2;
+                case KEY_RIGHT: return 3;
+                case 'q':       return -1;
+            }
+            return -2;
+        }
+        std::string getName() const override { return "Ncurses"; }
+};
+
+
+Contenu de ./lib/.gitkeep :
+
+
+Contenu de ./include/Core/DisplayInterface.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** DisplayInterface.hpp
+*/
+
+#pragma once
+#include <string>
+#include <vector>
+
+struct GameState {
+    std::vector<std::string> map;
+    int score;
+    int lives;
+    int level;
+    std::string gameName;
+    // Ajouter d'autres éléments d'état au besoin
+};
+
+class IDisplay {
+    public:
+        virtual ~IDisplay() = default;
+        virtual void init() = 0;
+        virtual void close() = 0;
+        virtual void render(const GameState& state) = 0;
+        virtual int getInput() = 0;
+        virtual std::string getName() const = 0;
+};
+
+
+Contenu de ./include/Core/GameInterface.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** GameInterface.hpp
+*/
+
+#pragma once
+#include "DisplayInterface.hpp"
+
+class IGame {
+    public:
+        virtual ~IGame() = default;
+        virtual GameState update() = 0;
+        virtual void handleInput(int key) = 0;
+        virtual std::string getName() const = 0;
+        virtual void reset() = 0;
+};
+
+
+Contenu de ./include/Core/DLLoader.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** DLLoader.hpp
+*/
+
+#pragma once
+#include <dlfcn.h>
+#include <string>
+#include <stdexcept>
+
+template <typename T>
+class DLLoader {
+    private:
+        void* handle;
+        T* instance;
+    public:
+        DLLoader() : handle(nullptr), instance(nullptr) {}
+        T* load(const std::string& path) {
+            if (handle) dlclose(handle);
+            handle = dlopen(path.c_str(), RTLD_LAZY);
+            if (!handle) throw std::runtime_error(dlerror());
+            auto create = reinterpret_cast<T*(*)()>(dlsym(handle, "create"));
+            if (!create) throw std::runtime_error(dlerror());
+            instance = create();
+            return instance;
+        }
+        ~DLLoader() {
+            if (handle) {
+                delete instance;
+                dlclose(handle);
+            }
+        }
+};
+
+
+Contenu de ./include/Games/Menu.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Menu.hpp
+*/
+
+
+
+Contenu de ./include/Games/Pacman.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Pacman.hpp
+*/
+
+#pragma once
+#include "../Core/GameInterface.hpp"
+
+class Pacman : public IGame {
+    protected:
+        GameState state;
+        int score;
+        int lives;
+        int level;
+        std::vector<std::string> map;
+    public:
+        Pacman();
+        GameState update() override;
+        void handleInput(int key) override;
+        std::string getName() const override { return "Pacman"; }
+        void reset() override;
+    private:
+        void loadMap();
+        void moveGhosts();
+};
+
+
+Contenu de ./Makefile :
+##
+## EPITECH PROJECT, 2024
+## My_arc
+## File description:
+## Makefile
+##
+
+CXX	=	g++
+CXXFLAGS	=	-std=c++17 -fPIC
+LDFLAGS	=	-ldl
+LIBS	=	-lSDL2
+
+SRC_DIR	=	src
+INC_DIR	=	include
+LIB_DIR	=	lib
+
+GAMES	=	Pacman	\
+			Menu
+
+LIBS_GRAPHIC	=	ncurses	\
+					sdl2	\
+					sfml
+
+all: core games graphicals
+
+core:
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/Core/Main.cpp -o Main.o
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/Core/DLLoader.cpp -o DLLoader.o
+	$(CXX) Main.o DLLoader.o -o arcade $(LDFLAGS)
+
+games:
+	@for game in $(GAMES); do \
+		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Games/$$game/$$game.cpp -o $(LIB_DIR)/arcade_$$game.so; \
+	done
+
+graphicals:
+	@for lib in $(LIBS_GRAPHIC); do \
+		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS); \
+	done
+
+clean:
+	rm -f *.o arcade $(LIB_DIR)/*.so
+
+fclean: clean
+	rm -f $(LIB_DIR)/*.so
+	rm -f *.so
+
+re: fclean all
+
+
+Contenu de ./toto.txt :
+Contenu de ./.github/workflows/unitest.yml :
+name: Unitest C++
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt install -y \
+            g++ \
+            libncurses-dev \
+            libsdl2-dev \
+            libsdl2-ttf-dev \
+            libsfml-dev \
+            cmake \
+            make
+
+      - name: Build & Test
+        run: |
+          make unitest
+
+
+Contenu de ./src/Core/DLLoader.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** DLLoader.cpp
+*/
+
+
+
+Contenu de ./src/Core/Main.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Main.cpp
+*/
+
+#include "../include/Core/DisplayInterface.hpp"
+#include "../include/Core/GameInterface.hpp"
+#include "../include/Core/DLLoader.hpp"
+
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+    try {
+        DLLoader<IDisplay> displayLoader;
+        DLLoader<IGame> gameLoader;
+
+        auto display = displayLoader.load("./lib/arcade_sdl2.so");
+        auto game = gameLoader.load("./lib/arcade_Pacman.so");
+
+        display->init();
+
+        while(true) {
+            int input = display->getInput();
+            if(input == -1) break;
+            game->handleInput(input);
+            GameState state = game->update();
+            display->render(state);
+        }
+        display->close();
+    } catch(const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
+
+Contenu de ./src/Games/Menu/Menu.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Menu.cpp
+*/
+
+
+
+Contenu de ./src/Games/Pacman/Pacman.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Pacman.cpp
+*/
+
+#include "../../../include/Games/Pacman.hpp"
+#include <fstream>
+
+Pacman::Pacman()
+{
+    reset();
+}
+
+void Pacman::reset()
+{
+    score = 0;
+    lives = 3;
+    level = 1;
+    loadMap();
+}
+
+GameState Pacman::update()
+{
+    moveGhosts();
+    state = {map, score, lives, level, getName()};
+    return state;
+}
+
+void Pacman::handleInput(int key)
+{
+    switch(key) {
+        case 0: /* UP */    break;
+        case 1: /* DOWN */  break;
+        case 2: /* LEFT */  break;
+        case 3: /* RIGHT */ break;
+    }
+}
+
+void Pacman::loadMap() {
+    // Chargement original adapté
+    std::ifstream file("Assets/Maps/pacman_map.txt");
+    // ... code original ...
+}
+
+
+Contenu de ./src/Libs/sdl2/sdl2.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** SDL2.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <SDL2/SDL.h>
+
+class SDL2Display : public IDisplay {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+
+public:
+    void init() override {
+        SDL_Init(SDL_INIT_VIDEO);
+        window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    }
+
+    void close() override {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+    }
+
+    void render(const GameState& state) override {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        // Rendu du jeu
+        // ... code original adapté ...
+
+        SDL_RenderPresent(renderer);
+    }
+
+    int getInput() override {
+        SDL_Event e;
+        while(SDL_PollEvent(&e)) {
+            if(e.type == SDL_QUIT) return -1;
+            if(e.type == SDL_KEYDOWN) {
+                switch(e.key.keysym.sym) {
+                    case SDLK_UP:    return 0;
+                    case SDLK_DOWN:  return 1;
+                    case SDLK_LEFT:  return 2;
+                    case SDLK_RIGHT: return 3;
+                }
+            }
+        }
+        return -2;
+    }
+    std::string getName() const override { return "SDL2"; }
+};
+
+extern "C" IDisplay* create() { return new SDL2Display(); }
+
+
+Contenu de ./src/Libs/sfml/sfml.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** SFML.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <SFML/Graphics.hpp>
+
+class SFMLDisplay : public IDisplay
+{
+    sf::RenderWindow window;
+public:
+    void init() override {
+        window.create(sf::VideoMode(800, 600), "Arcade");
+    }
+
+    void close() override {
+        window.close();
+    }
+
+    void render(const GameState& state) override {
+        window.clear(sf::Color::Black);
+
+        // Rendu du jeu
+        // ... code original adapté ...
+
+        window.display();
+    }
+
+    int getInput() override {
+        sf::Event e;
+        while(window.pollEvent(e)) {
+            if(e.type == sf::Event::Closed) return -1;
+            if(e.type == sf::Event::KeyPressed) {
+                switch(e.key.code) {
+                    case sf::Keyboard::Up:    return 0;
+                    case sf::Keyboard::Down:  return 1;
+                    case sf::Keyboard::Left:  return 2;
+                    case sf::Keyboard::Right: return 3;
+                }
+            }
+        }
+        return -2;
+    }
+    std::string getName() const override { return "SFML"; }
+};
+
+
+Contenu de ./src/Libs/ncurses/ncurses.cpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** Ncurses.cpp
+*/
+
+#include "../../../include/Core/DisplayInterface.hpp"
+#include <ncurses.h>
+
+class NcursesDisplay : public IDisplay {
+    public:
+        void init() override {
+            initscr();
+            noecho();
+            curs_set(0);
+            keypad(stdscr, TRUE);
+        }
+
+        void close() override {
+            endwin();
+        }
+
+        void render(const GameState& state) override {
+            clear();
+            for(int i = 0; i < state.map.size(); i++) {
+                mvprintw(i, 0, state.map[i].c_str());
+            }
+            mvprintw(state.map.size(), 0, ("Score: " + std::to_string(state.score)).c_str());
+            mvprintw(state.map.size() + 1, 0, ("Lives: " + std::to_string(state.lives)).c_str());
+            mvprintw(state.map.size() + 2, 0, ("Level: " + std::to_string(state.level)).c_str());
+            mvprintw(state.map.size() + 3, 0, ("Game: " + state.gameName).c_str());
+            refresh();
+        }
+
+        int getInput() override {
+            switch(getch()) {
+                case KEY_UP:    return 0;
+                case KEY_DOWN:  return 1;
+                case KEY_LEFT:  return 2;
+                case KEY_RIGHT: return 3;
+                case 'q':       return -1;
+            }
+            return -2;
+        }
+        std::string getName() const override { return "Ncurses"; }
+};
+
+
+Contenu de ./lib/.gitkeep :
+
+
+Contenu de ./include/Core/DisplayInterface.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** DisplayInterface.hpp
+*/
+
+#pragma once
+#include <string>
+#include <vector>
+
+struct GameState {
+    std::vector<std::string> map;
+    int score;
+    int lives;
+    int level;
+    std::string gameName;
+    // Ajouter d'autres éléments d'état au besoin
+};
+
+class IDisplay {
+    public:
+        virtual ~IDisplay() = default;
+        virtual void init() = 0;
+        virtual void close() = 0;
+        virtual void render(const GameState& state) = 0;
+        virtual int getInput() = 0;
+        virtual std::string getName() const = 0;
+};
+
+
+Contenu de ./include/Core/GameInterface.hpp :
+/*
+** EPITECH PROJECT, 2024
+** B-OOP-400-MAR-4-1-arcade-yanis.prevost
+** File description:
+** GameInterface.hpp
+*/
+
+#pragma once
+#include "DisplayInterface.hpp"
+
+class IGame {
+    public:
+        virtual ~IGame() = default;
+        virtual GameState update() = 0;
+        virtual void handleInput(int key) = 0;
+        virtual std::string getName() const = 0;
+        virtual void reset() = 0;
+};
+
+
+Contenu de ./include/Core/DLLoader.hpp :
+
+
