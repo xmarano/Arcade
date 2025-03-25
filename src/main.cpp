@@ -21,6 +21,9 @@ void run_arcade(IDisplayModule*& currentDisplay, DLLoader<IDisplayModule>& displ
     Launcher launcher;
 
     while (running) {
+        // get data
+        // process data
+        // update display
         code = currentDisplay->display();
         if (code > 0 && code < 4) {
             launcher.handle_events(currentDisplay, displayLoader, currentGame, code);

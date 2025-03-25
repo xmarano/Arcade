@@ -9,7 +9,7 @@
 #include <filesystem>
 #include "Menu.hpp"
 
-Menu::Menu() : current({1, 1}), selectedOption({0, 0})
+Menu::Menu() : current({1, 1}), selectedOption({0, 0}), isUsernameSet(false)
 {
 }
 
@@ -53,9 +53,22 @@ void Menu::DisplayModules1(IRenderer *renderer)
     }
 }
 
-vector<string> Menu::get_highscore()
+vector<string> Menu::get_stats()
 {
     vector<string> highScore(4);
+    // Username
+    ifstream usernameFile("Assets/Stats/username.txt");
+    if (!usernameFile.is_open())
+        throw ArcadeException("Error opening username file");
+
+    usernameFile >> highScore[0];
+    if (highScore[0] == "")
+        highScore[0] = "__________";
+    else
+        isUsernameSet = true;
+
+    usernameFile.close();
+
     // Pacman
     ifstream highscorePacman("Assets/Stats/pacman_highscore.txt");
     ifstream highlevelPacman("Assets/Stats/pacman_highlevel.txt");
@@ -63,41 +76,41 @@ vector<string> Menu::get_highscore()
     if (!highscorePacman.is_open() || !highlevelPacman.is_open())
         throw ArcadeException("Error opening highscore or highlevel file for pacman");
 
-    highscorePacman >> highScore[0];
-    highlevelPacman >> highScore[1];
+    highscorePacman >> highScore[1];
+    highlevelPacman >> highScore[2];
 
     highscorePacman.close();
     highlevelPacman.close();
 
     // Snake
     ifstream highscoreSnake("Assets/Stats/snake_highscore.txt");
-    ifstream highlevelSnake("Assets/Stats/snake_highlevel.txt");
 
-    if (!highscoreSnake.is_open() || !highlevelSnake.is_open())
-        throw ArcadeException("Error opening highscore or highlevel file for snake");
+    if (!highscoreSnake.is_open())
+        throw ArcadeException("Error opening highscore file for snake");
 
-    highscoreSnake >> highScore[2];
-    highlevelSnake >> highScore[3];
+    highscoreSnake >> highScore[3];
 
     highscoreSnake.close();
-    highlevelSnake.close();
     return highScore;
 }
 
 void Menu::DisplayModules2(IRenderer *renderer)
 {
-    vector<string> highScore = get_highscore();
-    DisplayText(renderer, "USER : __________", 2, 4);
-    DisplayText(renderer, "HighScore Pacman : " + highScore[0], 2, 5);
-    DisplayText(renderer, "HighLevel Pacman  : " + highScore[1], 2, 6);
-    DisplayText(renderer, "HighScore Snake  : " + highScore[2], 2, 7);
-    DisplayText(renderer, "HighLevel Snake  : " + highScore[3], 2, 8);
-
-    if (current.first == 3 && current.second == 1) {
-        DisplayText(renderer, ">> CONFIRM <<", 2, 9);
-    } else {
-        DisplayText(renderer, "CONFIRM", 2, 9);
+    vector<string> highScore = get_stats();
+    if (current.first != 3) {
+        DisplayText(renderer, "User : " + highScore[0], 2, 4);
     }
+    DisplayText(renderer, "HighScore Pacman : " + highScore[1], 2, 5);
+    DisplayText(renderer, "HighLevel Pacman  : " + highScore[2], 2, 6);
+    DisplayText(renderer, "HighScore Snake  : " + highScore[3], 2, 7);
+
+    DisplayText(renderer, "+---------------+", 2, 8);
+    if (current.first == 4 && current.second == 1) {
+        DisplayText(renderer, "| >> CONFIRM << |", 2, 9);
+    } else {
+        DisplayText(renderer, "|    CONFIRM    |", 2, 9);
+    }
+    DisplayText(renderer, "+---------------+", 2, 10);
 }
 
 void Menu::DisplayModules3(IRenderer *renderer)
@@ -151,9 +164,30 @@ int Menu::Actions(IRenderer *renderer, MenuEvent ev)
             current.second = 1;
         } else if (current.first == 2) {
             selectedOption.second = current.second;
-            current.first = 3;
+            string username;
+            ifstream userFile("Assets/Stats/username.txt");
+            userFile >> username;
+            userFile.close();
+            if (username == "") {
+                current.first = 3;
+            } else {
+                current.first = 4;
+            }
             current.second = 1;
         } else if (current.first == 3) {
+            if (!isUsernameSet) {
+                // string username;
+                // char ch;
+                // while ((ch = getch()) != '\n') {
+                    // username += ch;
+                    // DisplayText(renderer, "User : " + username, 2, 4);
+                // }
+                // ofstream userFile("Assets/Stats/username.txt");
+                // userFile << username;
+                // userFile.close();
+            }
+            current.first = 4;
+        } else if (current.first == 4) {
             // pacman
             if (selectedOption.first == 1 && selectedOption.second == 1) {
                 return CODE_NC_PACMAN;

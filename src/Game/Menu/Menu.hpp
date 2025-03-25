@@ -36,6 +36,7 @@ class Menu : public IGameModule
     private:
         pair<int, int> current;
         pair<int, int> selectedOption;
+        bool isUsernameSet;
         DLLoader<IGameModule> gameLoader;
         IGameModule *game;
     public:
@@ -47,7 +48,7 @@ class Menu : public IGameModule
         void DisplayModules2(IRenderer *renderer);
         void DisplayModules3(IRenderer *renderer);
         int Actions(IRenderer *renderer, MenuEvent ev);
-        vector<string> get_highscore();
+        vector<string> get_stats();
 
         std::string get_game_name() override { return "Menu"; }
 };
