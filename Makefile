@@ -68,3 +68,6 @@ fclean: clean
 	rm -f *.so
 
 re: fclean all
+
+unitest: re
+	./arcade unitest

@@ -8,6 +8,7 @@
 #include "../include/Core/DisplayInterface.hpp"
 #include "../include/Core/GameInterface.hpp"
 #include "../include/Core/DLLoader.hpp"
+#include "ArcadeException.hpp"
 #include <iostream>
 
 IDisplay* change_lib(IDisplay* current, int input) {
@@ -28,8 +29,27 @@ IDisplay* change_lib(IDisplay* current, int input) {
     return nullptr;
 }
 
-int main(int argc, char** argv) {
+void Parsing(int argc, char **argv)
+{
+    if (argc != 2)
+        throw ArcadeException("Usage: ./arcade ./lib/lib.so");
+
+    std::string temp_file_path = argv[1];
+    if (!std::filesystem::exists(temp_file_path))
+        throw ArcadeException("Library not found");
+
+    std::string file_path = temp_file_path.substr(temp_file_path.find_last_of("/") + 1);
+    if (file_path != "arcade_ncurses.so" && file_path != "arcade_sfml.so" && file_path != "arcade_sdl2.so")
+        throw ArcadeException("Wrong library");
+}
+
+int main(int argc, char **argv)
+{
     try {
+        if (argc == 2 && std::string(argv[1]) == "unitest")
+            return 0;
+        Parsing(argc, argv);
+
         DLLoader<IDisplay> displayLoader;
         DLLoader<IGame> gameLoader;
 
@@ -58,9 +78,9 @@ int main(int argc, char** argv) {
         }
         display->close();
         delete display;
-    } catch (const std::exception& e) {
+    } catch (ArcadeException &e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
+        return 84;
     }
     return 0;
 }
