@@ -33,7 +33,7 @@ void SDL2Display::render(const GameState &state)
         //     case '.':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
         //     case '@': SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
         // }
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
     SDL_RenderPresent(renderer);
@@ -41,7 +41,7 @@ void SDL2Display::render(const GameState &state)
 
 int SDL2Display::getInput()
 {
-    cout << "Ncurses input" << endl;
+    // cout << "Ncurses input" << endl;
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT)
@@ -51,6 +51,10 @@ int SDL2Display::getInput()
                 case SDLK_q: return -1;
                 case SDLK_i: return 1;
                 case SDLK_p: return 3;
+                case SDLK_UP: return 5;
+                case SDLK_DOWN: return 6;
+                case SDLK_LEFT: return 7;
+                case SDLK_RIGHT: return 8;
             }
         }
     }
