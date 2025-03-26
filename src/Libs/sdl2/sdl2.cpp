@@ -39,9 +39,9 @@ void SDL2Display::render(const GameState &state)
         SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
-    renderText("Menu", 10, 10);
-    renderText("1. Pacman", 10, 50);
-    renderText("2. Snake", 10, 90);
+    // renderText("Menu", 10, 10);
+    // renderText("1. Pacman", 10, 50);
+    // renderText("2. Snake", 10, 90);
     SDL_RenderPresent(renderer);
 }
 

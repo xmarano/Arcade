@@ -4,7 +4,6 @@
 ** File description:
 ** Pacman.cpp
 */
-
 #include "../../../include/Games/Pacman.hpp"
 #include <fstream>
 #include <algorithm>
@@ -50,62 +49,61 @@ GameState Pacman::update() {
             entity.x = j;
             entity.y = i;
             entity.element = map[i][j];
-            switch (entity.element)
-            {
-            case WALL:
-                entity.red = 255;
-                entity.green = 255;
-                entity.blue = 255;
-                entity.alpha = 150;
-                break;
-            case COIN:
-                entity.red = 100;
-                entity.green = 100;
-                entity.blue = 100;
-                entity.alpha = 200;
-                break;
-            case POWERUP:
-                entity.red = 255;
-                entity.green = 0;
-                entity.blue = 255;
-                entity.alpha = 200;
-                break;
-            case RED_GHOST:
-                entity.red = 255;
-                entity.green = 0;
-                entity.blue = 0;
-                entity.alpha = 200;
-                break;
-            case PINK_GHOST:
-                entity.red = 255;
-                entity.green = 105;
-                entity.blue = 180;
-                entity.alpha = 200;
-                break;
-            case BLUE_GHOST:
-                entity.red = 0;
-                entity.green = 0;
-                entity.blue = 255;
-                entity.alpha = 200;
-                break;
-            case ORANGE_GHOST:
-                entity.red = 255;
-                entity.green = 165;
-                entity.blue = 0;
-                entity.alpha = 200;
-                break;
-            case TELEPORT:
-                entity.red = 0;
-                entity.green = 255;
-                entity.blue = 0;
-                entity.alpha = 200;
-                break;
-            default:
-                entity.red = 0;
-                entity.green = 0;
-                entity.blue = 0;
-                entity.alpha = 0;
-                break;
+            switch (entity.element) {
+                case WALL:
+                    entity.red = 255;
+                    entity.green = 255;
+                    entity.blue = 255;
+                    entity.alpha = 150;
+                    break;
+                case COIN:
+                    entity.red = 100;
+                    entity.green = 100;
+                    entity.blue = 100;
+                    entity.alpha = 200;
+                    break;
+                case POWERUP:
+                    entity.red = 255;
+                    entity.green = 0;
+                    entity.blue = 255;
+                    entity.alpha = 200;
+                    break;
+                case RED_GHOST:
+                    entity.red = 255;
+                    entity.green = 0;
+                    entity.blue = 0;
+                    entity.alpha = 200;
+                    break;
+                case PINK_GHOST:
+                    entity.red = 255;
+                    entity.green = 105;
+                    entity.blue = 180;
+                    entity.alpha = 200;
+                    break;
+                case BLUE_GHOST:
+                    entity.red = 0;
+                    entity.green = 0;
+                    entity.blue = 255;
+                    entity.alpha = 200;
+                    break;
+                case ORANGE_GHOST:
+                    entity.red = 255;
+                    entity.green = 165;
+                    entity.blue = 0;
+                    entity.alpha = 200;
+                    break;
+                case TELEPORT:
+                    entity.red = 0;
+                    entity.green = 255;
+                    entity.blue = 0;
+                    entity.alpha = 200;
+                    break;
+                default:
+                    entity.red = 0;
+                    entity.green = 0;
+                    entity.blue = 0;
+                    entity.alpha = 0;
+                    break;
             }
             state.entities.push_back(entity);
         }

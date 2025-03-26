@@ -36,9 +36,9 @@ void SFMLDisplay::render(const GameState &state)
         rect.setFillColor(color);
         window.draw(rect);
     }
-    renderText("Menu", 10, 10);
-    renderText("1. Pacman", 10, 50);
-    renderText("2. Snake", 10, 90);
+    // renderText("Menu", 10, 10);
+    // renderText("1. Pacman", 10, 50);
+    // renderText("2. Snake", 10, 90);
     window.display();
 }
 
