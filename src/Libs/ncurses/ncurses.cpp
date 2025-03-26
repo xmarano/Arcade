@@ -37,6 +37,10 @@ int NcursesDisplay::getInput()
         case 'q': return -1;
         case 'o': return 2;
         case 'p': return 3;
+        case KEY_UP: return 5;
+        case KEY_DOWN: return 6;
+        case KEY_LEFT: return 7;
+        case KEY_RIGHT: return 8;
     }
     return 0;
 }

@@ -39,8 +39,6 @@ void SFMLDisplay::render(const GameState &state)
 
 int SFMLDisplay::getInput()
 {
-
-    cout << "Ncurszzees input" << endl;
     sf::Event e;
     while (window.pollEvent(e)) {
         if (e.type == sf::Event::Closed)
@@ -50,6 +48,11 @@ int SFMLDisplay::getInput()
                 case sf::Keyboard::Q: return -1;
                 case sf::Keyboard::I: return 1;
                 case sf::Keyboard::O: return 2;
+                case sf::Keyboard::P: return 3;
+                case sf::Keyboard::Up: return 5;
+                case sf::Keyboard::Down: return 6;
+                case sf::Keyboard::Left: return 7;
+                case sf::Keyboard::Right: return 8;
             }
         }
     }
