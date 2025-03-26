@@ -41,7 +41,7 @@ void SDL2Display::render(const GameState &state)
 
 int SDL2Display::getInput()
 {
-    cout << "Ncurses input" << endl;
+    // cout << "Ncurses input" << endl;
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT)
@@ -50,6 +50,10 @@ int SDL2Display::getInput()
             switch (e.key.keysym.sym) {
                 case SDLK_i: return 1;
                 case SDLK_p: return 3;
+                case SDLK_UP: return 5;
+                case SDLK_DOWN: return 6;
+                case SDLK_LEFT: return 7;
+                case SDLK_RIGHT: return 8;
             }
         }
     }

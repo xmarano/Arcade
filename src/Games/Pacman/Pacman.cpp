@@ -31,6 +31,11 @@ void Pacman::reset()
 
 GameState Pacman::update() {
     // [...] (déplacements, logique du jeu)
+    move_ghost(pos_red_ghost, RED_GHOST);
+    move_ghost(pos_pink_ghost, PINK_GHOST);
+    move_ghost(pos_blue_ghost, BLUE_GHOST);
+    move_ghost(pos_orange_ghost, ORANGE_GHOST);
+    handleInput(1);
 
     // Conversion de la carte en entités génériques
     state.entities.clear();
@@ -120,16 +125,16 @@ void Pacman::handleInput(int key)
     int y = pos_player.second;
 
     switch(key) {
-        case 0:
+        case 5:
             if (x > 0 && map[x - 1][y] != WALL) movePlayer(x - 1, y);
             break;
-        case 1:
+        case 6:
             if (x < MAP_HEIGHT - 1 && map[x + 1][y] != WALL) movePlayer(x + 1, y);
             break;
-        case 2:
+        case 7:
             if (y > 0 && map[x][y - 1] != WALL) movePlayer(x, y - 1);
             break;
-        case 3:
+        case 8:
             if (y < (int)map[x].size() - 1 && map[x][y + 1] != WALL) movePlayer(x, y + 1);
             break;
     }
