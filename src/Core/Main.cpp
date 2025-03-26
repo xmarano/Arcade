@@ -10,6 +10,7 @@
 #include "../include/Core/DLLoader.hpp"
 #include "ArcadeException.hpp"
 #include <iostream>
+#include <filesystem>
 
 IDisplay* change_lib(IDisplay* current, int input) {
     static DLLoader<IDisplay> loader; // Garde le loader en vie
