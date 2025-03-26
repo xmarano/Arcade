@@ -6,11 +6,18 @@
 */
 
 #include "sdl2.hpp"
+#include "../src/Core/ArcadeException.hpp"
+
+SDL2Display::SDL2Display()
+{
+    TTF_Init();
+    font = TTF_OpenFont("Assets/Font/goofy.ttf", 24);
+}
 
 void SDL2Display::init()
 {
     SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+    window = SDL_CreateWindow("Arcade - sdl2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
@@ -36,7 +43,21 @@ void SDL2Display::render(const GameState &state)
         SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
+    renderText("Menu", 10, 10);
+    renderText("1. Pacman", 10, 50);
+    renderText("2. Snake", 10, 90);
     SDL_RenderPresent(renderer);
+}
+
+void SDL2Display::renderText(const std::string &text, int x, int y)
+{
+    SDL_Color color = {255, 255, 255, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_Rect dest = {x, y, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &dest);
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
 
 int SDL2Display::getInput()
@@ -55,6 +76,7 @@ int SDL2Display::getInput()
                 case SDLK_DOWN: return 6;
                 case SDLK_LEFT: return 7;
                 case SDLK_RIGHT: return 8;
+                case SDLK_RETURN: return 10;
             }
         }
     }

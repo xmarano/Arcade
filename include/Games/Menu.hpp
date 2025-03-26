@@ -4,4 +4,19 @@
 ** File description:
 ** Menu.hpp
 */
+#include "../Core/GameInterface.hpp"
 
+#pragma once
+
+class Menu : public IGame {
+    public:
+        Menu();
+        GameState update() override;
+        void handleInput(int key) override;
+        std::string getName() const override { return "Menu"; }
+        void reset() override;
+
+    private:
+        int selectedGame;
+        std::vector<std::string> gameList;
+};

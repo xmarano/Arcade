@@ -14,6 +14,8 @@
 class SFMLDisplay : public IDisplay
 {
     sf::RenderWindow window;
+    sf::Font font;
+
     public:
         ~SFMLDisplay() override {
             close(); // Fermeture automatique
@@ -22,6 +24,7 @@ class SFMLDisplay : public IDisplay
 
         void close() override;
         void render(const GameState& state) override;
+        void renderText(const std::string& text, int x, int y);
 
         int getInput() override;
         std::string getName() const override { return "SFML"; }
