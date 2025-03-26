@@ -7,11 +7,12 @@
 
 #pragma once
 #include "../../../include/Core/DisplayInterface.hpp"
-#include <SDL.h>
 #if defined(__linux__)
     #include <SDL2/SDL_ttf.h>
+    #include <SDL2/SDL.h>
 #elif defined(__APPLE__)
     #include <SDL_ttf.h>
+    #include <SDL.h>
 #endif
 
 class SDL2Display : public IDisplay {
