@@ -1,20 +1,12 @@
 # ARCADE
 ![unitest](https://github.com/EpitechPromo2028/B-OOP-400-MAR-4-1-arcade-yanis.prevost/actions/workflows/unitest.yml/badge.svg)
-### How to implement new graphics/games libraries
+### Documentation 🫲[`Readme`](doc/README.md) 🫱
 
-1. Set your `.so` file into the [`./lib`](lib/) directory
-2. Compile with `make`
-3. Start with `./arcade lib/[your_lib]`
+> [!WARNING]\
+> Darwin Error ⚠ `ld: library 'SDL2' not found`
 
-Should be architectured like this :
-```shell
-.
-├── Assets
-├── Makefile
-├── README.md
-├── doc
-├── lib
-│    ├── [HERE]
-│    └── [HERE]
-└── src
+How to fix it:
+```
+export CPATH=/opt/homebrew/include/SDL2:$CPATH
+export LIBRARY_PATH=/opt/homebrew/lib:$LIBRARY_PATH
 ```

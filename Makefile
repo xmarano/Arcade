@@ -1,18 +1,13 @@
-##
 ## EPITECH PROJECT, 2024
-## My_arc
+## Arcade
 ## File description:
 ## Makefile
 ##
+YELLOW  = $(shell tput setaf 3; tput bold)
+GREEN   = $(shell tput setaf 2; tput bold)
+RESET   = $(shell tput sgr0)
 
-CXX	=	g++
-CXXFLAGS	=	-std=c++17 -fPIC
-LDFLAGS	=	-ldl
-LIBS	=	-lSDL2
-
-SRC_DIR	=	src
-INC_DIR	=	include
-LIB_DIR	=	lib
+NAME	=	arcade
 
 GAMES	=	Pacman	\
 			Menu
@@ -27,28 +22,49 @@ LIBS_FLAGS	=	-lncurses	\
 				-lsfml-window	\
 				-lsfml-system
 
+FLAGS	=	-std=c++17 -fPIC
+DARWIN_SDL2_FLAGS = -I/opt/homebrew/include/SDL2 -L/opt/homebrew/lib
+DARWIN_SFML_FLAGS = -I/opt/homebrew/include -L/opt/homebrew/lib
+
+UNAME	:=	$(shell uname -s)
+
+ifeq ($(UNAME),Darwin)
+    FLAGS += -w
+endif
+
 all: core games graphicals
+	@echo "$(YELLOW)$(UNAME)$(RESET)"
 
 core:
-	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/Core/Main.cpp -o Main.o
-	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/Core/DLLoader.cpp -o DLLoader.o
-	$(CXX) Main.o DLLoader.o -o arcade $(LDFLAGS)
+	@echo "$(GREEN)core$(RESET)"
+	g++ $(FLAGS) -Iinclude -c src/Core/Main.cpp -o Main.o
+	g++ $(FLAGS) -Iinclude -c src/Core/DLLoader.cpp -o DLLoader.o
+	g++ Main.o DLLoader.o -o arcade -ldl
+	rm -f *.o
 
 games:
+	@echo "$(GREEN)games$(RESET)"
+ifeq ($(UNAME),Darwin)
 	@for game in $(GAMES); do \
-		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Games/$$game/$$game.cpp -o $(LIB_DIR)/arcade_$$game.so; \
+		g++ $(FLAGS) -Iinclude -shared src/Games/$$game/$$game.cpp -o lib/arcade_$$game.so $(DARWIN_SDL2_FLAGS); \
 	done
+else
+	@for game in $(GAMES); do \
+		g++ $(FLAGS) -Iinclude -shared src/Games/$$game/$$game.cpp -o lib/arcade_$$game.so; \
+	done
+endif
 
 graphicals:
+	@echo "$(GREEN)graphicals$(RESET)"
 	@for lib in $(LIBS_GRAPHIC); do \
-		$(CXX) $(CXXFLAGS) -I$(INC_DIR) -shared $(SRC_DIR)/Libs/$$lib/$$lib.cpp -o $(LIB_DIR)/arcade_$$lib.so $(LIBS) $(LIBS_FLAGS); \
+		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(LIBS) $(LIBS_FLAGS); \
 	done
 
 clean:
-	rm -f *.o arcade $(LIB_DIR)/*.so
+	rm -f *.o arcade lib/*.so
 
 fclean: clean
-	rm -f $(LIB_DIR)/*.so
+	rm -f lib/*.so
 	rm -f *.so
 
 re: fclean all

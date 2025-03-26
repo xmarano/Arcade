@@ -34,12 +34,9 @@ int NcursesDisplay::getInput()
 {
     int ch = getch();
     switch (ch) {
-        case 'o':
-            return 2;
-        case 'p':
-            return 3;
-        case 'q':
-            return -1;
+        case 'q': return -1;
+        case 'o': return 2;
+        case 'p': return 3;
     }
     return 0;
 }

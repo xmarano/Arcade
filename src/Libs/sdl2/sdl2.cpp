@@ -48,6 +48,7 @@ int SDL2Display::getInput()
             return -1;
         if (e.type == SDL_KEYDOWN) {
             switch (e.key.keysym.sym) {
+                case SDLK_q: return -1;
                 case SDLK_i: return 1;
                 case SDLK_p: return 3;
             }

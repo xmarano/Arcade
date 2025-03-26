@@ -7,7 +7,7 @@
 
 #pragma once
 #include "../../../include/Core/DisplayInterface.hpp"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 class SDL2Display : public IDisplay {
     SDL_Window* window;

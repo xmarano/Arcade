@@ -46,6 +46,7 @@ int SFMLDisplay::getInput()
             return -1;
         if (e.type == sf::Event::KeyPressed) {
             switch (e.key.code) {
+                case sf::Keyboard::Q: return -1;
                 case sf::Keyboard::I: return 1;
                 case sf::Keyboard::O: return 2;
             }
