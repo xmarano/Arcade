@@ -186,6 +186,7 @@ int Pacman::check_bonuses(char new_pos)
     if (new_pos == RED_GHOST || new_pos == PINK_GHOST || new_pos == BLUE_GHOST || new_pos == ORANGE_GHOST) {
         this->lives -= 1;
         this->pos_player = DEFAULT_PLAYER_POSITION;
+        // reset de position des fantomes à faire
         return 1;
     }
     if (new_pos == TELEPORT) {
@@ -252,6 +253,7 @@ std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost
     if (this->map[new_pos.first][new_pos.second] == PLAYER) {
         this->lives -= 1;
         this->pos_player = DEFAULT_PLAYER_POSITION;
+        // reset de position des fantômes à faire
     }
     if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PLAYER)
         this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
