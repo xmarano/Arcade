@@ -9,12 +9,15 @@
 #include "../Core/GameInterface.hpp"
 #include <vector>
 
-    #define MAP_HEIGHT 25
+    #define PLAYER 'C'
+    #define WALL '#'
     #define RED_GHOST 'R'
     #define PINK_GHOST 'P'
     #define BLUE_GHOST 'B'
     #define ORANGE_GHOST 'O'
     #define COIN '.'
+    #define EMPTY ' '
+    #define POWERUP '@'
     #define TELEPORT 'T'
     #define MAP_HEIGHT 25
     #define DEFAULT_PLAYER_POSITION std::make_pair(18, 11)
@@ -49,16 +52,16 @@ class Pacman : public IGame {
         void handleInput(int key) override;
         std::string getName() const override { return "Pacman"; }
         void reset() override;
-        EntityType charToEntityType(char c) {
-            switch (c) {
-                case 'C': return EntityType::PLAYER;
-                case '#': return EntityType::WALL;
-                case '.': return EntityType::BONUS;
-                case '@': return EntityType::POWERUP;
-                case 'R': case 'P': case 'B': case 'O': return EntityType::ENEMY;
-                default: return EntityType::EMPTY;
-            }
-        }
+        // EntityType charToEntityType(char c) {
+        //     switch (c) {
+        //         case 'C': return EntityType::PLAYER;
+        //         case '#': return EntityType::WALL;
+        //         case '.': return EntityType::BONUS;
+        //         case '@': return EntityType::POWERUP;
+        //         case 'R': case 'P': case 'B': case 'O': return EntityType::ENEMY;
+        //         default: return EntityType::EMPTY;
+        //     }
+        // }
 
     private:
         void loadMap();

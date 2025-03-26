@@ -23,6 +23,7 @@ void SFMLDisplay::render(const GameState &state)
     for (const auto& entity : state.entities) {
         sf::RectangleShape rect(sf::Vector2f(20, 20));
         rect.setPosition(entity.x * 20, entity.y * 20);
+        sf::Color color = {(sf::Uint8)entity.red, (sf::Uint8)entity.green, (sf::Uint8)entity.blue, (sf::Uint8)entity.alpha};
         // switch (entity.type) {
         //     case WALL:  rect.setFillColor(sf::Color::White); break;
         //     case PLAYER: rect.setFillColor(sf::Color::Yellow); break;
@@ -30,7 +31,7 @@ void SFMLDisplay::render(const GameState &state)
         //     case COIN:  rect.setFillColor(sf::Color::White); break;
         //     case POWERUP: rect.setFillColor(sf::Color::Magenta); break;
         // }
-        rect.setFillColor(sf::Color::Magenta); break;
+        rect.setFillColor(color);
         window.draw(rect);
     }
     window.display();

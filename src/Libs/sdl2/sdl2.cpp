@@ -33,7 +33,7 @@ void SDL2Display::render(const GameState &state)
         //     case '.':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
         //     case '@': SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
         // }
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
     SDL_RenderPresent(renderer);
