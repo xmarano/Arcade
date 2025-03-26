@@ -31,10 +31,15 @@ void Pacman::reset()
 
 GameState Pacman::update() {
     // [...] (déplacements, logique du jeu)
-    move_ghost(pos_red_ghost, RED_GHOST);
-    move_ghost(pos_pink_ghost, PINK_GHOST);
-    move_ghost(pos_blue_ghost, BLUE_GHOST);
-    move_ghost(pos_orange_ghost, ORANGE_GHOST);
+    if (win_condition() == 1) {
+        level += 1;
+        this->map = this->original_map;
+        pos_player = DEFAULT_PLAYER_POSITION;
+    }
+    pos_red_ghost = move_ghost(pos_red_ghost, RED_GHOST);
+    pos_pink_ghost = move_ghost(pos_pink_ghost, PINK_GHOST);
+    pos_blue_ghost = move_ghost(pos_blue_ghost, BLUE_GHOST);
+    pos_orange_ghost = move_ghost(pos_orange_ghost, ORANGE_GHOST);
     handleInput(1);
 
     // Conversion de la carte en entités génériques
@@ -142,10 +147,13 @@ void Pacman::handleInput(int key)
 
 void Pacman::movePlayer(int new_x, int new_y)
 {
-    check_bonuses(map[new_x][new_y]);
-    map[pos_player.first][pos_player.second] = EMPTY;
-    pos_player = {new_x, new_y};
-    map[new_x][new_y] = PLAYER;
+    std::pair<int, int> player_tmp = pos_player;
+    if (check_bonuses(map[new_x][new_y]) == 0) {
+        pos_player = {new_x, new_y};
+        map[new_x][new_y] = PLAYER;
+    }
+    this->map[player_tmp.first][player_tmp.second] = EMPTY;
+    this->coin_map[player_tmp.first][player_tmp.second] = EMPTY;
 }
 
 void Pacman::loadMap()
