@@ -23,13 +23,14 @@ void SFMLDisplay::render(const GameState &state)
     for (const auto& entity : state.entities) {
         sf::RectangleShape rect(sf::Vector2f(20, 20));
         rect.setPosition(entity.x * 20, entity.y * 20);
-        switch (entity.type) {
-            case WALL:  rect.setFillColor(sf::Color::White); break;
-            case PLAYER: rect.setFillColor(sf::Color::Yellow); break;
-            case ENEMY: rect.setFillColor(sf::Color::Red); break;
-            case COIN:  rect.setFillColor(sf::Color::White); break;
-            case POWERUP: rect.setFillColor(sf::Color::Magenta); break;
-        }
+        // switch (entity.type) {
+        //     case WALL:  rect.setFillColor(sf::Color::White); break;
+        //     case PLAYER: rect.setFillColor(sf::Color::Yellow); break;
+        //     case ENEMY: rect.setFillColor(sf::Color::Red); break;
+        //     case COIN:  rect.setFillColor(sf::Color::White); break;
+        //     case POWERUP: rect.setFillColor(sf::Color::Magenta); break;
+        // }
+        rect.setFillColor(sf::Color::Magenta); break;
         window.draw(rect);
     }
     window.display();

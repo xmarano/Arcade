@@ -27,13 +27,13 @@ void SDL2Display::render(const GameState &state)
     SDL_RenderClear(renderer);
     for (const auto& entity : state.entities) {
         SDL_Rect rect = {entity.x * 20, entity.y * 20, 20, 20};
-        switch (entity.type) {
-            case WALL:  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
-            case PLAYER: SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); break;
-            case ENEMY: SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); break;
-            case COIN:  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
-            case POWERUP: SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
-        }
+        // switch (entity.element) {
+        //     case '#':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
+        //     case 'C': SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); break;
+        //     case '.':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
+        //     case '@': SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
+        // }
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderFillRect(renderer, &rect);
     }
     SDL_RenderPresent(renderer);

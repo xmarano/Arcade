@@ -39,19 +39,13 @@ GameState Pacman::update() {
             Entity entity;
             entity.x = j;
             entity.y = i;
-            switch (map[i][j]) {
-                case 'C': entity.type = PLAYER; break;
-                case '#': entity.type = WALL; break;
-                case '.': entity.type = BONUS; break;
-                case 'R': case 'P': case 'B': case 'O': entity.type = ENEMY; break;
-                default: entity.type = EMPTY; break;
-            }
-            if (entity.type != EMPTY) state.entities.push_back(entity);
+            entity.element = map[i][j];
+            if (entity.element != EMPTY) state.entities.push_back(entity);
         }
     }
 
     Entity player;
-    player.type = PLAYER;
+    player.element = 'C';
     player.x = pos_player.second; // colonne
     player.y = pos_player.first;  // ligne
     state.entities.push_back(player);

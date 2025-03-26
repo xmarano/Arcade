@@ -25,7 +25,7 @@ void NcursesDisplay::render(const GameState &state)
 {
     clear();
     for (const auto& entity : state.entities) {
-        mvaddch(entity.y, entity.x, entity.type);
+        mvaddch(entity.y, entity.x, entity.element);
     }
     refresh();
 }

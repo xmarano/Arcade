@@ -29,8 +29,9 @@ enum EntityType {
 };
 
 struct Entity {
-    EntityType type;   // Type de l'élément (ex: WALL, PLAYER)
+    char element;   // Type de l'élément (ex: WALL, PLAYER)
     int x, y;          // Position
+    int red, green, blue, alpha; // color
     // Optionnel : données supplémentaires (ex: couleur, état)
 };
 
