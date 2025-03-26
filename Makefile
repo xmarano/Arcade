@@ -18,6 +18,7 @@ LIBS_GRAPHIC	=	ncurses	\
 
 LIBS_FLAGS	=	-lncurses	\
 				-lSDL2	\
+				-lSDL2_ttf	\
 				-lsfml-graphics	\
 				-lsfml-window	\
 				-lsfml-system
