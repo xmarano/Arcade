@@ -55,8 +55,9 @@ int main(int argc, char **argv)
         DLLoader<IGame> gameLoader;
 
         IDisplay* display = displayLoader.load(argv[1]);
-        IGame* game = gameLoader.load("./lib/arcade_Menu.so");
-        // IGame* game = gameLoader.load("./lib/arcade_Pacman.so");
+        // IGame *game = gameLoader.load("./lib/arcade_Menu.so");
+        IGame *game = gameLoader.load("./lib/arcade_Snake.so");
+        // IGame *game = gameLoader.load("./lib/arcade_Pacman.so");
 
         display->init();
 
