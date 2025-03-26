@@ -8,17 +8,13 @@
 #include "sdl2.hpp"
 #include "../src/Core/ArcadeException.hpp"
 
-SDL2Display::SDL2Display()
-{
-    TTF_Init();
-    font = TTF_OpenFont("Assets/Font/goofy.ttf", 24);
-}
-
 void SDL2Display::init()
 {
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("Arcade - sdl2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    TTF_Init();
+    font = TTF_OpenFont("Assets/Font/goofy.ttf", 24);
 }
 
 void SDL2Display::close()

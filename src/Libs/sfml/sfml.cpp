@@ -6,9 +6,11 @@
 */
 
 #include "sfml.hpp"
+#include "../src/Core/ArcadeException.hpp"
 
 void SFMLDisplay::init()
 {
+    font.loadFromFile("Assets/Font/goofy.ttf");
     window.create(sf::VideoMode(800, 600), "Arcade - sfml");
 }
 
