@@ -17,9 +17,7 @@ class SFMLDisplay : public IDisplay
     sf::Font font;
 
     public:
-        ~SFMLDisplay() override {
-            close(); // Fermeture automatique
-        }
+        ~SFMLDisplay() override { close(); }
         void init() override;
 
         void close() override;

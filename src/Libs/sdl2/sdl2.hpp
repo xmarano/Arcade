@@ -21,10 +21,7 @@ class SDL2Display : public IDisplay {
     TTF_Font *font;
 
     public:
-        SDL2Display();
-        ~SDL2Display() override {
-            close(); // Appel explicite à close()
-        }
+        ~SDL2Display() override { close(); }
         void init() override;
 
         void close() override;

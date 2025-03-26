@@ -10,6 +10,7 @@ RESET   = $(shell tput sgr0)
 NAME	=	arcade
 
 GAMES	=	Pacman	\
+			Snake	\
 			Menu
 
 LIBS_GRAPHIC	=	ncurses	\
@@ -29,9 +30,9 @@ DARWIN_SFML_FLAGS = -I/opt/homebrew/include -L/opt/homebrew/lib
 
 UNAME	:=	$(shell uname -s)
 
-ifeq ($(UNAME),Darwin)
-    FLAGS += -w
-endif
+# ifeq ($(UNAME),Darwin)
+#     FLAGS += -w
+# endif
 
 all: core games graphicals
 	@echo "$(YELLOW)$(UNAME)$(RESET)"
@@ -57,9 +58,15 @@ endif
 
 graphicals:
 	@echo "$(GREEN)graphicals$(RESET)"
+ifeq ($(UNAME),Darwin)
 	@for lib in $(LIBS_GRAPHIC); do \
-		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(LIBS) $(LIBS_FLAGS); \
+		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS); \
 	done
+else
+	@for lib in $(LIBS_GRAPHIC); do \
+		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(LIBS_FLAGS); \
+	done
+endif
 
 clean:
 	rm -f *.o arcade lib/*.so

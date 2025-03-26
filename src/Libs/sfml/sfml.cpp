@@ -6,9 +6,11 @@
 */
 
 #include "sfml.hpp"
+#include "../src/Core/ArcadeException.hpp"
 
 void SFMLDisplay::init()
 {
+    font.loadFromFile("Assets/Font/goofy.ttf");
     window.create(sf::VideoMode(800, 600), "Arcade - sfml");
 }
 
@@ -34,9 +36,9 @@ void SFMLDisplay::render(const GameState &state)
         rect.setFillColor(color);
         window.draw(rect);
     }
-    renderText("Menu", 10, 10);
-    renderText("1. Pacman", 10, 50);
-    renderText("2. Snake", 10, 90);
+    // renderText("Menu", 10, 10);
+    // renderText("1. Pacman", 10, 50);
+    // renderText("2. Snake", 10, 90);
     window.display();
 }
 
