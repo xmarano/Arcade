@@ -11,19 +11,24 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+class SfmlMenu;
+
 class SFMLDisplay : public IDisplay
 {
-    sf::RenderWindow window;
-    sf::Font font;
-
+    private:
+        SfmlMenu *menuRenderer;
     public:
-        ~SFMLDisplay() override { close(); }
-        void init() override;
+        sf::RenderWindow window;
+        sf::Font font;
 
+        SFMLDisplay();
+        ~SFMLDisplay() override;
+
+        IMenuRenderer *getMenuRenderer() override;
+        void init() override;
         void close() override;
         void render(const GameState& state) override;
         void renderText(const std::string& text, int x, int y);
-
         int getInput() override;
-        std::string getName() const override { return "SFML"; }
+        std::string getName() const override { return "SDL2"; }
 };
