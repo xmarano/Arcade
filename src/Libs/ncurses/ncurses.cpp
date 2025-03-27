@@ -41,6 +41,7 @@ void NcursesDisplay::renderText(const std::string &text, int x, int y)
 
 int NcursesDisplay::getInput()
 {
+    // nodelay(stdscr, TRUE); //! sus mais ca marche..
     int ch = getch();
 
     switch (ch) {
