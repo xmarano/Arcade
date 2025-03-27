@@ -19,6 +19,7 @@ class NcursesDisplay : public IDisplay
         void init() override;
         void close() override;
         void render(const GameState& state) override;
+        void renderText(const std::string& text, int x, int y);
         int getInput() override;
         std::string getName() const override { return "Ncurses"; }
 };

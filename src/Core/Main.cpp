@@ -49,6 +49,8 @@ void Parsing(int argc, char **argv)
 int main(int argc, char **argv)
 {
     bool isMenu = true;
+    bool needRestart = false;
+    std::string nextLib;
 
     try {
         if (argc == 2 && std::string(argv[1]) == "unitest")
@@ -81,9 +83,9 @@ int main(int argc, char **argv)
                 if (ret == -1) break;
                 if (ret == CODE_NC_PACMAN) {
                     display->close();
-                    display = displayLoader.load("./lib/arcade_ncurses.so");
+                    display = displayLoader.load("./lib/arcade_sdl2.so");
                     display->init();
-                    game = gameLoader.load("./lib/arcade_Pacman.so");
+                    game = gameLoader.load("./lib/arcade_Snake.so");
                     isMenu = false;
                 }
             }

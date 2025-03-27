@@ -25,7 +25,8 @@ MenuEvent NcursesMenu::pollEvent()
         return MenuEvent::Enter;
     if (ch == 127 || ch == KEY_BACKSPACE)
         return MenuEvent::Back;
-
+    if (ch == 'h')
+        return MenuEvent::PlayPacman;
     return MenuEvent::None;
 }
 
