@@ -45,7 +45,11 @@ core:
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/ncurses/nc_menu.cpp -o nc_menu.o
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sfml/sfml_menu.cpp -o sfml_menu.o
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o
-	g++ Main.o Launcher.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o  -o arcade -ldl $(LIBS_FLAGS)
+ifeq ($(UNAME),Darwin)
+	g++ Main.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(DARWIN_SDL2_FLAGS) $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS)
+else
+	g++ Main.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(LIBS_FLAGS)
+endif
 	rm -f *.o
 
 games:
@@ -64,7 +68,7 @@ graphicals:
 	@echo "$(GREEN)graphicals$(RESET)"
 ifeq ($(UNAME),Darwin)
 	@for lib in $(LIBS_GRAPHIC); do \
-		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS); \
+		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp src/Core/Menu/$$lib/*.cpp -o lib/arcade_$$lib.so $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS); \
 	done
 else
 	@for lib in $(LIBS_GRAPHIC); do \

@@ -89,6 +89,7 @@ int SFMLDisplay::getInput()
                 case sf::Keyboard::Left: return 7;
                 case sf::Keyboard::Right: return 8;
                 case sf::Keyboard::Return: return 10;
+                default: return 0; // a verifier si ça pose problème
             }
         }
     }
