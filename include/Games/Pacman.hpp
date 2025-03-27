@@ -45,6 +45,7 @@ class Pacman : public IGame {
         std::vector<std::string> map;
         std::vector<std::string> original_map;
         std::vector<std::string> coin_map;
+        clock_t phantom_clock, player_clock;
 
     public:
         Pacman();
@@ -70,4 +71,6 @@ class Pacman : public IGame {
         bool win_condition();
         std::pair<int, int> move_ghost(std::pair<int, int> pos, char type);
         int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
+        bool is_valid_position(std::pair<int, int> pos);
+        std::pair<int, int> random_move(std::pair<int, int> pos);
 };

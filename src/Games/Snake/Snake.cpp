@@ -4,7 +4,7 @@
 ** File description:
 ** Snake.cpp
 */
-#include "include/Games/Snake.hpp"
+#include "../../../include/Games/Snake.hpp"
 #include <fstream>
 #include <algorithm>
 
