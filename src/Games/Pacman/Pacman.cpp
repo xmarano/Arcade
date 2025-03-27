@@ -42,6 +42,9 @@ GameState Pacman::update() {
         pos_pink_ghost = move_ghost(pos_pink_ghost, PINK_GHOST);
         pos_blue_ghost = move_ghost(pos_blue_ghost, BLUE_GHOST);
         pos_orange_ghost = move_ghost(pos_orange_ghost, ORANGE_GHOST);
+        if (pos_red_ghost == std::make_pair(0, 0) || pos_pink_ghost == std::make_pair(0, 0) || pos_blue_ghost == std::make_pair(0, 0) || pos_orange_ghost == std::make_pair(0, 0)) {
+            reset_positions();
+        }
         phantom_clock = clock();
     }
     if (clock() - player_clock > 100000) {
@@ -191,8 +194,7 @@ int Pacman::check_bonuses(char new_pos)
     }
     if (new_pos == RED_GHOST || new_pos == PINK_GHOST || new_pos == BLUE_GHOST || new_pos == ORANGE_GHOST) {
         this->lives -= 1;
-        this->pos_player = DEFAULT_PLAYER_POSITION;
-        // reset de position des fantomes à faire
+        reset_positions();
         return 1;
     }
     if (new_pos == TELEPORT) {
@@ -232,6 +234,19 @@ bool Pacman::is_valid_position(std::pair<int, int> pos)
     if (this->map[pos.first][pos.second] == COIN || this->map[pos.first][pos.second] == POWERUP || this->map[pos.first][pos.second] == EMPTY || this->map[pos.first][pos.second] == PLAYER)
         return true;
     return false;
+}
+
+void Pacman::reset_positions()
+{
+    this->pos_player = DEFAULT_PLAYER_POSITION;
+    this->map[pos_red_ghost.first][pos_red_ghost.second] = this->coin_map[pos_red_ghost.first][pos_red_ghost.second];
+    this->map[pos_pink_ghost.first][pos_pink_ghost.second] = this->coin_map[pos_pink_ghost.first][pos_pink_ghost.second];
+    this->map[pos_blue_ghost.first][pos_blue_ghost.second] = this->coin_map[pos_blue_ghost.first][pos_blue_ghost.second];
+    this->map[pos_orange_ghost.first][pos_orange_ghost.second] = this->coin_map[pos_orange_ghost.first][pos_orange_ghost.second];
+    this->pos_red_ghost = RED_GHOST_POS;
+    this->pos_pink_ghost = PINK_GHOST_POS;
+    this->pos_blue_ghost = BLUE_GHOST_POS;
+    this->pos_orange_ghost = ORANGE_GHOST_POS;
 }
 
 std::pair<int, int> Pacman::random_move(std::pair<int, int> pos)
@@ -284,8 +299,8 @@ std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost
         new_pos = random_move(pos_ghost);
     if (this->map[new_pos.first][new_pos.second] == PLAYER) {
         this->lives -= 1;
-        this->pos_player = DEFAULT_PLAYER_POSITION;
-        // reset de position des fantômes à faire
+        this->map[pos_ghost.first][pos_ghost.second] = this->coin_map[pos_ghost.first][pos_ghost.second];
+        return std::make_pair(0, 0);
     }
     if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PLAYER)
         this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
