@@ -6,7 +6,26 @@
 */
 
 #include "sfml.hpp"
+#include "../../../src/Core/Menu/sfml/sfml_menu.hpp"
 #include "../src/Core/ArcadeException.hpp"
+
+SFMLDisplay::SFMLDisplay() : menuRenderer(nullptr) {}
+
+SFMLDisplay::~SFMLDisplay()
+{
+    if (menuRenderer) {
+        delete menuRenderer;
+    }
+    close();
+}
+
+IMenuRenderer* SFMLDisplay::getMenuRenderer()
+{
+    if (!menuRenderer) {
+        menuRenderer = new SfmlMenu(this);
+    }
+    return static_cast<IMenuRenderer*>(menuRenderer);
+}
 
 void SFMLDisplay::init()
 {

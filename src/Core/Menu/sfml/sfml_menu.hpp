@@ -7,10 +7,14 @@
 
 #include "../../../../include/Core/Menu.hpp"
 
+class SFMLDisplay;
+
 class SfmlMenu : public IMenuRenderer
 {
+    private:
+        SFMLDisplay *display;
     public:
-        SfmlMenu();
+        SfmlMenu(SFMLDisplay *disp);
         ~SfmlMenu() = default;
 
         MenuEvent pollEvent() override;
