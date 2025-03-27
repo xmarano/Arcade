@@ -8,18 +8,20 @@
 #include "../include/Core/DisplayInterface.hpp"
 #include "../include/Core/GameInterface.hpp"
 #include "../include/Core/DLLoader.hpp"
+#include "../include/Core/Menu.hpp"
 #include "ArcadeException.hpp"
 #include <iostream>
 #include <filesystem>
+#include "Launcher.hpp"
 
-IDisplay* change_lib(IDisplay* current, int input) {
-    static DLLoader<IDisplay> loader; // Garde le loader en vie
+IDisplay* change_lib(IDisplay* current, int input)
+{
+    static DLLoader<IDisplay> loader;
 
     if (current) {
         current->close();
-        delete current; // Supprime l'instance manuellement
+        delete current;
     }
-
     if (input == 1) {
         return loader.load("./lib/arcade_ncurses.so");
     } else if (input == 2) {
@@ -46,39 +48,47 @@ void Parsing(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+    bool isMenu = true;
+
     try {
         if (argc == 2 && std::string(argv[1]) == "unitest")
             return 0;
         Parsing(argc, argv);
-
         DLLoader<IDisplay> displayLoader;
         DLLoader<IGame> gameLoader;
-
+        IGame *game = nullptr;
+        Menu menu;
         IDisplay* display = displayLoader.load(argv[1]);
-        // IGame *game = gameLoader.load("./lib/arcade_Menu.so");
-        IGame *game = gameLoader.load("./lib/arcade_Snake.so");
-        // IGame *game = gameLoader.load("./lib/arcade_Pacman.so");
-
         display->init();
-
         while (true) {
-            int input = display->getInput();
-            if (input == -1)
-                break;
-
-            if (input >= 1 && input <= 3) {
-                IDisplay* newDisplay = change_lib(display, input);
-                if (newDisplay) {
-                    display = newDisplay;
-                    display->init();
+            if (isMenu == false) {
+                int input = display->getInput();
+                if (input == -1)
+                    break;
+                if (input >= 1 && input <= 3) {
+                    IDisplay* newDisplay = change_lib(display, input);
+                    if (newDisplay) {
+                        display = newDisplay;
+                        display->init();
+                    }
+                    continue;
                 }
-                continue;
+                game->handleInput(input);
+                GameState state = game->update();
+                display->render(state);
+            } else {
+                int ret = menu.draw_menu(display);
+                if (ret == -1) break;
+                if (ret == CODE_NC_PACMAN) {
+                    display->close();
+                    display = displayLoader.load("./lib/arcade_ncurses.so");
+                    display->init();
+                    game = gameLoader.load("./lib/arcade_Pacman.so");
+                    isMenu = false;
+                }
             }
-
-            game->handleInput(input);
-            GameState state = game->update();
-            display->render(state);
         }
+        delete game;
         display->close();
         delete display;
     } catch (ArcadeException &e) {
@@ -87,3 +97,17 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+
+// int main(int argc, char **argv)
+// {
+//     try {
+//         if (argc == 2 && std::string(argv[1]) == "unitest")
+//             return 0;
+//         Parsing(argc, argv);
+//         Launcher launcher(argv[1]);
+//         return launcher.run();
+//     } catch (ArcadeException &e) {
+//         std::cerr << "Error: " << e.what() << std::endl;
+//         return 84;
+//     }
+// }

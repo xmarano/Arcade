@@ -6,7 +6,26 @@
 */
 
 #include "sdl2.hpp"
+#include "../../../src/Core/Menu/sdl2/sdl2_menu.hpp"
 #include "../src/Core/ArcadeException.hpp"
+
+SDL2Display::SDL2Display() : menuRenderer(nullptr) {}
+
+SDL2Display::~SDL2Display()
+{
+    if (menuRenderer) {
+        delete menuRenderer;
+    }
+    close();
+}
+
+IMenuRenderer* SDL2Display::getMenuRenderer()
+{
+    if (!menuRenderer) {
+        menuRenderer = new Sdl2Menu(this);
+    }
+    return static_cast<IMenuRenderer*>(menuRenderer);
+}
 
 void SDL2Display::init()
 {
@@ -19,9 +38,11 @@ void SDL2Display::init()
 
 void SDL2Display::close()
 {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    if (window) {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+    }
 }
 
 void SDL2Display::render(const GameState &state)
@@ -30,18 +51,9 @@ void SDL2Display::render(const GameState &state)
     SDL_RenderClear(renderer);
     for (const auto& entity : state.entities) {
         SDL_Rect rect = {entity.x * 20, entity.y * 20, 20, 20};
-        // switch (entity.element) {
-        //     case '#':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
-        //     case 'C': SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); break;
-        //     case '.':  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); break;
-        //     case '@': SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); break;
-        // }
         SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
-    // renderText("Menu", 10, 10);
-    // renderText("1. Pacman", 10, 50);
-    // renderText("2. Snake", 10, 90);
     SDL_RenderPresent(renderer);
 }
 
@@ -58,7 +70,6 @@ void SDL2Display::renderText(const std::string &text, int x, int y)
 
 int SDL2Display::getInput()
 {
-    // cout << "Ncurses input" << endl;
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT)

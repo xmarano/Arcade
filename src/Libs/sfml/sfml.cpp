@@ -6,7 +6,26 @@
 */
 
 #include "sfml.hpp"
+#include "../../../src/Core/Menu/sfml/sfml_menu.hpp"
 #include "../src/Core/ArcadeException.hpp"
+
+SFMLDisplay::SFMLDisplay() : menuRenderer(nullptr) {}
+
+SFMLDisplay::~SFMLDisplay()
+{
+    if (menuRenderer) {
+        delete menuRenderer;
+    }
+    close();
+}
+
+IMenuRenderer* SFMLDisplay::getMenuRenderer()
+{
+    if (!menuRenderer) {
+        menuRenderer = new SfmlMenu(this);
+    }
+    return static_cast<IMenuRenderer*>(menuRenderer);
+}
 
 void SFMLDisplay::init()
 {
@@ -70,6 +89,7 @@ int SFMLDisplay::getInput()
                 case sf::Keyboard::Left: return 7;
                 case sf::Keyboard::Right: return 8;
                 case sf::Keyboard::Return: return 10;
+                default: return 0; // a verifier si ça pose problème
             }
         }
     }
