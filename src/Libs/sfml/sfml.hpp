@@ -14,11 +14,11 @@
 
 class SFMLDisplay : public IDisplay
 {
-    sf::RenderWindow window;
-    sf::Font font;
-    SfmlMenu menuRenderer;
-
+    private:
+        SfmlMenu menuRenderer;
     public:
+        sf::RenderWindow window;
+        sf::Font font;
         ~SFMLDisplay() override { close(); }
         IMenuRenderer* getMenuRenderer() override { return &menuRenderer; }
         void init() override;

@@ -19,5 +19,5 @@ class NcursesMenu : public IMenuRenderer
         ~NcursesMenu() = default;
 
         MenuEvent pollEvent() override;
-        void DrawText1(string text, int module, int height) override;
+        void DrawText1(string text, int module, int height, int weight) override;
 };

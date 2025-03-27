@@ -24,7 +24,7 @@ void Menu::DisplayText(string text, int module, int height, IMenuRenderer *menuR
     // int y = (screenHeight / 10 * height);
     string error = "!-- ERROR DISPLAY --!";
     // if (module == 0) {
-        menuRenderer->DrawText1(text, 0, 0);
+        menuRenderer->DrawText1(text, 0, 0, 0);
     // } else if (module == 1) {
     //     this->renderer->DrawText1(((screenWidth / 3) / 2) - (text.length() / 2), y, text);
     // } else if (module == 2) {

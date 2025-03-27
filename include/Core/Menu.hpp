@@ -53,5 +53,5 @@ class IMenuRenderer {
         virtual ~IMenuRenderer() = default;
         virtual MenuEvent pollEvent() = 0;
 
-        virtual void DrawText1(string text, int module, int height) = 0;
+        virtual void DrawText1(string text, int module, int height, int weight) = 0;
 };

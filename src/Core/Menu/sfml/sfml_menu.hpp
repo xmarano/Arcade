@@ -14,5 +14,5 @@ class SfmlMenu : public IMenuRenderer
         ~SfmlMenu() = default;
 
         MenuEvent pollEvent() override;
-        void DrawText1(string text, int module, int height) override;
+        void DrawText1(string text, int module, int height, int weight) override;
 };

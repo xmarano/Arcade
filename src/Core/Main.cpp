@@ -55,9 +55,9 @@ int main(int argc, char **argv)
         Parsing(argc, argv);
         DLLoader<IDisplay> displayLoader;
         DLLoader<IGame> gameLoader;
-        IDisplay* display = displayLoader.load(argv[1]);
         IGame *game = nullptr;
         Menu menu;
+        IDisplay* display = displayLoader.load(argv[1]);
         display->init();
         while (true) {
             if (isMenu == false) {

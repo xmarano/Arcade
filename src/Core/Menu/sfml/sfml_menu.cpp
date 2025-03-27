@@ -34,7 +34,7 @@ MenuEvent SfmlMenu::pollEvent()
     return MenuEvent::None;
 }
 
-void SfmlMenu::DrawText1(string text, int module, int height)
+void SfmlMenu::DrawText1(string text, int module, int height, int weight)
 {
 
 }
