@@ -141,82 +141,85 @@ int Menu::Actions(MenuEvent ev)
     if (ev == MenuEvent::Quit) {
         return -1;
     }
-    if (ev == MenuEvent::Up) {
-        if (current.second > 1) {
-            current.second--;
-        }
+    if (ev == MenuEvent::PlayPacman) {
+        return CODE_NC_PACMAN;
     }
-    if (ev == MenuEvent::Down) {
-        if (current.first == 1) {
-            if (current.second < 2) {
-                current.second++;
-            }
-        }
-        if (current.first == 2) {
-            if (current.second < 3) {
-                current.second++;
-            }
-        }
-    }
-    if (ev == MenuEvent::Enter) {
-        if (current.first == 1) {
-            selectedOption.first = current.second;
-            current.first = 2;
-            current.second = 1;
-        } else if (current.first == 2) {
-            selectedOption.second = current.second;
-            string username;
-            ifstream userFile("Assets/Stats/username.txt");
-            userFile >> username;
-            userFile.close();
-            if (username == "") {
-                current.first = 3;
-            } else {
-                current.first = 4;
-            }
-            current.second = 1;
-        } else if (current.first == 3) {
-            if (!isUsernameSet) {
-                // string username;
-                // char ch;
-                // while ((ch = getch()) != '\n') {
-                    // username += ch;
-                    // DisplayText("User : " + username, 2, 4);
-                // }
-                // ofstream userFile("Assets/Stats/username.txt");
-                // userFile << username;
-                // userFile.close();
-            }
-            current.first = 4;
-        } else if (current.first == 4) {
-            // pacman
-            if (selectedOption.first == 1 && selectedOption.second == 1) {
-                return CODE_NC_PACMAN;
-            } else if (selectedOption.first == 1 && selectedOption.second == 2) {
-                return CODE_SDL2_PACMAN;
-            } else if (selectedOption.first == 1 && selectedOption.second == 3) {
-                return CODE_SFML_PACMAN;
-            }
-            // snake
-            if (selectedOption.first == 2 && selectedOption.second == 1) {
-                return CODE_NC_SNAKE;
-            } else if (selectedOption.first == 2 && selectedOption.second == 2) {
-                return CODE_SDL2_SNAKE;
-            } else if (selectedOption.first == 2 && selectedOption.second == 3) {
-                return CODE_SFML_SNAKE;
-            }
-        }
-    }
-    if (ev == MenuEvent::Back) {
-        if (current.first == 2) {
-            current.first = 1;
-            if (current.second == 3) {
-                current.second = 2;
-            }
-        } else if (current.first == 3) {
-            current.first = 2;
-        }
-    }
+    // if (ev == MenuEvent::Up) {
+    //     if (current.second > 1) {
+    //         current.second--;
+    //     }
+    // }
+    // if (ev == MenuEvent::Down) {
+    //     if (current.first == 1) {
+    //         if (current.second < 2) {
+    //             current.second++;
+    //         }
+    //     }
+    //     if (current.first == 2) {
+    //         if (current.second < 3) {
+    //             current.second++;
+    //         }
+    //     }
+    // }
+    // if (ev == MenuEvent::Enter) {
+    //     if (current.first == 1) {
+    //         selectedOption.first = current.second;
+    //         current.first = 2;
+    //         current.second = 1;
+    //     } else if (current.first == 2) {
+    //         selectedOption.second = current.second;
+    //         string username;
+    //         ifstream userFile("Assets/Stats/username.txt");
+    //         userFile >> username;
+    //         userFile.close();
+    //         if (username == "") {
+    //             current.first = 3;
+    //         } else {
+    //             current.first = 4;
+    //         }
+    //         current.second = 1;
+    //     } else if (current.first == 3) {
+    //         if (!isUsernameSet) {
+    //             // string username;
+    //             // char ch;
+    //             // while ((ch = getch()) != '\n') {
+    //                 // username += ch;
+    //                 // DisplayText("User : " + username, 2, 4);
+    //             // }
+    //             // ofstream userFile("Assets/Stats/username.txt");
+    //             // userFile << username;
+    //             // userFile.close();
+    //         }
+    //         current.first = 4;
+    //     } else if (current.first == 4) {
+    //         // pacman
+    //         if (selectedOption.first == 1 && selectedOption.second == 1) {
+    //             return CODE_NC_PACMAN;
+    //         } else if (selectedOption.first == 1 && selectedOption.second == 2) {
+    //             return CODE_SDL2_PACMAN;
+    //         } else if (selectedOption.first == 1 && selectedOption.second == 3) {
+    //             return CODE_SFML_PACMAN;
+    //         }
+    //         // snake
+    //         if (selectedOption.first == 2 && selectedOption.second == 1) {
+    //             return CODE_NC_SNAKE;
+    //         } else if (selectedOption.first == 2 && selectedOption.second == 2) {
+    //             return CODE_SDL2_SNAKE;
+    //         } else if (selectedOption.first == 2 && selectedOption.second == 3) {
+    //             return CODE_SFML_SNAKE;
+    //         }
+    //     }
+    // }
+    // if (ev == MenuEvent::Back) {
+    //     if (current.first == 2) {
+    //         current.first = 1;
+    //         if (current.second == 3) {
+    //             current.second = 2;
+    //         }
+    //     } else if (current.first == 3) {
+    //         current.first = 2;
+    //     }
+    // }
     return 0;
 }
 
@@ -241,7 +244,6 @@ int Menu::draw_menu(IDisplay *renderer)
     MenuEvent ev = menuRenderer->pollEvent();
 
     int ret = Actions(ev);
-
     if (ret == -1) { return -1;}
     if (ret == CODE_NC_PACMAN) return CODE_NC_PACMAN;
     if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;

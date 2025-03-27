@@ -30,6 +30,8 @@ MenuEvent SfmlMenu::pollEvent()
                 return MenuEvent::Enter;
             if (event.key.code == sf::Keyboard::BackSpace)
                 return MenuEvent::Back;
+            if (event.key.code == sf::Keyboard::H)
+                return MenuEvent::PlayPacman;
         }
     }
     return MenuEvent::None;

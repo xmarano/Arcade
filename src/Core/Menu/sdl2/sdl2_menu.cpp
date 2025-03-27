@@ -23,6 +23,7 @@ MenuEvent Sdl2Menu::pollEvent()
                 case SDLK_DOWN: return MenuEvent::Down;
                 case SDLK_RETURN: return MenuEvent::Enter;
                 case SDLK_BACKSPACE: return MenuEvent::Back;
+                case SDLK_h: return MenuEvent::PlayPacman;
             }
         }
     }

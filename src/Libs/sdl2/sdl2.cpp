@@ -11,7 +11,8 @@
 
 SDL2Display::SDL2Display() : menuRenderer(nullptr) {}
 
-SDL2Display::~SDL2Display() {
+SDL2Display::~SDL2Display()
+{
     if (menuRenderer) {
         delete menuRenderer;
     }

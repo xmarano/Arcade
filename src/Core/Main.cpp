@@ -12,15 +12,16 @@
 #include "ArcadeException.hpp"
 #include <iostream>
 #include <filesystem>
+#include "Launcher.hpp"
 
-IDisplay* change_lib(IDisplay* current, int input) {
-    static DLLoader<IDisplay> loader; // Garde le loader en vie
+IDisplay* change_lib(IDisplay* current, int input)
+{
+    static DLLoader<IDisplay> loader;
 
     if (current) {
         current->close();
-        delete current; // Supprime l'instance manuellement
+        delete current;
     }
-
     if (input == 1) {
         return loader.load("./lib/arcade_ncurses.so");
     } else if (input == 2) {
@@ -77,21 +78,17 @@ int main(int argc, char **argv)
                 display->render(state);
             } else {
                 int ret = menu.draw_menu(display);
-                if (ret == -1)
-                    break;
-                if (ret >= 1 && ret <= 3) {
-                    IDisplay* newDisplay = change_lib(display, ret);
-                    if (newDisplay) {
-                        display = newDisplay;
-                        display->init();
-                    }
-                    isMenu = false;
-                }
-                if (ret >= 4 && ret <= 9) {
+                if (ret == -1) break;
+                if (ret == CODE_NC_PACMAN) {
+                    display->close();
+                    display = displayLoader.load("./lib/arcade_ncurses.so");
+                    display->init();
+                    game = gameLoader.load("./lib/arcade_Pacman.so");
                     isMenu = false;
                 }
             }
         }
+        delete game;
         display->close();
         delete display;
     } catch (ArcadeException &e) {
@@ -100,3 +97,17 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+
+// int main(int argc, char **argv)
+// {
+//     try {
+//         if (argc == 2 && std::string(argv[1]) == "unitest")
+//             return 0;
+//         Parsing(argc, argv);
+//         Launcher launcher(argv[1]);
+//         return launcher.run();
+//     } catch (ArcadeException &e) {
+//         std::cerr << "Error: " << e.what() << std::endl;
+//         return 84;
+//     }
+// }

@@ -9,6 +9,8 @@
 
 void NcursesDisplay::init()
 {
+    ofstream file("temp.txt");
+    file << "caaca";
     initscr();
     start_color();
     noecho();

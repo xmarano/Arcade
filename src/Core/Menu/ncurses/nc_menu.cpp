@@ -32,6 +32,7 @@ MenuEvent NcursesMenu::pollEvent()
 void NcursesMenu::DrawText1(string text, int module, int height, int weight)
 {
     mvprintw(height, weight, text.c_str());
+
     // int screenWidth = getmaxx(stdscr);
     // int screenHeight = getmaxy(stdscr);
     // int y = (screenHeight / 10 * height);

@@ -33,16 +33,18 @@
 │   ├── Core
 │   │   ├── ArcadeException.hpp
 │   │   ├── DLLoader.cpp
+│   │   ├── Launcher.cpp
+│   │   ├── Launcher.hpp
 │   │   ├── Main.cpp
 │   │   └── Menu
 │   │       ├── Menu.cpp
-│   │       ├── Ncurses
+│   │       ├── ncurses
 │   │       │   ├── nc_menu.cpp
 │   │       │   └── nc_menu.hpp
-│   │       ├── Sdl2
+│   │       ├── sdl2
 │   │       │   ├── sdl2_menu.cpp
 │   │       │   └── sdl2_menu.hpp
-│   │       └── Sfml
+│   │       └── sfml
 │   │           ├── sfml_menu.cpp
 │   │           └── sfml_menu.hpp
 │   ├── Games
@@ -64,4 +66,4 @@
     ├── main.cpp
     └── Makefile
 
-24 directories, 41 files
+24 directories, 43 files
