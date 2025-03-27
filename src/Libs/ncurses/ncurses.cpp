@@ -9,8 +9,6 @@
 
 void NcursesDisplay::init()
 {
-    ofstream file("temp.txt");
-    file << "caaca";
     initscr();
     start_color();
     noecho();
@@ -27,7 +25,7 @@ void NcursesDisplay::render(const GameState &state)
 {
     clear();
     for (const auto& entity : state.entities) {
-        mvaddch(entity.y, entity.x, entity.element);
+        mvprintw(entity.y, entity.x, &entity.element);
     }
     refresh();
 }
