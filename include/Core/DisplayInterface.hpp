@@ -12,10 +12,6 @@
 #include <vector>
 using namespace std;
 
-#pragma once
-#include <vector>
-#include <string>
-
 // Définition des types d'éléments
 enum EntityType {
     WALL,
@@ -43,6 +39,8 @@ struct GameState {
     std::string gameName;          // Pour adapter le thème graphique
 };
 
+class IMenuRenderer;
+
 class IDisplay {
     public:
         virtual ~IDisplay() = default;
@@ -51,4 +49,5 @@ class IDisplay {
         virtual void render(const GameState& state) = 0;
         virtual int getInput() = 0;
         virtual string getName() const = 0;
+        virtual IMenuRenderer* getMenuRenderer() = 0;
 };

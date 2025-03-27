@@ -46,6 +46,7 @@ int NcursesDisplay::getInput()
     return 0;
 }
 
-extern "C" IDisplay* create() {
+extern "C" IDisplay* create()
+{
     return new NcursesDisplay();
 }

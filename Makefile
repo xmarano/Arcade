@@ -10,8 +10,7 @@ RESET   = $(shell tput sgr0)
 NAME	=	arcade
 
 GAMES	=	Pacman	\
-			Snake	\
-			Menu
+			Snake
 
 LIBS_GRAPHIC	=	ncurses	\
 					sdl2	\
@@ -41,7 +40,11 @@ core:
 	@echo "$(GREEN)core$(RESET)"
 	g++ $(FLAGS) -Iinclude -c src/Core/Main.cpp -o Main.o
 	g++ $(FLAGS) -Iinclude -c src/Core/DLLoader.cpp -o DLLoader.o
-	g++ Main.o DLLoader.o -o arcade -ldl
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/Menu.cpp -o Menu.o
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/ncurses/nc_menu.cpp -o nc_menu.o
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sfml/sfml_menu.cpp -o sfml_menu.o
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o
+	g++ Main.o DLLoader.o Menu.o nc_menu.o sfml_menu.o sdl2_menu.o -o arcade -ldl $(LIBS_FLAGS)
 	rm -f *.o
 
 games:
@@ -64,7 +67,7 @@ ifeq ($(UNAME),Darwin)
 	done
 else
 	@for lib in $(LIBS_GRAPHIC); do \
-		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp -o lib/arcade_$$lib.so $(LIBS_FLAGS); \
+		g++ $(FLAGS) -Iinclude -shared src/Libs/$$lib/$$lib.cpp src/Core/Menu/$$lib/*.cpp -o lib/arcade_$$lib.so $(LIBS_FLAGS); \
 	done
 endif
 

@@ -7,6 +7,7 @@
 
 #pragma once
 #include "../../../include/Core/DisplayInterface.hpp"
+#include "../src/Core/Menu/sdl2/sdl2_menu.hpp"
 #if defined(__linux__)
     #include <SDL2/SDL_ttf.h>
     #include <SDL2/SDL.h>
@@ -15,12 +16,15 @@
     #include <SDL.h>
 #endif
 
-class SDL2Display : public IDisplay {
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    TTF_Font *font;
-
+class SDL2Display : public IDisplay
+{
+    private:
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+        TTF_Font *font;
+        Sdl2Menu menuRenderer;
     public:
+        IMenuRenderer *getMenuRenderer() override { return &menuRenderer; }
         ~SDL2Display() override { close(); }
         void init() override;
 

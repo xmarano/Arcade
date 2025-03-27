@@ -8,6 +8,7 @@
 #include "../include/Core/DisplayInterface.hpp"
 #include "../include/Core/GameInterface.hpp"
 #include "../include/Core/DLLoader.hpp"
+#include "../include/Core/Menu.hpp"
 #include "ArcadeException.hpp"
 #include <iostream>
 #include <filesystem>
@@ -46,38 +47,50 @@ void Parsing(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+    bool isMenu = true;
+
     try {
         if (argc == 2 && std::string(argv[1]) == "unitest")
             return 0;
         Parsing(argc, argv);
-
         DLLoader<IDisplay> displayLoader;
         DLLoader<IGame> gameLoader;
-
         IDisplay* display = displayLoader.load(argv[1]);
-        // IGame *game = gameLoader.load("./lib/arcade_Menu.so");
-        IGame *game = gameLoader.load("./lib/arcade_Snake.so");
-        // IGame *game = gameLoader.load("./lib/arcade_Pacman.so");
-
+        IGame *game = nullptr;
+        Menu menu;
         display->init();
-
         while (true) {
-            int input = display->getInput();
-            if (input == -1)
-                break;
-
-            if (input >= 1 && input <= 3) {
-                IDisplay* newDisplay = change_lib(display, input);
-                if (newDisplay) {
-                    display = newDisplay;
-                    display->init();
+            if (isMenu == false) {
+                int input = display->getInput();
+                if (input == -1)
+                    break;
+                if (input >= 1 && input <= 3) {
+                    IDisplay* newDisplay = change_lib(display, input);
+                    if (newDisplay) {
+                        display = newDisplay;
+                        display->init();
+                    }
+                    continue;
                 }
-                continue;
+                game->handleInput(input);
+                GameState state = game->update();
+                display->render(state);
+            } else {
+                int ret = menu.draw_menu(display);
+                if (ret == -1)
+                    break;
+                if (ret >= 1 && ret <= 3) {
+                    IDisplay* newDisplay = change_lib(display, ret);
+                    if (newDisplay) {
+                        display = newDisplay;
+                        display->init();
+                    }
+                    isMenu = false;
+                }
+                if (ret >= 4 && ret <= 9) {
+                    isMenu = false;
+                }
             }
-
-            game->handleInput(input);
-            GameState state = game->update();
-            display->render(state);
         }
         display->close();
         delete display;

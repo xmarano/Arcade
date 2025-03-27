@@ -1,0 +1,67 @@
+.
+├── archi.txt
+├── Assets
+│   ├── Font
+│   │   ├── arcade.ttf
+│   │   ├── arial.ttf
+│   │   ├── goofy.ttf
+│   │   ├── little.ttf
+│   │   └── text.ttf
+│   ├── Maps
+│   │   ├── pacman_map.txt
+│   │   └── snake_map.txt
+│   └── Stats
+│       ├── pacman_highlevel.txt
+│       ├── pacman_highscore.txt
+│       ├── snake_highscore.txt
+│       └── username.txt
+├── doc
+│   └── README.md
+├── include
+│   ├── Core
+│   │   ├── DisplayInterface.hpp
+│   │   ├── DLLoader.hpp
+│   │   ├── GameInterface.hpp
+│   │   └── Menu.hpp
+│   └── Games
+│       ├── Pacman.hpp
+│       └── Snake.hpp
+├── lib
+├── Makefile
+├── README.md
+├── src
+│   ├── Core
+│   │   ├── ArcadeException.hpp
+│   │   ├── DLLoader.cpp
+│   │   ├── Main.cpp
+│   │   └── Menu
+│   │       ├── Menu.cpp
+│   │       ├── Ncurses
+│   │       │   ├── nc_menu.cpp
+│   │       │   └── nc_menu.hpp
+│   │       ├── Sdl2
+│   │       │   ├── sdl2_menu.cpp
+│   │       │   └── sdl2_menu.hpp
+│   │       └── Sfml
+│   │           ├── sfml_menu.cpp
+│   │           └── sfml_menu.hpp
+│   ├── Games
+│   │   ├── Pacman
+│   │   │   └── Pacman.cpp
+│   │   └── Snake
+│   │       └── Snake.cpp
+│   └── Libs
+│       ├── ncurses
+│       │   ├── ncurses.cpp
+│       │   └── ncurses.hpp
+│       ├── sdl2
+│       │   ├── sdl2.cpp
+│       │   └── sdl2.hpp
+│       └── sfml
+│           ├── sfml.cpp
+│           └── sfml.hpp
+└── test
+    ├── main.cpp
+    └── Makefile
+
+24 directories, 41 files
