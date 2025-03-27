@@ -5,7 +5,25 @@
 ** Launcher.cpp
 */
 
-#include "Launcher.hpp"
+#include "../../include/Core/Launcher.hpp"
+
+IDisplay* Launcher::change_lib(IDisplay* current, int input)
+{
+    static DLLoader<IDisplay> loader;
+
+    if (current) {
+        current->close();
+        delete current;
+    }
+    if (input == 1) {
+        return loader.load("./lib/arcade_ncurses.so");
+    } else if (input == 2) {
+        return loader.load("./lib/arcade_sdl2.so");
+    } else if (input == 3) {
+        return loader.load("./lib/arcade_sfml.so");
+    }
+    return nullptr;
+}
 
 Launcher::Launcher(const std::string& initialDisplayPath) : currentDisplay(displayLoader.load(initialDisplayPath)), isMenu(true) {
     currentDisplay->init();
@@ -24,24 +42,6 @@ Launcher::~Launcher()
     }
 }
 
-void Launcher::changeDisplay(int displayCode)
-{
-    if (!currentDisplay)
-        return;
-    IDisplay* newDisplay = nullptr;
-    switch (displayCode) {
-        case 1: newDisplay = displayLoader.load("./lib/arcade_ncurses.so"); break;
-        case 2: newDisplay = displayLoader.load("./lib/arcade_sdl2.so"); break;
-        case 3: newDisplay = displayLoader.load("./lib/arcade_sfml.so"); break;
-        default: return;
-    }
-    currentDisplay->close();
-    delete currentDisplay;
-    currentDisplay = newDisplay;
-    currentDisplay->init();
-
-}
-
 void Launcher::launchGame(int gameCode)
 {
     if (currentDisplay) {
@@ -56,8 +56,8 @@ void Launcher::launchGame(int gameCode)
             break;
         // ... autres cas
     }
-
-    if (currentDisplay) currentDisplay->init();
+    if (currentDisplay)
+        currentDisplay->init();
     isMenu = false;
 }
 
@@ -69,10 +69,14 @@ int Launcher::run()
             if (input == -1)
                 break;
             if (input >= 1 && input <= 3) {
-                changeDisplay(input);
+                IDisplay* newDisplay = change_lib(currentDisplay, input);
+                if (newDisplay) {
+                    currentDisplay = newDisplay;
+                    currentDisplay->init();
+                }
                 continue;
             }
-            if (currentGame) {
+            if (currentGame != nullptr) {
                 currentGame->handleInput(input);
                 GameState state = currentGame->update();
                 currentDisplay->render(state);

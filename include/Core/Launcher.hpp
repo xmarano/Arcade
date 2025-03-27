@@ -27,5 +27,5 @@ class Launcher {
         int run();
     private:
         void launchGame(int gameCode);
-        void changeDisplay(int displayCode);
+        IDisplay *change_lib(IDisplay *current, int input);
 };

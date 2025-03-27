@@ -7,7 +7,6 @@
 
 #include "sdl2.hpp"
 #include "../../../src/Core/Menu/sdl2/sdl2_menu.hpp"
-#include "../src/Core/ArcadeException.hpp"
 
 SDL2Display::SDL2Display() : menuRenderer(nullptr) {}
 
