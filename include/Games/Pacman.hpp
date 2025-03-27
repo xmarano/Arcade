@@ -73,4 +73,5 @@ class Pacman : public IGame {
         int manhattan_distance(std::pair<int, int> a, std::pair<int, int> b);
         bool is_valid_position(std::pair<int, int> pos);
         std::pair<int, int> random_move(std::pair<int, int> pos);
+        void reset_positions();
 };
