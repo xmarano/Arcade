@@ -37,7 +37,8 @@ GameState Pacman::update() {
         this->map = this->original_map;
         pos_player = DEFAULT_PLAYER_POSITION;
     }
-    if (clock() - phantom_clock > 150000) {
+    clock_t time_elasped = clock();
+    if (time_elasped - phantom_clock > 150000) {
         pos_red_ghost = move_ghost(pos_red_ghost, RED_GHOST);
         pos_pink_ghost = move_ghost(pos_pink_ghost, PINK_GHOST);
         pos_blue_ghost = move_ghost(pos_blue_ghost, BLUE_GHOST);
@@ -47,11 +48,13 @@ GameState Pacman::update() {
         }
         phantom_clock = clock();
     }
-    if (clock() - player_clock > 100000) {
+    if (time_elasped - player_clock > 100000) {
         handleInput(1);
         player_clock = clock();
     }
-
+    if (time_elasped - frozen_clock > 5000000) {
+        is_sous_frozen = false;
+    }
     // Conversion de la carte en entités génériques
     state.entities.clear();
     for (int i = 0; i < map.size(); ++i) {
@@ -84,24 +87,48 @@ GameState Pacman::update() {
                     entity.green = 0;
                     entity.blue = 0;
                     entity.alpha = 200;
+                    if (is_sous_frozen == true) {
+                        entity.red = 14;
+                        entity.green = 32;
+                        entity.blue = 255;
+                        entity.alpha = 200;
+                    }
                     break;
                 case PINK_GHOST:
                     entity.red = 255;
                     entity.green = 105;
                     entity.blue = 180;
                     entity.alpha = 200;
+                    if (is_sous_frozen == true) {
+                        entity.red = 14;
+                        entity.green = 32;
+                        entity.blue = 255;
+                        entity.alpha = 200;
+                    }
                     break;
                 case BLUE_GHOST:
                     entity.red = 0;
                     entity.green = 0;
                     entity.blue = 255;
                     entity.alpha = 200;
+                    if (is_sous_frozen == true) {
+                        entity.red = 14;
+                        entity.green = 32;
+                        entity.blue = 255;
+                        entity.alpha = 200;
+                    }
                     break;
                 case ORANGE_GHOST:
                     entity.red = 255;
                     entity.green = 165;
                     entity.blue = 0;
                     entity.alpha = 200;
+                    if (is_sous_frozen == true) {
+                        entity.red = 14;
+                        entity.green = 32;
+                        entity.blue = 255;
+                        entity.alpha = 200;
+                    }
                     break;
                 case TELEPORT:
                     entity.red = 0;
@@ -190,12 +217,27 @@ int Pacman::check_bonuses(char new_pos)
     } else if (new_pos == POWERUP) {
         this->score += (50 * level);
         this->is_sous_frozen = true;
+        frozen_clock = clock();
         return 0;
     }
     if (new_pos == RED_GHOST || new_pos == PINK_GHOST || new_pos == BLUE_GHOST || new_pos == ORANGE_GHOST) {
-        this->lives -= 1;
-        reset_positions();
-        return 1;
+        if (is_sous_frozen == false) {
+            this->lives -= 1;
+            reset_positions();
+            return 1;
+        } else {
+            if (new_pos == RED_GHOST) {
+                this->pos_red_ghost = RED_GHOST_POS;
+            } else if (new_pos == PINK_GHOST) {
+                this->pos_pink_ghost = PINK_GHOST_POS;
+            } else if (new_pos == BLUE_GHOST) {
+                this->pos_blue_ghost = BLUE_GHOST_POS;
+            } else if (new_pos == ORANGE_GHOST) {
+                this->pos_orange_ghost = ORANGE_GHOST_POS;
+            }
+            this->score += (200 * level);
+            return 0;
+        }
     }
     if (new_pos == TELEPORT) {
         if (this->pos_player == std::make_pair(TELEPORT_1.first, TELEPORT_1.second + 1)) {
@@ -267,12 +309,62 @@ std::pair<int, int> Pacman::random_move(std::pair<int, int> pos)
 
 std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost)
 {
+    std::pair<int, int> new_pos = pos_ghost;
+
+    if (is_sous_frozen == false)
+        new_pos = chase_movement(pos_ghost);
+    else
+        new_pos = fear_movement(pos_ghost);
+    if (this->map[new_pos.first][new_pos.second] == PLAYER) {
+        this->map[pos_ghost.first][pos_ghost.second] = this->coin_map[pos_ghost.first][pos_ghost.second];
+        if (is_sous_frozen == false) {
+            this->lives -= 1;
+            return std::make_pair(0, 0);
+        } else {
+            if (Ghost == RED_GHOST) {
+                this->pos_red_ghost = RED_GHOST_POS;
+                this->score += (200 * level);
+                return this->pos_red_ghost;
+            } else if (Ghost == PINK_GHOST) {
+                this->pos_pink_ghost = PINK_GHOST_POS;
+                this->score += (200 * level);
+                return this->pos_pink_ghost;
+            } else if (Ghost == BLUE_GHOST) {
+                this->pos_blue_ghost = BLUE_GHOST_POS;
+                this->score += (200 * level);
+                return this->pos_blue_ghost;
+            } else if (Ghost == ORANGE_GHOST) {
+                this->pos_orange_ghost = ORANGE_GHOST_POS;
+                this->score += (200 * level);
+                return this->pos_orange_ghost;
+            }
+        }
+    }
+    if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PLAYER)
+        this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
+    else {
+        if (this->coin_map[pos_ghost.first][pos_ghost.second] == COIN || this->coin_map[pos_ghost.first][pos_ghost.second] == POWERUP)
+            this->map[pos_ghost.first][pos_ghost.second] = this->original_map[pos_ghost.first][pos_ghost.second];
+        else
+            this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
+    }
+    this->map[new_pos.first][new_pos.second] = Ghost;
+    return new_pos;
+}
+
+extern "C" IGame* create()
+{
+    return new Pacman();
+}
+
+std::pair<int, int> Pacman::chase_movement(std::pair<int, int> pos_ghost)
+{
     int tmp = manhattan_distance(pos_ghost, this->pos_player);
     int distance = manhattan_distance(pos_ghost, this->pos_player);
     std::pair<int, int> new_pos = pos_ghost;
 
     if (is_valid_position(std::make_pair(pos_ghost.first - 1, pos_ghost.second)) == true) {
-        if (distance >= manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player)) {
+        if (distance > manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player)) {
             distance = manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player);
             new_pos = std::make_pair(pos_ghost.first - 1, pos_ghost.second);
         }
@@ -297,24 +389,40 @@ std::pair<int, int> Pacman::move_ghost(std::pair<int, int> pos_ghost, char Ghost
     }
     if (tmp == distance)
         new_pos = random_move(pos_ghost);
-    if (this->map[new_pos.first][new_pos.second] == PLAYER) {
-        this->lives -= 1;
-        this->map[pos_ghost.first][pos_ghost.second] = this->coin_map[pos_ghost.first][pos_ghost.second];
-        return std::make_pair(0, 0);
-    }
-    if (this->original_map[pos_ghost.first][pos_ghost.second] == BLUE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == ORANGE_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PINK_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == RED_GHOST || this->original_map[pos_ghost.first][pos_ghost.second] == PLAYER)
-        this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
-    else {
-        if (this->coin_map[pos_ghost.first][pos_ghost.second] == COIN || this->coin_map[pos_ghost.first][pos_ghost.second] == POWERUP)
-            this->map[pos_ghost.first][pos_ghost.second] = this->original_map[pos_ghost.first][pos_ghost.second];
-        else
-            this->map[pos_ghost.first][pos_ghost.second] = EMPTY;
-    }
-    this->map[new_pos.first][new_pos.second] = Ghost;
     return new_pos;
 }
 
-extern "C" IGame* create()
+std::pair<int, int> Pacman::fear_movement(std::pair<int, int> pos_ghost)
 {
-    return new Pacman();
+    int tmp = manhattan_distance(pos_ghost, this->pos_player);
+    int distance = manhattan_distance(pos_ghost, this->pos_player);
+    std::pair<int, int> new_pos = pos_ghost;
+
+    if (is_valid_position(std::make_pair(pos_ghost.first - 1, pos_ghost.second)) == true) {
+        if (distance < manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first - 1, pos_ghost.second), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first - 1, pos_ghost.second);
+        }
+    }
+    if (is_valid_position(std::make_pair(pos_ghost.first + 1, pos_ghost.second)) == true) {
+        if (distance < manhattan_distance(std::make_pair(pos_ghost.first + 1, pos_ghost.second), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first + 1, pos_ghost.second), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first + 1, pos_ghost.second);
+        }
+    }
+    if (is_valid_position(std::make_pair(pos_ghost.first, pos_ghost.second - 1)) == true) {
+        if (distance < manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second - 1), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second - 1), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first, pos_ghost.second - 1);
+        }
+    }
+    if (is_valid_position(std::make_pair(pos_ghost.first, pos_ghost.second + 1)) == true) {
+        if (distance < manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second + 1), this->pos_player)) {
+            distance = manhattan_distance(std::make_pair(pos_ghost.first, pos_ghost.second + 1), this->pos_player);
+            new_pos = std::make_pair(pos_ghost.first, pos_ghost.second + 1);
+        }
+    }
+    if (tmp == distance)
+        new_pos = random_move(pos_ghost);
+    return new_pos;
 }
