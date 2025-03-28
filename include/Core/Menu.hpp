@@ -57,4 +57,6 @@ class IMenuRenderer {
         virtual MenuEvent pollEvent() = 0;
 
         virtual void DrawText1(int pos_x, int pos_y, string text) = 0;
+        virtual void clearScreen() = 0;
+        virtual void displayy() = 0;
 };

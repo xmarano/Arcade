@@ -8,6 +8,7 @@
 #include <iostream>
 #include <filesystem>
 #include "../../../include/Core/Menu.hpp"
+#include <ncurses.h>
 
 Menu::Menu() : current({1, 1}), selectedOption({0, 0}), isUsernameSet(false)
 {
@@ -245,6 +246,8 @@ int Menu::draw_menu(IDisplay *renderer)
     string title_3 = "Affichage:";
     IMenuRenderer *menuRenderer = renderer->getMenuRenderer();
 
+    menuRenderer->clearScreen();
+
     DisplayText(menuRenderer, title_0, 0, 0);
     DisplayText(menuRenderer, title_1, 1, 2);
     DisplayText(menuRenderer, title_2, 2, 2);
@@ -257,6 +260,9 @@ int Menu::draw_menu(IDisplay *renderer)
     MenuEvent ev = menuRenderer->pollEvent();
 
     int ret = Actions(ev);
+
+    menuRenderer->displayy();
+
     if (ret == -1) { return -1;}
     if (ret == CODE_NC_PACMAN) return CODE_NC_PACMAN;
     if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;

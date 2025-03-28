@@ -104,8 +104,9 @@ int Launcher::run()
             }
         } else {
             int ret = menu.draw_menu(currentDisplay);
-            if (ret == -1)
+            if (ret == -1) {
                 break;
+            }
             if (ret >= CODE_NC_PACMAN && ret <= CODE_SFML_SNAKE) {
                 launchGame(ret);
             }

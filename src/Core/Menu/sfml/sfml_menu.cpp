@@ -47,5 +47,14 @@ void SfmlMenu::DrawText1(int pos_x, int pos_y, string text)
     displayText.setFillColor(sf::Color::White);
     displayText.setPosition(pos_x, pos_y);
     display->window.draw(displayText);
+}
+
+void SfmlMenu::clearScreen()
+{
+    display->window.clear();
+}
+
+void SfmlMenu::displayy()
+{
     display->window.display();
 }

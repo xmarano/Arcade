@@ -33,21 +33,9 @@ MenuEvent NcursesMenu::pollEvent()
 void NcursesMenu::DrawText1(int pos_x, int pos_y, string text)
 {
     mvprintw(pos_y, pos_x, text.c_str());
+    refresh();
+}
 
-    // int screenWidth = getmaxx(stdscr);
-    // int screenHeight = getmaxy(stdscr);
-    // int y = (screenHeight / 10 * height);
-    // string error = "!-- ERROR DISPLAY --!";
-
-    // if (module == 0) {
-    //     mvprintw(y, (screenWidth / 2) - (text.length() / 2), text.c_str());
-    // } else if (module == 1) {
-    //     mvprintw(y, ((screenWidth / 3) / 2) - (text.length() / 2), text.c_str());
-    // } else if (module == 2) {
-    //     mvprintw(y, ((screenWidth / 1) / 2) - (text.length() / 2), text.c_str());
-    // } else if (module == 3) {
-    //     mvprintw(y, ((screenWidth / 3) * 2.5) - (text.length() / 2), text.c_str());
-    // } else {
-    //     mvprintw(y, (screenWidth / 2) - (error.length() / 2), error.c_str());
-    // }
+void NcursesMenu::clearScreen() {
+    clear();
 }
