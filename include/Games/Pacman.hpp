@@ -76,4 +76,5 @@ class Pacman : public IGame {
         void reset_positions();
         std::pair<int, int> chase_movement(std::pair<int, int> pos_ghost);
         std::pair<int, int> fear_movement(std::pair<int, int> pos_ghost);
+        void draw_hud();
 };
