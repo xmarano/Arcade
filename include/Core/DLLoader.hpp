@@ -9,6 +9,7 @@
 #include <dlfcn.h>
 #include <string>
 #include <stdexcept>
+#include "ArcadeException.hpp"
 
 template <typename T>
 class DLLoader {
@@ -22,10 +23,10 @@ class DLLoader {
             }
             m_handle = dlopen(path.c_str(), RTLD_LAZY);
             if (!m_handle)
-                throw std::runtime_error(dlerror());
+                throw ArcadeException(dlerror());
             auto create = reinterpret_cast<T*(*)()>(dlsym(m_handle, "create"));
             if (!create)
-                throw std::runtime_error(dlerror());
+                throw ArcadeException(dlerror());
 
             m_instance = create();
             return m_instance;

@@ -9,32 +9,41 @@
 
 void NcursesDisplay::init()
 {
-    ofstream file("temp.txt");
-    file << "caaca";
     initscr();
     start_color();
     noecho();
     curs_set(0);
     keypad(stdscr, TRUE);
+    clear();
+    refresh();
 }
 
 void NcursesDisplay::close()
 {
-    endwin();
+    if (!isendwin()) {
+        endwin();
+    }
 }
 
 void NcursesDisplay::render(const GameState &state)
 {
     clear();
     for (const auto& entity : state.entities) {
-        mvaddch(entity.y, entity.x, entity.element);
+        mvaddch(entity.y, entity.x, entity.element); //! mvprintw fait de la merde
     }
     refresh();
 }
 
+void NcursesDisplay::renderText(const std::string &text, int x, int y)
+{
+    mvprintw(y, x, text.c_str());
+}
+
 int NcursesDisplay::getInput()
 {
+    // nodelay(stdscr, TRUE); //! sus mais ca marche..
     int ch = getch();
+
     switch (ch) {
         case 'q': return -1;
         case 'o': return 2;

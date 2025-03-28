@@ -46,9 +46,9 @@ core:
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sfml/sfml_menu.cpp -o sfml_menu.o
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o
 ifeq ($(UNAME),Darwin)
-	g++ Main.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(DARWIN_SDL2_FLAGS) $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS)
+	g++ Main.o Launcher.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(DARWIN_SDL2_FLAGS) $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS)
 else
-	g++ Main.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(LIBS_FLAGS)
+	g++ Main.o Launcher.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(LIBS_FLAGS)
 endif
 	rm -f *.o
 
