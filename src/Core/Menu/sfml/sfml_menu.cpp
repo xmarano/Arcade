@@ -20,8 +20,6 @@ MenuEvent SfmlMenu::pollEvent()
         if (event.type == sf::Event::Closed)
             return MenuEvent::Quit;
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::Escape)
-                return MenuEvent::Quit;
             if (event.key.code == sf::Keyboard::Down)
                 return MenuEvent::Down;
             if (event.key.code == sf::Keyboard::Up)

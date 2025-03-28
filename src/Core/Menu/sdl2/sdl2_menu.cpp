@@ -14,11 +14,11 @@ MenuEvent Sdl2Menu::pollEvent()
 {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
-        if (e.type == SDL_QUIT)
+        if (e.type == SDL_QUIT) {
             return MenuEvent::Quit;
+        }
         if (e.type == SDL_KEYDOWN) {
             switch (e.key.keysym.sym) {
-                case SDLK_q: return MenuEvent::Quit;
                 case SDLK_UP: return MenuEvent::Up;
                 case SDLK_DOWN: return MenuEvent::Down;
                 case SDLK_RETURN: return MenuEvent::Enter;

@@ -41,6 +41,7 @@ void SDL2Display::close()
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
+        TTF_Quit();
     }
 }
 
