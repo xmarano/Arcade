@@ -37,7 +37,7 @@ MenuEvent SfmlMenu::pollEvent()
     return MenuEvent::None;
 }
 
-void SfmlMenu::DrawText1(string text, int module, int height, int weight)
+void SfmlMenu::DrawText1(int pos_x, int pos_y, string text)
 {
     sf::Text displayText;
 
@@ -45,7 +45,7 @@ void SfmlMenu::DrawText1(string text, int module, int height, int weight)
     displayText.setString(text);
     displayText.setCharacterSize(24);
     displayText.setFillColor(sf::Color::White);
-    displayText.setPosition(weight, height);
+    displayText.setPosition(pos_x, pos_y);
     display->window.draw(displayText);
     display->window.display();
 }

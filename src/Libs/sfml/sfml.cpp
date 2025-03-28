@@ -92,6 +92,16 @@ int SFMLDisplay::getInput()
     return 0;
 }
 
+int SFMLDisplay::getScreenWidth()
+{
+    return window.getSize().x;
+}
+
+int SFMLDisplay::getScreenHeight()
+{
+    return window.getSize().y;
+}
+
 extern "C" {
     IDisplay* create() { return new SFMLDisplay(); }
 }

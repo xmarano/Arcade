@@ -30,14 +30,14 @@ MenuEvent Sdl2Menu::pollEvent()
     return MenuEvent::None;
 }
 
-void Sdl2Menu::DrawText1(string text, int module, int x, int y)
+void Sdl2Menu::DrawText1(int pos_x, int pos_y, string text)
 {
     SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
     SDL_RenderClear(display->renderer);
     SDL_Color color = {255, 255, 255, 255};
-    SDL_Surface* surface = TTF_RenderText_Solid(display->font, text.c_str(), color);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(display->renderer, surface);
-    SDL_Rect dest = {x, y, surface->w, surface->h};
+    SDL_Surface *surface = TTF_RenderText_Solid(display->font, text.c_str(), color);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(display->renderer, surface);
+    SDL_Rect dest = {pos_x, pos_y, surface->w, surface->h};
     SDL_RenderCopy(display->renderer, texture, NULL, &dest);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);

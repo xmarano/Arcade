@@ -54,7 +54,28 @@ void Launcher::launchGame(int gameCode)
             currentDisplay = displayLoader.load("./lib/arcade_ncurses.so");
             currentGame = gameLoader.load("./lib/arcade_Pacman.so");
             break;
-        // ... autres cas
+        case CODE_SDL2_PACMAN:
+            currentDisplay = displayLoader.load("./lib/arcade_sdl2.so");
+            currentGame = gameLoader.load("./lib/arcade_Pacman.so");
+            break;
+        case CODE_SFML_PACMAN:
+            currentDisplay = displayLoader.load("./lib/arcade_sfml.so");
+            currentGame = gameLoader.load("./lib/arcade_Pacman.so");
+            break;
+        case CODE_NC_SNAKE:
+            currentDisplay = displayLoader.load("./lib/arcade_ncurses.so");
+            currentGame = gameLoader.load("./lib/arcade_Snake.so");
+            break;
+        case CODE_SDL2_SNAKE:
+            currentDisplay = displayLoader.load("./lib/arcade_sdl2.so");
+            currentGame = gameLoader.load("./lib/arcade_Snake.so");
+            break;
+        case CODE_SFML_SNAKE:
+            currentDisplay = displayLoader.load("./lib/arcade_sfml.so");
+            currentGame = gameLoader.load("./lib/arcade_Snake.so");
+            break;
+        default:
+            break;
     }
     if (currentDisplay)
         currentDisplay->init();

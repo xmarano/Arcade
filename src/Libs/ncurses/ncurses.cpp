@@ -57,6 +57,23 @@ int NcursesDisplay::getInput()
     return 0;
 }
 
+int NcursesDisplay::getScreenWidth()
+{
+    int maxX, maxY;
+
+    getmaxyx(stdscr, maxY, maxX);
+    return maxX;
+}
+
+int NcursesDisplay::getScreenHeight()
+{
+    int maxX, maxY;
+
+    getmaxyx(stdscr, maxY, maxX);
+    return maxY;
+}
+
+
 extern "C" IDisplay* create()
 {
     return new NcursesDisplay();
