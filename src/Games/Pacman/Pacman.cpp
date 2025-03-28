@@ -39,7 +39,7 @@ GameState Pacman::update() {
     if (win_condition() == 1) {
         level += 1;
         this->map = this->original_map;
-        pos_player = DEFAULT_PLAYER_POSITION;
+        reset_positions();
     }
     clock_t time_elasped = clock();
     if (time_elasped - phantom_clock > 150000) {
