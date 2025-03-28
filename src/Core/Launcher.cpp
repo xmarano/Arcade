@@ -51,7 +51,7 @@ void Launcher::launchGame(int gameCode)
 
     switch (gameCode) {
         case CODE_NC_PACMAN:
-            currentDisplay = displayLoader.load("./lib/arcade_ncurses.so");
+            currentDisplay = displayLoader.load("./lib/arcade_sdl2.so");
             currentGame = gameLoader.load("./lib/arcade_Pacman.so");
             break;
         // ... autres cas
