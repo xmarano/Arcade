@@ -13,6 +13,10 @@ Pacman::Pacman()
     reset();
 }
 
+void Pacman::draw_hud()
+{
+}
+
 void Pacman::reset()
 {
     score = 0;
