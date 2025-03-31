@@ -9,8 +9,8 @@ RESET   = $(shell tput sgr0)
 
 NAME	=	arcade
 
-GAMES	=	Pacman	\
-			Snake
+GAMES	=	pacman	\
+			snake
 
 LIBS_GRAPHIC	=	ncurses	\
 					sdl2	\
