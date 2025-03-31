@@ -44,10 +44,11 @@ core:
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/Menu.cpp -o Menu.o
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/ncurses/nc_menu.cpp -o nc_menu.o
 	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sfml/sfml_menu.cpp -o sfml_menu.o
-	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o
 ifeq ($(UNAME),Darwin)
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o $(DARWIN_SDL2_FLAGS)
 	g++ Main.o Launcher.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(DARWIN_SDL2_FLAGS) $(DARWIN_SDL2_FLAGS) $(LIBS_FLAGS)
 else
+	g++ $(FLAGS) -Iinclude -c src/Core/Menu/sdl2/sdl2_menu.cpp -o sdl2_menu.o
 	g++ Main.o Launcher.o DLLoader.o nc_menu.o sfml_menu.o sdl2_menu.o Menu.o -o arcade -ldl $(LIBS_FLAGS)
 endif
 	rm -f *.o
