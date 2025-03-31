@@ -50,4 +50,6 @@ class IDisplay {
         virtual int getInput() = 0;
         virtual string getName() const = 0;
         virtual IMenuRenderer* getMenuRenderer() = 0;
+        virtual int getScreenWidth() = 0;
+        virtual int getScreenHeight() = 0;
 };

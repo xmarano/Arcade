@@ -8,6 +8,7 @@
 #include <iostream>
 #include <filesystem>
 #include "../../../include/Core/Menu.hpp"
+#include <ncurses.h>
 
 Menu::Menu() : current({1, 1}), selectedOption({0, 0}), isUsernameSet(false)
 {
@@ -17,101 +18,114 @@ Menu::~Menu()
 {
 }
 
-void Menu::DisplayText(string text, int module, int height, IMenuRenderer *menuRenderer)
+int Menu::getScreenWidth()
 {
-    // int screenWidth = getScreenWidth();
-    // int screenHeight = getScreenHeight();
-    // int y = (screenHeight / 10 * height);
+    if (!renderer) return 0;
+    return renderer->getScreenWidth();
+}
+
+int Menu::getScreenHeight()
+{
+    if (!renderer) return 0;
+    return renderer->getScreenHeight();
+}
+
+void Menu::DisplayText(IMenuRenderer *menuRenderer, string text, int module, int height)
+{
+    int screenWidth = getScreenWidth();
+    int screenHeight = getScreenHeight();
+    int y = (screenHeight / 10 * height);
+
     string error = "!-- ERROR DISPLAY --!";
-    // if (module == 0) {
-        menuRenderer->DrawText1(text, 0, 0, 0);
-    // } else if (module == 1) {
-    //     this->renderer->DrawText1(((screenWidth / 3) / 2) - (text.length() / 2), y, text);
-    // } else if (module == 2) {
-    //     this->renderer->DrawText1(((screenWidth / 1) / 2) - (text.length() / 2), y, text);
-    // } else if (module == 3) {
-    //     this->renderer->DrawText1(((screenWidth / 3) * 2.5) - (text.length() / 2), y, text);
-    // } else {
-    //     this->renderer->DrawText1((screenWidth / 2) - (error.length() / 2), y, error);
-    // }
+    if (module == 0) {
+        menuRenderer->DrawText1((screenWidth / 2) - (text.length() / 2), y, text);
+    } else if (module == 1) {
+        menuRenderer->DrawText1(((screenWidth / 3) / 2) - (text.length() / 2), y, text);
+    } else if (module == 2) {
+        menuRenderer->DrawText1(((screenWidth / 1) / 2) - (text.length() / 2), y, text);
+    } else if (module == 3) {
+        menuRenderer->DrawText1(((screenWidth / 3) * 2.5) - (text.length() / 2), y, text);
+    } else {
+        menuRenderer->DrawText1((screenWidth / 2) - (error.length() / 2), y, error);
+    }
 }
 
-void Menu::DisplayModules1(IDisplay *renderer)
+void Menu::DisplayModules1(IMenuRenderer *menuRenderer)
 {
-    // vector<string> moduleGames;
-    // moduleGames.push_back("Pacman");
-    // moduleGames.push_back("Snake");
+    vector<string> moduleGames;
+    moduleGames.push_back("Pacman");
+    moduleGames.push_back("Snake");
 
-    // for (int i = 0; i < moduleGames.size(); i++) {
-    //     if (current.first == 1 && current.second == i + 1) {
-    //         DisplayText("> " + moduleGames[i] + " <", 1, i + 4);
-    //     } else {
-    //         DisplayText(moduleGames[i], 1, i + 4);
-    //     }
-    // }
+    for (int i = 0; i < moduleGames.size(); i++) {
+        if (current.first == 1 && current.second == i + 1) {
+            DisplayText(menuRenderer, "> " + moduleGames[i] + " <", 1, i + 4);
+        } else {
+            DisplayText(menuRenderer, moduleGames[i], 1, i + 4);
+        }
+    }
 }
 
-// vector<string> Menu::get_stats()
-// {
-//     vector<string> highScore(4);
-//     // Username
-//     ifstream usernameFile("Assets/Stats/username.txt");
-//     if (!usernameFile.is_open())
-//         // throw ArcadeException("Error opening username file");
-
-//     usernameFile >> highScore[0];
-//     if (highScore[0] == "")
-//         highScore[0] = "__________";
-//     else
-//         isUsernameSet = true;
-
-//     usernameFile.close();
-
-//     // Pacman
-//     ifstream highscorePacman("Assets/Stats/pacman_highscore.txt");
-//     ifstream highlevelPacman("Assets/Stats/pacman_highlevel.txt");
-
-//     if (!highscorePacman.is_open() || !highlevelPacman.is_open())
-//         // throw ArcadeException("Error opening highscore or highlevel file for pacman");
-
-//     highscorePacman >> highScore[1];
-//     highlevelPacman >> highScore[2];
-
-//     highscorePacman.close();
-//     highlevelPacman.close();
-
-//     // Snake
-//     ifstream highscoreSnake("Assets/Stats/snake_highscore.txt");
-
-//     if (!highscoreSnake.is_open())
-//         // throw ArcadeException("Error opening highscore file for snake");
-
-//     highscoreSnake >> highScore[3];
-
-//     highscoreSnake.close();
-//     return highScore;
-// }
-
-void Menu::DisplayModules2(IDisplay *renderer)
+vector<string> Menu::get_stats()
 {
-    // vector<string> highScore = get_stats();
-    // if (current.first != 3) {
-    //     DisplayText("User : " + highScore[0], 2, 4);
-    // }
-    // DisplayText("HighScore Pacman : " + highScore[1], 2, 5);
-    // DisplayText("HighLevel Pacman  : " + highScore[2], 2, 6);
-    // DisplayText("HighScore Snake  : " + highScore[3], 2, 7);
+    vector<string> highScore(4);
+    // Username
+    ifstream usernameFile("Assets/Stats/username.txt");
+    if (!usernameFile.is_open())
+        throw ArcadeException("Error opening username file");
 
-    // DisplayText("+---------------+", 2, 8);
-    // if (current.first == 4 && current.second == 1) {
-    //     DisplayText("| >> CONFIRM << |", 2, 9);
-    // } else {
-    //     DisplayText("|    CONFIRM    |", 2, 9);
-    // }
-    // DisplayText("+---------------+", 2, 10);
+    usernameFile >> highScore[0];
+    if (highScore[0] == "")
+        highScore[0] = "__________";
+    else
+        isUsernameSet = true;
+
+    usernameFile.close();
+
+    // Pacman
+    ifstream highscorePacman("Assets/Stats/pacman_highscore.txt");
+    ifstream highlevelPacman("Assets/Stats/pacman_highlevel.txt");
+
+    if (!highscorePacman.is_open() || !highlevelPacman.is_open())
+        throw ArcadeException("Error opening highscore or highlevel file for pacman");
+
+    highscorePacman >> highScore[1];
+    highlevelPacman >> highScore[2];
+
+    highscorePacman.close();
+    highlevelPacman.close();
+
+    // Snake
+    ifstream highscoreSnake("Assets/Stats/snake_highscore.txt");
+
+    if (!highscoreSnake.is_open())
+        throw ArcadeException("Error opening highscore file for snake");
+
+    highscoreSnake >> highScore[3];
+
+    highscoreSnake.close();
+    return highScore;
 }
 
-void Menu::DisplayModules3(IDisplay *renderer)
+void Menu::DisplayModules2(IMenuRenderer *menuRenderer)
+{
+    vector<string> highScore = get_stats();
+    if (current.first != 3) {
+        DisplayText(menuRenderer, "User : " + highScore[0], 2, 4);
+    }
+    DisplayText(menuRenderer, "HighScore Pacman : " + highScore[1], 2, 5);
+    DisplayText(menuRenderer, "HighLevel Pacman  : " + highScore[2], 2, 6);
+    DisplayText(menuRenderer, "HighScore Snake  : " + highScore[3], 2, 7);
+
+    DisplayText(menuRenderer, "+---------------+", 2, 8);
+    if (current.first == 4 && current.second == 1) {
+        DisplayText(menuRenderer, "| >> CONFIRM << |", 2, 9);
+    } else {
+        DisplayText(menuRenderer, "|    CONFIRM    |", 2, 9);
+    }
+    DisplayText(menuRenderer, "+---------------+", 2, 10);
+}
+
+void Menu::DisplayModules3(IMenuRenderer *menuRenderer)
 {
     vector<string> moduleFiles;
 
@@ -124,16 +138,16 @@ void Menu::DisplayModules3(IDisplay *renderer)
     //         moduleFiles.push_back(temp_file);
     //     }
     // }
-    // moduleFiles.push_back("Ncurses");
-    // moduleFiles.push_back("Sdl2");
-    // moduleFiles.push_back("Sfml");
-    // for (int i = 0; i < moduleFiles.size(); i++) {
-    //     if (current.first == 2 && current.second == i + 1) {
-    //         DisplayText("> " + moduleFiles[i] + " <", 3, i + 4);
-    //     } else {
-    //         DisplayText(moduleFiles[i], 3, i + 4);
-    //     }
-    // }
+    moduleFiles.push_back("Ncurses");
+    moduleFiles.push_back("Sdl2");
+    moduleFiles.push_back("Sfml");
+    for (int i = 0; i < moduleFiles.size(); i++) {
+        if (current.first == 2 && current.second == i + 1) {
+            DisplayText(menuRenderer, "> " + moduleFiles[i] + " <", 3, i + 4);
+        } else {
+            DisplayText(menuRenderer, moduleFiles[i], 3, i + 4);
+        }
+    }
 }
 
 int Menu::Actions(MenuEvent ev)
@@ -144,82 +158,82 @@ int Menu::Actions(MenuEvent ev)
     if (ev == MenuEvent::PlayPacman) {
         return CODE_NC_PACMAN;
     }
-    // if (ev == MenuEvent::Up) {
-    //     if (current.second > 1) {
-    //         current.second--;
-    //     }
-    // }
-    // if (ev == MenuEvent::Down) {
-    //     if (current.first == 1) {
-    //         if (current.second < 2) {
-    //             current.second++;
-    //         }
-    //     }
-    //     if (current.first == 2) {
-    //         if (current.second < 3) {
-    //             current.second++;
-    //         }
-    //     }
-    // }
-    // if (ev == MenuEvent::Enter) {
-    //     if (current.first == 1) {
-    //         selectedOption.first = current.second;
-    //         current.first = 2;
-    //         current.second = 1;
-    //     } else if (current.first == 2) {
-    //         selectedOption.second = current.second;
-    //         string username;
-    //         ifstream userFile("Assets/Stats/username.txt");
-    //         userFile >> username;
-    //         userFile.close();
-    //         if (username == "") {
-    //             current.first = 3;
-    //         } else {
-    //             current.first = 4;
-    //         }
-    //         current.second = 1;
-    //     } else if (current.first == 3) {
-    //         if (!isUsernameSet) {
-    //             // string username;
-    //             // char ch;
-    //             // while ((ch = getch()) != '\n') {
-    //                 // username += ch;
-    //                 // DisplayText("User : " + username, 2, 4);
-    //             // }
-    //             // ofstream userFile("Assets/Stats/username.txt");
-    //             // userFile << username;
-    //             // userFile.close();
-    //         }
-    //         current.first = 4;
-    //     } else if (current.first == 4) {
-    //         // pacman
-    //         if (selectedOption.first == 1 && selectedOption.second == 1) {
-    //             return CODE_NC_PACMAN;
-    //         } else if (selectedOption.first == 1 && selectedOption.second == 2) {
-    //             return CODE_SDL2_PACMAN;
-    //         } else if (selectedOption.first == 1 && selectedOption.second == 3) {
-    //             return CODE_SFML_PACMAN;
-    //         }
-    //         // snake
-    //         if (selectedOption.first == 2 && selectedOption.second == 1) {
-    //             return CODE_NC_SNAKE;
-    //         } else if (selectedOption.first == 2 && selectedOption.second == 2) {
-    //             return CODE_SDL2_SNAKE;
-    //         } else if (selectedOption.first == 2 && selectedOption.second == 3) {
-    //             return CODE_SFML_SNAKE;
-    //         }
-    //     }
-    // }
-    // if (ev == MenuEvent::Back) {
-    //     if (current.first == 2) {
-    //         current.first = 1;
-    //         if (current.second == 3) {
-    //             current.second = 2;
-    //         }
-    //     } else if (current.first == 3) {
-    //         current.first = 2;
-    //     }
-    // }
+    if (ev == MenuEvent::Up) {
+        if (current.second > 1) {
+            current.second--;
+        }
+    }
+    if (ev == MenuEvent::Down) {
+        if (current.first == 1) {
+            if (current.second < 2) {
+                current.second++;
+            }
+        }
+        if (current.first == 2) {
+            if (current.second < 3) {
+                current.second++;
+            }
+        }
+    }
+    if (ev == MenuEvent::Enter) {
+        if (current.first == 1) {
+            selectedOption.first = current.second;
+            current.first = 2;
+            current.second = 1;
+        } else if (current.first == 2) {
+            selectedOption.second = current.second;
+            string username;
+            ifstream userFile("Assets/Stats/username.txt");
+            userFile >> username;
+            userFile.close();
+            if (username == "") {
+                current.first = 3;
+            } else {
+                current.first = 4;
+            }
+            current.second = 1;
+        } else if (current.first == 3) {
+            if (!isUsernameSet) {
+                // string username;
+                // char ch;
+                // while ((ch = getch()) != '\n') {
+                    // username += ch;
+                    // DisplayText("User : " + username, 2, 4);
+                // }
+                // ofstream userFile("Assets/Stats/username.txt");
+                // userFile << username;
+                // userFile.close();
+            }
+            current.first = 4;
+        } else if (current.first == 4) {
+            // pacman
+            if (selectedOption.first == 1 && selectedOption.second == 1) {
+                return CODE_NC_PACMAN;
+            } else if (selectedOption.first == 1 && selectedOption.second == 2) {
+                return CODE_SDL2_PACMAN;
+            } else if (selectedOption.first == 1 && selectedOption.second == 3) {
+                return CODE_SFML_PACMAN;
+            }
+            // snake
+            if (selectedOption.first == 2 && selectedOption.second == 1) {
+                return CODE_NC_SNAKE;
+            } else if (selectedOption.first == 2 && selectedOption.second == 2) {
+                return CODE_SDL2_SNAKE;
+            } else if (selectedOption.first == 2 && selectedOption.second == 3) {
+                return CODE_SFML_SNAKE;
+            }
+        }
+    }
+    if (ev == MenuEvent::Back) {
+        if (current.first == 2) {
+            current.first = 1;
+            if (current.second == 3) {
+                current.second = 2;
+            }
+        } else if (current.first == 3) {
+            current.first = 2;
+        }
+    }
     return 0;
 }
 
@@ -232,18 +246,23 @@ int Menu::draw_menu(IDisplay *renderer)
     string title_3 = "Affichage:";
     IMenuRenderer *menuRenderer = renderer->getMenuRenderer();
 
-    DisplayText(title_0, 0, 0, menuRenderer);
-    // DisplayText(title_1, 1, 2);
-    // DisplayText(title_2, 2, 2);
-    // DisplayText(title_3, 3, 2);
+    menuRenderer->clearScreen();
 
-    // DisplayModules1(renderer);
-    // DisplayModules2(renderer);
-    // DisplayModules3(renderer);
+    DisplayText(menuRenderer, title_0, 0, 0);
+    DisplayText(menuRenderer, title_1, 1, 2);
+    DisplayText(menuRenderer, title_2, 2, 2);
+    DisplayText(menuRenderer, title_3, 3, 2);
+
+    DisplayModules1(menuRenderer);
+    DisplayModules2(menuRenderer);
+    DisplayModules3(menuRenderer);
 
     MenuEvent ev = menuRenderer->pollEvent();
 
     int ret = Actions(ev);
+
+    menuRenderer->displayy();
+
     if (ret == -1) { return -1;}
     if (ret == CODE_NC_PACMAN) return CODE_NC_PACMAN;
     if (ret == CODE_SDL2_PACMAN) return CODE_SDL2_PACMAN;

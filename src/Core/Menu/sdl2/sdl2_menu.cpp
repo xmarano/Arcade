@@ -14,11 +14,11 @@ MenuEvent Sdl2Menu::pollEvent()
 {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
-        if (e.type == SDL_QUIT)
+        if (e.type == SDL_QUIT) {
             return MenuEvent::Quit;
+        }
         if (e.type == SDL_KEYDOWN) {
             switch (e.key.keysym.sym) {
-                case SDLK_q: return MenuEvent::Quit;
                 case SDLK_UP: return MenuEvent::Up;
                 case SDLK_DOWN: return MenuEvent::Down;
                 case SDLK_RETURN: return MenuEvent::Enter;
@@ -30,16 +30,23 @@ MenuEvent Sdl2Menu::pollEvent()
     return MenuEvent::None;
 }
 
-void Sdl2Menu::DrawText1(string text, int module, int x, int y)
+void Sdl2Menu::DrawText1(int pos_x, int pos_y, string text)
 {
-    SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
-    SDL_RenderClear(display->renderer);
     SDL_Color color = {255, 255, 255, 255};
-    SDL_Surface* surface = TTF_RenderText_Solid(display->font, text.c_str(), color);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(display->renderer, surface);
-    SDL_Rect dest = {x, y, surface->w, surface->h};
+    SDL_Surface *surface = TTF_RenderText_Blended(display->font, text.c_str(), color);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(display->renderer, surface);
+    SDL_Rect dest = {pos_x, pos_y, surface->w, surface->h};
     SDL_RenderCopy(display->renderer, texture, NULL, &dest);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+void Sdl2Menu::clearScreen()
+{
+    SDL_RenderClear(display->renderer);
+}
+
+void Sdl2Menu::displayy()
+{
     SDL_RenderPresent(display->renderer);
 }

@@ -22,4 +22,6 @@ class NcursesDisplay : public IDisplay
         void renderText(const std::string& text, int x, int y);
         int getInput() override;
         std::string getName() const override { return "Ncurses"; }
+        int getScreenWidth() override;
+        int getScreenHeight() override;
 };

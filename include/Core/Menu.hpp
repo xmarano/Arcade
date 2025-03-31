@@ -41,11 +41,14 @@ class Menu {
         Menu();
         ~Menu();
         int draw_menu(IDisplay *renderer); // Ajouter le paramètre IDisplay*
-        void DisplayText(string text, int module, int height, IMenuRenderer *menuRenderer);
-        void DisplayModules1(IDisplay *renderer);
-        void DisplayModules2(IDisplay *renderer);
-        void DisplayModules3(IDisplay *renderer);
+        void DisplayText(IMenuRenderer *menuRenderer, string text, int module, int height);
+        void DisplayModules1(IMenuRenderer *menuRenderer);
+        void DisplayModules2(IMenuRenderer *menuRenderer);
+        void DisplayModules3(IMenuRenderer *menuRenderer);
+        vector<string> get_stats();
         int Actions(MenuEvent ev); // Corriger le paramètre
+        int getScreenWidth();
+        int getScreenHeight();
 };
 
 class IMenuRenderer {
@@ -53,5 +56,7 @@ class IMenuRenderer {
         virtual ~IMenuRenderer() = default;
         virtual MenuEvent pollEvent() = 0;
 
-        virtual void DrawText1(string text, int module, int height, int weight) = 0;
+        virtual void DrawText1(int pos_x, int pos_y, string text) = 0;
+        virtual void clearScreen() = 0;
+        virtual void displayy() = 0;
 };

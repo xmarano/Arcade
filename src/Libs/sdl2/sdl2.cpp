@@ -41,6 +41,7 @@ void SDL2Display::close()
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
+        TTF_Quit();
     }
 }
 
@@ -88,6 +89,23 @@ int SDL2Display::getInput()
     }
     return 0;
 }
+
+int SDL2Display::getScreenWidth()
+{
+    int width;
+
+    SDL_GetWindowSize(window, &width, nullptr);
+    return width;
+}
+
+int SDL2Display::getScreenHeight()
+{
+    int height;
+
+    SDL_GetWindowSize(window, nullptr, &height);
+    return height;
+}
+
 
 extern "C" {
     IDisplay* create() { return new SDL2Display(); }

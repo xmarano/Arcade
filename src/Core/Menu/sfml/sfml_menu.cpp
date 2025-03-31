@@ -20,8 +20,6 @@ MenuEvent SfmlMenu::pollEvent()
         if (event.type == sf::Event::Closed)
             return MenuEvent::Quit;
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::Escape)
-                return MenuEvent::Quit;
             if (event.key.code == sf::Keyboard::Down)
                 return MenuEvent::Down;
             if (event.key.code == sf::Keyboard::Up)
@@ -37,7 +35,7 @@ MenuEvent SfmlMenu::pollEvent()
     return MenuEvent::None;
 }
 
-void SfmlMenu::DrawText1(string text, int module, int height, int weight)
+void SfmlMenu::DrawText1(int pos_x, int pos_y, string text)
 {
     sf::Text displayText;
 
@@ -45,7 +43,16 @@ void SfmlMenu::DrawText1(string text, int module, int height, int weight)
     displayText.setString(text);
     displayText.setCharacterSize(24);
     displayText.setFillColor(sf::Color::White);
-    displayText.setPosition(weight, height);
+    displayText.setPosition(pos_x, pos_y);
     display->window.draw(displayText);
+}
+
+void SfmlMenu::clearScreen()
+{
+    display->window.clear();
+}
+
+void SfmlMenu::displayy()
+{
     display->window.display();
 }
