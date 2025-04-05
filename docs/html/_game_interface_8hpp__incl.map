@@ -1,0 +1,13 @@
+<map id="include/Core/GameInterface.hpp" name="include/Core/GameInterface.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="59,5,269,31"/>
+<area shape="rect" id="Node000002" href="$_display_interface_8hpp.html" title=" " alt="" coords="93,79,235,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,31,167,63,161,63,161,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,59,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="143,108,69,147,66,143,140,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="83,153,154,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="159,106,137,141,132,138,154,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="178,153,243,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="174,103,197,138,192,141,169,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="267,153,325,178"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="188,103,262,143,259,147,185,108"/>
+</map>

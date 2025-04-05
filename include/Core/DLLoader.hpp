@@ -17,6 +17,12 @@ class DLLoader {
         void* m_handle = nullptr;
         T* m_instance = nullptr;
     public:
+        /**
+        * @brief Loads a dynamic library at runtime.
+        * @param path Path to the .so file.
+        * @return Pointer to the loaded library instance.
+        * @throws ArcadeException if loading fails.
+        */
         T* load(const std::string& path) {
             if (m_handle) {
                 dlclose(m_handle);

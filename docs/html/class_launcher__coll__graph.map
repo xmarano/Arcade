@@ -1,0 +1,16 @@
+<map id="Launcher" name="Launcher">
+<area shape="rect" id="Node000001" title="Core class managing the game and graphics lifecycle." alt="" coords="277,183,352,208"/>
+<area shape="rect" id="Node000002" href="$class_d_l_loader.html" title=" " alt="" coords="114,94,264,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,131,227,157,251,172,278,182,276,187,249,176,223,161,201,135"/>
+<area shape="rect" id="Node000003" href="$class_i_display.html" title=" " alt="" coords="154,5,224,31"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="140,31,88,44,40,63,22,75,11,88,9,102,17,118,33,132,60,145,131,165,210,179,277,188,277,193,209,185,130,170,58,149,31,136,12,121,4,103,6,85,18,71,37,58,87,39,139,26"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,47,192,94,186,94,186,47"/>
+<area shape="rect" id="Node000006" href="$class_menu.html" title=" " alt="" coords="288,94,341,120"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="237,35,267,53,289,72,307,92,303,95,285,76,264,57,234,40"/>
+<area shape="rect" id="Node000004" href="$class_d_l_loader.html" title=" " alt="" coords="492,94,633,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="514,128,350,185,348,180,512,123"/>
+<area shape="rect" id="Node000005" href="$class_i_game.html" title=" " alt="" coords="412,5,473,31"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="430,46,393,109,358,160,333,184,329,180,354,157,388,106,426,43"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="473,38,547,91,544,96,469,42"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="317,135,317,182,312,182,312,135"/>
+</map>

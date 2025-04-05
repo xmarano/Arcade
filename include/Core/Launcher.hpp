@@ -13,6 +13,10 @@
 #include <iostream>
 #include <filesystem>
 
+/**
+* @class Launcher
+* @brief Core class, manage the game and graphics lifecycle.
+*/
 class Launcher {
     private:
         DLLoader<IDisplay> displayLoader;

@@ -1,0 +1,21 @@
+<map id="include/Core/Launcher.hpp" name="include/Core/Launcher.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="714,5,890,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,236,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="714,31,251,80,251,74,714,26"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="259,79,480,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="728,34,459,79,458,73,728,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="504,79,694,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="768,34,649,76,647,71,767,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="718,79,886,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="804,31,804,63,799,63,799,31"/>
+<area shape="rect" id="Node000006" href="$_arcade_exception_8hpp.html" title=" " alt="" coords="909,79,1054,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="833,29,938,70,936,75,831,34"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1078,79,1150,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="858,29,1064,75,1063,81,857,34"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1173,79,1254,105"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="883,29,1158,76,1158,81,882,34"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="898,153,975,178"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="977,106,954,141,950,138,972,103"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="999,153,1052,178"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="991,103,1013,138,1008,141,987,106"/>
+</map>

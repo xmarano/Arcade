@@ -1,0 +1,9 @@
+<map id="NcursesDisplay" name="NcursesDisplay">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,169,134,195"/>
+<area shape="rect" id="Node000002" href="$class_i_display.html" title=" " alt="" coords="5,80,75,106"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,119,75,168,70,170,49,121"/>
+<area shape="rect" id="Node000003" href="$class_ncurses_menu.html" title=" " alt="" coords="98,80,200,106"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,120,89,170,85,167,128,116"/>
+<area shape="rect" id="Node000004" href="$class_i_menu_renderer.html" title=" " alt="" coords="94,5,204,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="152,46,152,80,147,80,147,46"/>
+</map>

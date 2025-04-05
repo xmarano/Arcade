@@ -1,0 +1,20 @@
+<map id="include/Games/Snake.hpp" name="include/Games/Snake.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="241,5,415,31"/>
+<area shape="rect" id="Node000002" href="$_game_interface_8hpp.html" title=" " alt="" coords="82,79,259,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,34,212,75,210,70,300,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="267,226,325,252"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="329,32,303,211,297,210,324,31"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="333,79,387,105"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="336,30,351,64,346,66,331,32"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="411,79,472,105"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="349,29,411,68,408,73,346,34"/>
+<area shape="rect" id="Node000003" href="$_display_interface_8hpp.html" title=" " alt="" coords="100,153,241,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="173,105,173,137,168,137,168,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,226,59,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="148,181,70,221,68,216,146,177"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="83,226,154,252"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="164,180,139,215,134,212,160,177"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="178,226,243,252"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="180,177,199,212,194,214,175,180"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="193,177,263,216,260,221,191,181"/>
+</map>

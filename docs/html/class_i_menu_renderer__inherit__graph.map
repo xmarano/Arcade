@@ -1,0 +1,9 @@
+<map id="IMenuRenderer" name="IMenuRenderer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="116,5,226,31"/>
+<area shape="rect" id="Node000002" href="$class_ncurses_menu.html" title=" " alt="" coords="5,79,108,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,42,77,81,75,76,137,37"/>
+<area shape="rect" id="Node000003" href="$class_sdl2_menu.html" title=" " alt="" coords="132,79,211,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,46,174,79,168,79,168,46"/>
+<area shape="rect" id="Node000004" href="$class_sfml_menu.html" title=" " alt="" coords="235,79,315,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="203,38,259,76,256,81,200,42"/>
+</map>
