@@ -1,10 +1,11 @@
 # ARCADE
-![unitest](https://github.com/xmarano/arcade/actions/workflows/unitest.yml/badge.svg)
-![website](https://github.com/xmarano/arcade/actions/workflows/website.yml/badge.svg)
+[![unitest](https://github.com/xmarano/arcade/actions/workflows/unitest.yml/badge.svg)](https://github.com/xmarano/arcade/actions/workflows/unitest.yml)
+[![website](https://github.com/xmarano/arcade/actions/workflows/website.yml/badge.svg)](https://github.com/xmarano/arcade/actions/workflows/website.yml)
 
 ### Documentation 🫲[`Readme`](docs/README.md) | [`Website`](https://xmarano.github.io/Arcade) 🫱
 
-> [!WARNING] **Darwin Error**
+> [!WARNING]
+> **Darwin Error**
 > `ld: library 'SDL2' not found`
 >
 > **How to fix it** :

@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Check website status
         run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://xmarano.github.io/Arcade)
+          STATUS=$(curl -L -o /dev/null -s -w "%{http_code}" https://xmarano.github.io/Arcade)
           if [ "$STATUS" -ne 200 ]; then
             echo "❌ Site is down or not returning 200 OK (got $STATUS)"
             exit 1
