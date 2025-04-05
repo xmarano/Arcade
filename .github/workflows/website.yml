@@ -1,0 +1,22 @@
+name: Check GitHub Pages Site
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-website:
+    name: Check if GitHub Pages site is up
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check website status
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://xmarano.github.io/Arcade)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Site is down or not returning 200 OK (got $STATUS)"
+            exit 1
+          else
+            echo "✅ Site is up! (HTTP $STATUS)"
+          fi
