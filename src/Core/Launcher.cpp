@@ -101,6 +101,12 @@ int Launcher::run()
                 currentGame->handleInput(input);
                 GameState state = currentGame->update();
                 currentDisplay->render(state);
+                if (state.is_game_over == true) {
+                    currentDisplay->close();
+                    delete currentGame;
+                    currentGame = nullptr;
+                    isMenu = true;
+                }
             }
         } else {
             int ret = menu.draw_menu(currentDisplay);

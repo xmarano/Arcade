@@ -91,9 +91,12 @@ GameState Snake::update() {
         moveSnake();
         lastMoveTime = now;
 
-        if (checkCollision()) {
+        if (checkCollision() == true) {
             gameOver = true;
+            state.is_game_over = true;
             return state;
+        } else {
+            state.is_game_over = false;
         }
     }
 

@@ -36,6 +36,7 @@ struct GameState {
     int score;
     int lives;
     int level;
+    bool is_game_over;
     std::string gameName;          // Pour adapter le thème graphique
 };
 
