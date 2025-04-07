@@ -31,11 +31,9 @@ void NcursesDisplay::render(const GameState &state)
     for (const auto& entity : state.entities) {
         mvaddch(entity.y, entity.x, entity.element); //! mvprintw fait de la merde
     }
-    
-    // Affichage du score et du niveau
-    mvprintw(1, 25, "Score: %d", state.score);
-    mvprintw(2, 26, "Level: %d", state.level);
-    
+    mvprintw(1, 30, "Score: %d", state.score);
+    mvprintw(2, 30, "Lives: %d", state.lives);
+    mvprintw(3, 30, "Level: %d", state.level);
     refresh();
 }
 

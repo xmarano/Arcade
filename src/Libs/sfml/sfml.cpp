@@ -44,33 +44,9 @@ void SFMLDisplay::render(const GameState &state)
         sf::RectangleShape rect(sf::Vector2f(20, 20));
         rect.setPosition(entity.x * 20, entity.y * 20);
         sf::Color color = {(sf::Uint8)entity.red, (sf::Uint8)entity.green, (sf::Uint8)entity.blue, (sf::Uint8)entity.alpha};
-        // switch (entity.type) {
-        //     case WALL:  rect.setFillColor(sf::Color::White); break;
-        //     case PLAYER: rect.setFillColor(sf::Color::Yellow); break;
-        //     case ENEMY: rect.setFillColor(sf::Color::Red); break;
-        //     case COIN:  rect.setFillColor(sf::Color::White); break;
-        //     case POWERUP: rect.setFillColor(sf::Color::Magenta); break;
-        // }
         rect.setFillColor(color);
         window.draw(rect);
     }
-    
-    // Affichage du score et du niveau
-    sf::Text scoreText;
-    scoreText.setFont(font);
-    scoreText.setString("Score: " + std::to_string(state.score));
-    scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::White);
-    scoreText.setPosition(20, 20);
-    window.draw(scoreText);
-    
-    sf::Text levelText;
-    levelText.setFont(font);
-    levelText.setString("Level: " + std::to_string(state.level));
-    levelText.setCharacterSize(24);
-    levelText.setFillColor(sf::Color::White);
-    levelText.setPosition(20, 50);
-    window.draw(levelText);
     
     window.display();
 }

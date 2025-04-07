@@ -168,6 +168,8 @@ GameState Pacman::update() {
     player.alpha = 255;
     player.x = pos_player.second; // colonne
     player.y = pos_player.first;  // ligne
+    state.score = score;
+    state.level = level;
     state.entities.push_back(player);
 
     return state;

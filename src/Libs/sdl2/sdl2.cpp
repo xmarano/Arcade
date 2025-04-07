@@ -54,11 +54,12 @@ void SDL2Display::render(const GameState &state)
         SDL_SetRenderDrawColor(renderer, entity.red, entity.green, entity.blue, entity.alpha);
         SDL_RenderFillRect(renderer, &rect);
     }
-    
-    // Affichage du score et du niveau
-    renderText("Score: " + std::to_string(state.score), 20, 20);
-    renderText("Level: " + std::to_string(state.level), 20, 50);
-    
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_Rect hudRect = {0, 0, getScreenWidth(), 50};
+    SDL_RenderFillRect(renderer, &hudRect);
+    renderText("Score: " + std::to_string(state.score), 10, 10);
+    renderText("Lives: " + std::to_string(state.lives), 10, 30);
+    renderText("Level: " + std::to_string(state.level), 10, 50);
     SDL_RenderPresent(renderer);
 }
 
