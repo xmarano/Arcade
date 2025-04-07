@@ -15,6 +15,11 @@ Pacman::Pacman()
 
 void Pacman::draw_hud()
 {
+    // Mise à jour des informations à afficher dans le HUD
+    state.score = score;
+    state.level = level;
+    state.lives = lives;
+    state.gameName = "Pacman";
 }
 
 void Pacman::reset()
@@ -59,6 +64,10 @@ GameState Pacman::update() {
     if (time_elasped - frozen_clock > 5000000) {
         is_sous_frozen = false;
     }
+    
+    // Mise à jour du HUD avant de générer les entités
+    draw_hud();
+    
     // Conversion de la carte en entités génériques
     state.entities.clear();
     for (int i = 0; i < map.size(); ++i) {

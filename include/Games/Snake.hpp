@@ -35,6 +35,7 @@ class Snake : public IGame {
         bool checkCollision();
         void loadMap();
         void moveSnake();
+        void draw_hud(); // Nouvelle méthode pour mettre à jour le HUD
 
     public:
         Snake();

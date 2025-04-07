@@ -85,14 +85,12 @@ void Snake::moveSnake() {
 
 GameState Snake::update() {
     if (gameOver) return state;
-    
     auto now = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastMoveTime);
-    
     if (elapsed.count() >= MOVE_INTERVAL) {
         moveSnake();
         lastMoveTime = now;
-        
+
         if (checkCollision()) {
             gameOver = true;
             return state;
