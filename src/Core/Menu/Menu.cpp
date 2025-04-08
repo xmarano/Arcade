@@ -150,7 +150,7 @@ void Menu::DisplayModules3(IMenuRenderer *menuRenderer)
     }
 }
 
-int Menu::Actions(MenuEvent ev)
+int Menu::Actions(MenuEvent ev, IMenuRenderer *menuRenderer)
 {
     if (ev == MenuEvent::Quit) {
         return -1;
@@ -194,15 +194,17 @@ int Menu::Actions(MenuEvent ev)
             current.second = 1;
         } else if (current.first == 3) {
             if (!isUsernameSet) {
+                /////////////////////////////////////// USERNAME 
                 // string username;
                 // char ch;
                 // while ((ch = getch()) != '\n') {
-                    // username += ch;
-                    // DisplayText("User : " + username, 2, 4);
+                //     username += ch;
+                //     DisplayText(menuRenderer, "User : " + username, 2, 4);
                 // }
                 // ofstream userFile("Assets/Stats/username.txt");
                 // userFile << username;
                 // userFile.close();
+                /////////////////////////////////////// USERNAME 
             }
             current.first = 4;
         } else if (current.first == 4) {
@@ -259,7 +261,7 @@ int Menu::draw_menu(IDisplay *renderer)
 
     MenuEvent ev = menuRenderer->pollEvent();
 
-    int ret = Actions(ev);
+    int ret = Actions(ev, menuRenderer);
 
     menuRenderer->displayy();
 

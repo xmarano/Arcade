@@ -46,7 +46,7 @@ class Menu {
         void DisplayModules2(IMenuRenderer *menuRenderer);
         void DisplayModules3(IMenuRenderer *menuRenderer);
         vector<string> get_stats();
-        int Actions(MenuEvent ev); // Corriger le paramètre
+        int Actions(MenuEvent ev, IMenuRenderer *menuRenderer);
         int getScreenWidth();
         int getScreenHeight();
 };
