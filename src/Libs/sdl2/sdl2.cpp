@@ -56,8 +56,8 @@ void SDL2Display::render(const GameState &state)
     }
     
     // Affichage du score et du niveau
-    renderText("Score: " + std::to_string(state.score), 20, 20);
-    renderText("Level: " + std::to_string(state.level), 20, 50);
+    renderText("Score: " + std::to_string(state.score), 500, 20);
+    renderText("Level: " + std::to_string(state.level), 500, 50);
     
     SDL_RenderPresent(renderer);
 }

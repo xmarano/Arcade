@@ -61,7 +61,7 @@ void SFMLDisplay::render(const GameState &state)
     scoreText.setString("Score: " + std::to_string(state.score));
     scoreText.setCharacterSize(24);
     scoreText.setFillColor(sf::Color::White);
-    scoreText.setPosition(20, 20);
+    scoreText.setPosition(500, 20);
     window.draw(scoreText);
     
     sf::Text levelText;
@@ -69,7 +69,7 @@ void SFMLDisplay::render(const GameState &state)
     levelText.setString("Level: " + std::to_string(state.level));
     levelText.setCharacterSize(24);
     levelText.setFillColor(sf::Color::White);
-    levelText.setPosition(20, 50);
+    levelText.setPosition(500, 50);
     window.draw(levelText);
     
     window.display();

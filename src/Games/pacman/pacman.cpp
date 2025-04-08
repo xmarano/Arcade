@@ -22,6 +22,47 @@ void Pacman::draw_hud()
     state.gameName = "Pacman";
 }
 
+void Pacman::loadHighScore()
+{
+    std::ifstream file("Assets/Stats/pacman_highscore.txt");
+    if (file.is_open()) {
+        file >> highscore;
+        file.close();
+    } else {
+        highscore = 0;
+    }
+}
+
+void Pacman::saveHighScore()
+{
+    std::ofstream file("Assets/Stats/pacman_highscore.txt");
+    if (file.is_open()) {
+        file << highscore;
+        file.close();
+    }
+}
+
+void Pacman::loadHighLevel()
+{
+    std::ifstream file("Assets/Stats/pacman_highlevel.txt");
+    if (file.is_open()) {
+        file >> highLevel;
+        file.close();
+    } else {
+        highLevel = 1;
+    }
+}
+
+void Pacman::saveHighLevel()
+{
+    std::ofstream file("Assets/Stats/pacman_highlevel.txt");
+    if (file.is_open()) {
+        file << highLevel;
+        file.close();
+    }
+}
+
+
 void Pacman::reset()
 {
     score = 0;
@@ -37,12 +78,18 @@ void Pacman::reset()
     loadMap();
     phantom_clock = clock();
     player_clock = clock();
+    loadHighScore();
+    loadHighLevel();
 }
 
 GameState Pacman::update() {
     // [...] (déplacements, logique du jeu)
     if (win_condition() == 1) {
         level += 1;
+        if (level > highLevel) {
+            highLevel = level;
+            saveHighLevel();
+        }
         this->map = this->original_map;
         reset_positions();
     }
@@ -226,6 +273,10 @@ int Pacman::check_bonuses(char new_pos)
 {
     if (new_pos == COIN) {
         this->score += (10 * level);
+        if (this->score > highscore) {
+            highscore = this->score;
+            saveHighScore();
+        }
         return 0;
     } else if (new_pos == POWERUP) {
         this->score += (50 * level);

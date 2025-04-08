@@ -36,6 +36,7 @@ class Pacman : public IGame {
         int lives;
         int level;
         int highscore;
+        int highLevel;
         bool is_sous_frozen;
         std::pair<int, int> pos_player;
         std::pair<int, int> pos_red_ghost;
@@ -77,4 +78,8 @@ class Pacman : public IGame {
         std::pair<int, int> chase_movement(std::pair<int, int> pos_ghost);
         std::pair<int, int> fear_movement(std::pair<int, int> pos_ghost);
         void draw_hud();
+        void loadHighScore();
+        void saveHighScore();
+        void loadHighLevel();
+        void saveHighLevel();
 };

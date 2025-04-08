@@ -36,6 +36,8 @@ class Snake : public IGame {
         void loadMap();
         void moveSnake();
         void draw_hud(); // Nouvelle méthode pour mettre à jour le HUD
+        void loadHighScore();
+        void saveHighScore();
 
     public:
         Snake();

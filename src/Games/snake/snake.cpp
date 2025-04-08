@@ -8,26 +8,38 @@
 #include <fstream>
 #include <algorithm>
 
-Snake::Snake() : highScore(0) {
+Snake::Snake() : highScore(0)
+{
     std::srand(std::time(nullptr));
     reset();
 }
 
-void Snake::reset() {
+void Snake::draw_hud()
+{
+    state.score = score;
+    state.level = 1;
+    state.lives = 1;
+    state.gameName = "Snake";
+}
+
+void Snake::reset()
+{
     snakeBody.clear();
     snakeBody.push_back({8, 2});
     snakeBody.push_back({8, 1});
     snakeBody.push_back({8, 0});
-    direction = 8; // Right
+    direction = 8;
     nextDirection = 8;
     score = 0;
     gameOver = false;
     loadMap();
     generateFood();
     lastMoveTime = std::chrono::steady_clock::now();
+    loadHighScore();
 }
 
-void Snake::loadMap() {
+void Snake::loadMap()
+{
     std::ifstream file(DEFAULT_SNAKE_MAP);
     std::string line;
     map.clear();
@@ -36,7 +48,28 @@ void Snake::loadMap() {
     }
 }
 
-void Snake::generateFood() {
+void Snake::loadHighScore()
+{
+    std::ifstream file("Assets/Stats/snake_highscore.txt");
+    if (file.is_open()) {
+        file >> highScore;
+        file.close();
+    } else {
+        highScore = 0;
+    }
+}
+
+void Snake::saveHighScore()
+{
+    std::ofstream file("Assets/Stats/snake_highscore.txt");
+    if (file.is_open()) {
+        file << highScore;
+        file.close();
+    }
+}
+
+void Snake::generateFood()
+{
     int rows = map.size();
     int cols = map[0].size();
     do {
@@ -46,61 +79,78 @@ void Snake::generateFood() {
              std::find(snakeBody.begin(), snakeBody.end(), foodPos) != snakeBody.end());
 }
 
-bool Snake::checkCollision() {
+bool Snake::checkCollision()
+{
     auto head = snakeBody.front();
-    
+
     // Mur
     if (map[head.first][head.second] == WALL)
         return true;
-    
+
     // Auto-collision
     for (auto it = snakeBody.begin() + 1; it != snakeBody.end(); ++it)
         if (head == *it)
             return true;
-    
+
     return false;
 }
 
-void Snake::moveSnake() {
+void Snake::moveSnake()
+{
     auto newHead = snakeBody.front();
     switch (nextDirection) {
-        case 5: newHead.first--; break; // Haut
-        case 6: newHead.first++; break; // Bas
-        case 7: newHead.second--; break; // Gauche
-        case 8: newHead.second++; break; // Droite
+        case 5: newHead.first--; break;
+        case 6: newHead.first++; break;
+        case 7: newHead.second--; break;
+        case 8: newHead.second++; break;
     }
-    
+
     direction = nextDirection;
     snakeBody.insert(snakeBody.begin(), newHead);
-    
+
     // Vérifier la nourriture
     if (newHead == foodPos) {
         score += 10;
-        if (score > highScore) highScore = score;
+        if (score > highScore) {
+            highScore = score;
+            saveHighScore();
+        }
         generateFood();
     } else {
         snakeBody.pop_back();
     }
 }
 
-GameState Snake::update() {
-    if (gameOver) return state;
+GameState Snake::update()
+{
+    if (gameOver) {
+        draw_hud();
+        state.is_game_over = true;
+        return state;
+    }
+
+    // if (score > highScore) {
+    //     highScore = score;
+    //     saveHighScore();
+    // }
+
     auto now = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastMoveTime);
     if (elapsed.count() >= MOVE_INTERVAL) {
         moveSnake();
         lastMoveTime = now;
 
-        if (checkCollision() == true) {
+        if (checkCollision()) {
             gameOver = true;
             state.is_game_over = true;
+            draw_hud();
             return state;
         } else {
             state.is_game_over = false;
         }
     }
 
-    // Mise à jour de l'affichage
+    // Update affichage
     state.entities.clear();
 
     // Mur
@@ -120,7 +170,7 @@ GameState Snake::update() {
         }
     }
 
-    // Serpent
+    // Snake
     for (size_t i = 0; i < snakeBody.size(); i++) {
         Entity part;
         part.x = snakeBody[i].second;
@@ -144,10 +194,13 @@ GameState Snake::update() {
     food.alpha = 255;
     state.entities.push_back(food);
 
+    draw_hud();
+
     return state;
 }
 
-void Snake::handleInput(int key) {
+void Snake::handleInput(int key)
+{
     const int opposite[] = {0, 0, 0, 0, 0, 6, 5, 8, 7};
     if (key >= 5 && key <= 8 && direction != opposite[key]) {
         nextDirection = key;
