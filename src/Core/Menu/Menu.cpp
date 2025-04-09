@@ -193,7 +193,17 @@ int Menu::Actions(MenuEvent ev, IMenuRenderer *menuRenderer)
             current.second = 1;
         } else if (current.first == 3) {
             if (!isUsernameSet) {
-                // La gestion de la saisie du nom d'utilisateur est déléguée aux implémentations spécifiques
+                /////////////////////////////////////// USERNAME 
+                // string username;
+                // char ch;
+                // while ((ch = getch()) != '\n') {
+                //     username += ch;
+                //     DisplayText(menuRenderer, "User : " + username, 2, 4);
+                // }
+                // ofstream userFile("Assets/Stats/username.txt");
+                // userFile << username;
+                // userFile.close();
+                /////////////////////////////////////// USERNAME
             }
             current.first = 4;
         } else if (current.first == 4) {
