@@ -8,7 +8,6 @@
 #include <iostream>
 #include <filesystem>
 #include "../../../include/Core/Menu.hpp"
-#include <ncurses.h>
 
 Menu::Menu() : current({1, 1}), selectedOption({0, 0}), isUsernameSet(false)
 {
@@ -194,17 +193,7 @@ int Menu::Actions(MenuEvent ev, IMenuRenderer *menuRenderer)
             current.second = 1;
         } else if (current.first == 3) {
             if (!isUsernameSet) {
-                /////////////////////////////////////// USERNAME 
-                // string username;
-                // char ch;
-                // while ((ch = getch()) != '\n') {
-                //     username += ch;
-                //     DisplayText(menuRenderer, "User : " + username, 2, 4);
-                // }
-                // ofstream userFile("Assets/Stats/username.txt");
-                // userFile << username;
-                // userFile.close();
-                /////////////////////////////////////// USERNAME 
+                // La gestion de la saisie du nom d'utilisateur est déléguée aux implémentations spécifiques
             }
             current.first = 4;
         } else if (current.first == 4) {
